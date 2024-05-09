@@ -7,8 +7,8 @@
   * `pip install D:\Aicedrone\metashape_big_psx\Metashape-2.1.1-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl` Instalar módulo python de Metashape
   * `conda search -c conda-forge laspy` Comprobar última versión de laspy
   * `conda install -c conda-forge laspy=2.5.3` Instalar laspy
-* Agisoft Metashape 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_2_1_0_x64.msi) + activar licencia en GUI.
-* Módulo python de Metashape Pro 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-2.1.0-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl)
+* Agisoft Metashape 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_2_1_1_x64.msi) + activar licencia en GUI.
+* Módulo python de Metashape Pro 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-2.1.1-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl)
 * Modelos del geoide para descargar [link](https://www.agisoft.com/downloads/geoids/)
 
 # Requisitos de uso
