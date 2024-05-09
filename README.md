@@ -1,13 +1,14 @@
 # Requisitos instalación
 
-* Entorno conda con QGis + módulo python de Metashape Pro
+* Entorno conda con QGis + módulo python de Metashape Pro (2.1.1)
   * `conda search -c conda-forge qgis` Comprobar última versión estable de QGis
-  * `conda create -n metashape2.1.0_qgis3.28.13 -c conda-forge qgis=3.28.13` Crear entorno
-  * `conda activate metashape2.1.0_qgis3.28.13` Activar entorno
-  * `pip install C:\Metashape-2.1.0-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl` Instalar módulo python de Metashape
+  * `conda create -n metashape2.1.1_qgis3.34.6 -c conda-forge qgis=3.34.6 python=3.11` Crear entorno
+  * `conda activate metashape2.1.1_qgis3.34.6` Activar entorno
+  * `pip install D:\Aicedrone\metashape_big_psx\Metashape-2.1.1-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl` Instalar módulo python de Metashape
+  * `conda search -c conda-forge laspy` Comprobar última versión de laspy
   * `conda install -c conda-forge laspy=2.5.3` Instalar laspy
-* Agisoft Metashape 2.1.0 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_2_1_0_x64.msi) + activar licencia en GUI.
-* Módulo python de Metashape Pro 2.1.0 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-2.1.0-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl)
+* Agisoft Metashape 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_2_1_0_x64.msi) + activar licencia en GUI.
+* Módulo python de Metashape Pro 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-2.1.0-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl)
 * Modelos del geoide para descargar [link](https://www.agisoft.com/downloads/geoids/)
 
 # Requisitos de uso
