@@ -15,7 +15,7 @@
 
 ## Advertencias generales
 
-* EPSG permitidos: 25830, 25830+5782, 4326, 4326+3855, 4258+5782.
+* Se contemplan los códigos EPSG de los CRSs de España, por ejemplo: 25829, 25830, 25831, 25829+5782, 25830+5782, 25831+5782, 4326, 4326+3855, 4258+5782.
 * No se permiten parámetros sin dato. Si no procede, debe completarse con el valor `"0"`.
 * La carpeta de resultados será borrada en cada ejecución.
 * No se permiten caracteres especiales en la definición de los parámetros de entrada.
