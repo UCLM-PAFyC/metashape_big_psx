@@ -69,7 +69,7 @@ Para utilizar una **región de interés**, debe:
 
 Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido creado previamente por este script.
 
-# Instrucciones de ejecucción
+# Instrucciones de ejecución
 
 1. Revisar y editar parámetros de entrada en el archivo `params.json`:
 
