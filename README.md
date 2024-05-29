@@ -178,3 +178,23 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
 * `InstallRequirement.Geoid` Ruta del directorio donde se encuentras los modelos del geoide.
 
 2. Ejecutar el archivo `BigPsx.bat`.
+
+
+## **Ana del Campo Sánchez**
+
+Researcher, TIDOP
+
+University of Salamanca - USAL, 
+https://tidop.usal.es/miembros/ana-del-campo-sanchez/
+
+## **David Hernández López**
+
+Professor of Geomatics
+
+University of Castilla-La Mancha - UCLM, 
+david.hernandez@uclm.es
+
+University of Salamanca - USAL, 
+dhernand@usal.es
+
+ORCID, [https://orcid.org/0000-0001-9874-5243](https://orcid.org/0000-0001-9874-5243)
