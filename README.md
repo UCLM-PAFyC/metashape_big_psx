@@ -1,3 +1,6 @@
+# METASHAPE BIG PSX
+A tool to process big metashape projects developed for AICEDRONE project
+
 # Requisitos instalación
 
 * Entorno conda con QGis + módulo python de Metashape Pro (2.1.1)
