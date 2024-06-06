@@ -43,6 +43,7 @@ class MetashapeTools:
             Metashape.CoordinateSystem.addGeoid(dst)
 
     def check_initial(self):
+        gt.update_log('EXECUTION PARAMETERS:')
         # comprueba OS
         gt.is_platform('win32')
         # comprueba geoides
@@ -61,13 +62,12 @@ class MetashapeTools:
             gt.update_log(text="Incompatible Metashape version: {} != {}"
                           .format(found_major_version, compatible_major_version))
             raise SystemExit(0)
-        # activa todas GPU
+        # check metashape parameters
         Metashape.app.gpu_mask = 2 ** len(Metashape.app.enumGPUDevices()) - 1
         if Metashape.app.gpu_mask:
             Metashape.app.cpu_enable = False
         else:
             Metashape.app.cpu_enable = True
-        # escribe log
         gpus = Metashape.app.enumGPUDevices()
         text_gpus = ''
         for dicts in gpus:
@@ -77,6 +77,12 @@ class MetashapeTools:
                            'Activated license = ' + str(Metashape.app.activated) + '\n' +
                            'Version = ' + str(Metashape.app.version) + '\n' +
                            'Selected GPUs = ' + text_gpus)
+        file = os.path.normpath(gt.params_file)
+        import json
+        with open(file) as config_file:
+            parsed = json.load(config_file)
+            parsed_text = json.dumps(parsed, indent=2)
+        gt.update_log('INPUT PARAMETERS:\n' + parsed_text)
 
     def check_markers(self):
         if os.path.isfile(gt.params.get("OptimizeAlignment")["Path"]) \
@@ -239,7 +245,7 @@ class MetashapeTools:
                 # intersection + creation
                 if polygon.Intersects(roi) or polygon.Contains(roi) or polygon.Within(roi) or polygon.Overlaps(roi):
                     tile_count = tile_count + 1
-                    label = str(row) + '_' + str(col)
+                    label = "{:02d}".format(row) + '_' + "{:02d}".format(col)
                     shape = self.chunk.shapes.addShape()
                     shape.label = label
                     shape.group = group
@@ -627,16 +633,16 @@ class MetashapeTools:
 
     def merge_dems(self):
         psxs = gt.read_chunks()
-        label_dem = gt.params.get("SplitTile")["MergedDEM"]
-        gsd = int(float(gt.params.get("Project")["DemGSD"])*1000)
-        dst_path = os.path.join(gt.output_path,
-                                gt.label + '_' + label_dem.lower() + '_' + str(gsd) + 'mm.tif')
-        files = [os.path.join(gt.output_path,
-                              psx + '_' + label_dem.lower() + '_' + str(gsd) + 'mm.tif')
-                 for psx in psxs]
-        g = gdal.Warp(dst_path, files, format="GTiff",
-                      options=["COMPRESS=LZW", "TILED=YES"])
-        g = None
+        for label_dem in ["DSM", "DTM"]:
+            gsd = int(float(gt.params.get("Project")["DemGSD"])*1000)
+            dst_path = os.path.join(gt.output_path,
+                                    gt.label + '_' + label_dem.lower() + '_' + str(gsd) + 'mm.tif')
+            files = [os.path.join(gt.output_path,
+                                  psx + '_' + label_dem.lower() + '_' + str(gsd) + 'mm.tif')
+                     for psx in psxs]
+            g = gdal.Warp(dst_path, files, format="GTiff", options=["COMPRESS=LZW", "TILED=YES", "BIGTIFF=IF_NEEDED"])
+            g = None
+            gt.update_log('Merged full ' + label_dem + ':\nGSD = ' + str(gsd) + ' mm')
 
     def merge_orthomosaic(self):
         psxs = gt.read_chunks()
@@ -646,33 +652,91 @@ class MetashapeTools:
         files = [os.path.join(gt.output_path,
                               psx + '_orthomosaic_' + str(gsd) + 'mm.tif')
                  for psx in psxs]
-        g = gdal.Warp(dst_path, files, format="GTiff",
-                      options=["COMPRESS=LZW", "TILED=YES"])
+        g = gdal.Warp(dst_path, files, format="GTiff", options=["COMPRESS=LZW", "TILED=YES", "BIGTIFF=IF_NEEDED"])
         g = None
+        gt.update_log('Merged full orthomosaic:\nGSD = ' + str(gsd) + ' mm')
 
     def merge_pointclouds(self):
         psxs = gt.read_chunks()
-        dst_path = os.path.join(gt.output_path, gt.label + '_point_cloud.las')
         tmp_offset = [1e100, 1e100, 1e100]
+        n_max = 2000000000
+        dic_rows = {}
+        n = 0
         for psx in psxs:
+            src_path = os.path.join(gt.output_path, psx + '_point_cloud.las')
+            src_las = laspy.read(src_path)
+            row = psx.split('_')[0]
+            points = len(src_las.points)
+            n = n + points
+            try:
+                previous = dic_rows[row]
+                dic_rows[row] = previous + points
+            except:
+                dic_rows[row] = points
             src_path = os.path.join(gt.output_path, psx + '_point_cloud.las')
             src_las = laspy.read(src_path)
             src_offset = src_las.header.offset
             tmp_offset[0] = min(tmp_offset[0], src_offset[0])
             tmp_offset[1] = min(tmp_offset[1], src_offset[1])
             tmp_offset[2] = min(tmp_offset[2], src_offset[2])
-        print(tmp_offset)
-        dst_las = laspy.LasData(src_las.header)
-        dst_las.header.offset = tmp_offset
-        dst_las.write(dst_path)
-        for psx in psxs:
-            src_path = os.path.join(gt.output_path, psx + '_point_cloud.las')
-            src_las = laspy.read(src_path)
-            with laspy.open(dst_path, mode='a') as dst_las:
-                with laspy.open(src_path, mode='r') as src_las:
-                    for points in src_las.chunk_iterator(2_000_000):
-                        points.change_scaling(offsets=tmp_offset)
-                        dst_las.append_points(points)
+        if n < n_max:
+            dst_path = os.path.join(gt.output_path, gt.label + '_point_cloud.laz')
+            dst_las = laspy.LasData(src_las.header)
+            dst_las.header.offset = tmp_offset
+            dst_las.write(dst_path)
+            for psx in psxs:
+                src_path = os.path.join(gt.output_path, psx + '_point_cloud.las')
+                src_las = laspy.read(src_path)
+                with laspy.open(dst_path, mode='a') as dst_las:
+                    with laspy.open(src_path, mode='r') as src_las:
+                        for points in src_las.chunk_iterator(2_000_000):
+                            points.change_scaling(offsets=tmp_offset)
+                            dst_las.append_points(points)
+            gt.update_log('Merged full dense point cloud')
+        else:
+            dic_files = {}
+            n_file = 0
+            file_id = 0
+            rows_to_append = []
+            for row in dic_rows:
+                if n_file + dic_rows[row] < n_max:
+                    rows_to_append.append(row)
+                    n_file = n_file + dic_rows[row]
+                else:
+                    dic_files[file_id] = rows_to_append
+                    rows_to_append = []
+                    n_file = 0
+                    file_id = file_id + 1
+                    rows_to_append.append(row)
+                    n_file = n_file + dic_rows[row]
+            dic_files[file_id] = rows_to_append
+            for file in dic_files:
+                dst_path = os.path.join(gt.output_path, gt.label + '_point_cloud' + str(file) + '.laz')
+                tmp_offset = [1e100, 1e100, 1e100]
+                for psx in psxs:
+                    row = psx.split('_')[0]
+                    if row in dic_files[file]:
+                        src_path = os.path.join(gt.output_path, psx + '_point_cloud.las')
+                        src_las = laspy.read(src_path)
+                        src_offset = src_las.header.offset
+                        tmp_offset[0] = min(tmp_offset[0], src_offset[0])
+                        tmp_offset[1] = min(tmp_offset[1], src_offset[1])
+                        tmp_offset[2] = min(tmp_offset[2], src_offset[2])
+                dst_las = laspy.LasData(src_las.header)
+                dst_las.header.offset = tmp_offset
+                dst_las.write(dst_path)
+                for psx in psxs:
+                    row = psx.split('_')[0]
+                    if row in dic_files[file]:
+                        src_path = os.path.join(gt.output_path, psx + '_point_cloud.las')
+                        src_las = laspy.read(src_path)
+                        with laspy.open(dst_path, mode='a') as dst_las:
+                            with laspy.open(src_path, mode='r') as src_las:
+                                for points in src_las.chunk_iterator(2_000_000):
+                                    points.change_scaling(offsets=tmp_offset)
+                                    dst_las.append_points(points)
+                gt.update_log('Merged full dense point cloud (' + str(n_max) + 'points) = ' +
+                              str(file + 1) + '/' + str(len(dic_files)) + 'point clouds')
 
     def optimize_alignment(self, label=gt.label):
         self.set_chunk(label)
@@ -750,102 +814,110 @@ class MetashapeTools:
 
     def process_dems(self, label=gt.label):
         self.set_chunk(label)
-        self.chunk.buildDem(source_data=Metashape.PointCloudData)
-        self.chunk.elevation.label = 'DSM'
-        self.doc.save()
-        if float(gt.params.get("Project")["DemGSD"]) > 0:
-            self.chunk.exportRaster(
-                path=os.path.join(gt.output_path,
-                                  label + '_dsm_' + str(
-                                      int(float(gt.params.get("Project")["DemGSD"]) * 1000)) + 'mm.tif'),
-                source_data=Metashape.ElevationData,
-                resolution=float(gt.params.get("Project")["DemGSD"]),
-                image_compression=self.image_compression,
-                clip_to_boundary=True,
-                save_alpha=True,
+        if len(self.chunk.elevations) < 2:
+            if len(self.chunk.elevations) == 1:
+                self.chunk.remove(self.chunk.elevations[0])
+            self.chunk.buildDem(source_data=Metashape.PointCloudData)
+            self.chunk.elevation.label = 'DSM'
+            self.doc.save()
+            if float(gt.params.get("Project")["DemGSD"]) > 0:
+                self.chunk.exportRaster(
+                    path=os.path.join(gt.output_path,
+                                      label + '_dsm_' + str(
+                                          int(float(gt.params.get("Project")["DemGSD"]) * 1000)) + 'mm.tif'),
+                    source_data=Metashape.ElevationData,
+                    resolution=float(gt.params.get("Project")["DemGSD"]),
+                    image_compression=self.image_compression,
+                    clip_to_boundary=True,
+                    save_alpha=True,
+                )
+                gt.update_log('Completed DSM for chunk ' + label + ':\nGSD = ' + str(gt.params.get("Project")["DemGSD"]) + ' m')
+            else:
+                self.chunk.elevation = self.chunk.elevations[0]
+                resolution = round(self.chunk.elevation.resolution, ndigits=3)
+                self.chunk.exportRaster(
+                    path=os.path.join(gt.output_path,
+                                      label + '_dsm_' + str(
+                                          int(float(resolution) * 1000)) + 'mm.tif'),
+                    source_data=Metashape.ElevationData,
+                    image_compression=self.image_compression,
+                    clip_to_boundary=True,
+                    save_alpha=True,
+                )
+                gt.update_log('Completed DSM for chunk ' + label + ':\nGSD = ' + str(resolution) + ' m')
+            self.chunk.buildDem(
+                source_data=Metashape.PointCloudData,
+                interpolation=Metashape.Interpolation.Extrapolated,
+                classes=[2],
             )
-            gt.update_log('Completed DSM for chunk ' + label + ':\nGSD = ' + str(gt.params.get("Project")["DemGSD"]) + ' m')
+            self.doc.save()
+            self.chunk.elevation = self.chunk.elevations[1]
+            self.chunk.elevation.label = 'DTM'
+            self.doc.save()
+            if float(gt.params.get("Project")["DemGSD"]) > 0:
+                self.chunk.exportRaster(
+                    path=os.path.join(gt.output_path,
+                                      label + '_dtm_' + str(
+                                          int(float(gt.params.get("Project")["DemGSD"]) * 1000)) + 'mm.tif'),
+                    source_data=Metashape.ElevationData,
+                    resolution=float(gt.params.get("Project")["DemGSD"]),
+                    image_compression=self.image_compression,
+                    clip_to_boundary=True,
+                    save_alpha=True,
+                )
+                gt.update_log('Completed DTM for chunk ' + label + ':\nGSD = ' + str(gt.params.get("Project")["DemGSD"]) + ' m')
+            else:
+                resolution = round(self.chunk.elevation.resolution, ndigits=3)
+                self.chunk.exportRaster(
+                    path=os.path.join(gt.output_path,
+                                      label + '_dtm_' + str(
+                                          int(float(resolution) * 1000)) + 'mm.tif'),
+                    source_data=Metashape.ElevationData,
+                    image_compression=self.image_compression,
+                    clip_to_boundary=True,
+                    save_alpha=True,
+                )
+                gt.update_log('Completed DTM for chunk ' + label + ':\nGSD = ' + str(resolution) + ' m')
         else:
-            self.chunk.elevation = self.chunk.elevations[0]
-            resolution = round(self.chunk.elevation.resolution, ndigits=3)
-            self.chunk.exportRaster(
-                path=os.path.join(gt.output_path,
-                                  label + '_dsm_' + str(
-                                      int(float(resolution) * 1000)) + 'mm.tif'),
-                source_data=Metashape.ElevationData,
-                image_compression=self.image_compression,
-                clip_to_boundary=True,
-                save_alpha=True,
-            )
-            gt.update_log('Completed DSM for chunk ' + label + ':\nGSD = ' + str(resolution) + ' m')
-        self.chunk.buildDem(
-            source_data=Metashape.PointCloudData,
-            interpolation=Metashape.Interpolation.Extrapolated,
-            classes=[2],
-        )
-        self.doc.save()
-        self.chunk.elevation = self.chunk.elevations[1]
-        self.chunk.elevation.label = 'DTM'
-        self.doc.save()
-        if float(gt.params.get("Project")["DemGSD"]) > 0:
-            self.chunk.exportRaster(
-                path=os.path.join(gt.output_path,
-                                  label + '_dtm_' + str(
-                                      int(float(gt.params.get("Project")["DemGSD"]) * 1000)) + 'mm.tif'),
-                source_data=Metashape.ElevationData,
-                resolution=float(gt.params.get("Project")["DemGSD"]),
-                image_compression=self.image_compression,
-                clip_to_boundary=True,
-                save_alpha=True,
-            )
-            gt.update_log('Completed DTM for chunk ' + label + ':\nGSD = ' + str(gt.params.get("Project")["DemGSD"]) + ' m')
-        else:
-            resolution = round(self.chunk.elevation.resolution, ndigits=3)
-            self.chunk.exportRaster(
-                path=os.path.join(gt.output_path,
-                                  label + '_dtm_' + str(
-                                      int(float(resolution) * 1000)) + 'mm.tif'),
-                source_data=Metashape.ElevationData,
-                image_compression=self.image_compression,
-                clip_to_boundary=True,
-                save_alpha=True,
-            )
-            gt.update_log('Completed DTM for chunk ' + label + ':\nGSD = ' + str(resolution) + ' m')
+            gt.update_log('Founded DEMs for chunk ' + label)
 
     def process_orthomosaic(self, label=gt.label):
         self.set_chunk(label)
         self.chunk.elevation = self.chunk.elevations[0]
-        self.chunk.buildOrthomosaic(
-            surface_data=Metashape.ElevationData,
-            blending_mode=Metashape.MosaicBlending,
-            fill_holes=True,
-            refine_seamlines=False,
-        )
-        self.doc.save()
-        if float(gt.params.get("Project")["OrthoGSD"]) > 0:
-            self.chunk.exportRaster(
-                path=os.path.join(gt.output_path,
-                                  label + '_orthomosaic_' + str(
-                                      int(float(gt.params.get("Project")["OrthoGSD"]) * 1000)) + 'mm.tif'),
-                source_data=Metashape.OrthomosaicData,
-                resolution=float(gt.params.get("Project")["OrthoGSD"]),
-                image_compression=self.image_compression,
-                clip_to_boundary=True,
-                save_alpha=True,
+        if len(self.chunk.orthomosaics) == 0:
+            self.chunk.buildOrthomosaic(
+                surface_data=Metashape.ElevationData,
+                blending_mode=Metashape.MosaicBlending,
+                fill_holes=True,
+                refine_seamlines=False,
             )
-            gt.update_log('Completed orthomosaic for chunk ' + label + ':\nGSD = ' + str(gt.params.get("Project")["OrthoGSD"]) + ' m')
+            self.doc.save()
+            if float(gt.params.get("Project")["OrthoGSD"]) > 0:
+                self.chunk.exportRaster(
+                    path=os.path.join(gt.output_path,
+                                      label + '_orthomosaic_' + str(
+                                          int(float(gt.params.get("Project")["OrthoGSD"]) * 1000)) + 'mm.tif'),
+                    source_data=Metashape.OrthomosaicData,
+                    resolution=float(gt.params.get("Project")["OrthoGSD"]),
+                    image_compression=self.image_compression,
+                    clip_to_boundary=True,
+                    save_alpha=True,
+                )
+                gt.update_log('Completed orthomosaic for chunk ' + label + ':\nGSD = ' + str(gt.params.get("Project")["OrthoGSD"]) + ' m')
+            else:
+                resolution = round(self.chunk.orthomosaic.resolution, ndigits=3)
+                self.chunk.exportRaster(
+                    path=os.path.join(gt.output_path,
+                                      label + '_orthomosaic_' + str(
+                                          int(float(resolution) * 1000)) + 'mm.tif'),
+                    source_data=Metashape.OrthomosaicData,
+                    image_compression=self.image_compression,
+                    clip_to_boundary=True,
+                    save_alpha=True,
+                )
+                gt.update_log('Completed orthomosaic for chunk ' + label + ':\nGSD = ' + str(resolution) + ' m')
         else:
-            resolution = round(self.chunk.orthomosaic.resolution, ndigits=3)
-            self.chunk.exportRaster(
-                path=os.path.join(gt.output_path,
-                                  label + '_orthomosaic_' + str(
-                                      int(float(resolution) * 1000)) + 'mm.tif'),
-                source_data=Metashape.OrthomosaicData,
-                image_compression=self.image_compression,
-                clip_to_boundary=True,
-                save_alpha=True,
-            )
-            gt.update_log('Completed orthomosaic for chunk ' + label + ':\nGSD = ' + str(resolution) + ' m')
+            gt.update_log('Founded orthomosaic for chunk ' + label)
 
     def process_point_cloud(self, label=gt.label):
         self.set_chunk(label)
@@ -862,48 +934,51 @@ class MetashapeTools:
             "Moderate": Metashape.ModerateFiltering,
             "Aggressive": Metashape.AggressiveFiltering
         }
-        self.chunk.buildDepthMaps(
-            downscale=params_quality[gt.params.get("PointCloud")["Quality"]],
-            filter_mode=params_filter[gt.params.get("PointCloud")["FilterMode"]],
-        )
-        self.doc.save()
-        self.chunk.buildPointCloud(point_confidence=True)
-        self.doc.save()
-        gt.update_log('Created points in dense point cloud for chunk ' +
-                      label + ' = ' + str(self.chunk.point_cloud.point_count) + ' points')
-        self.chunk.point_cloud.setConfidenceFilter(0, 2)
-        self.chunk.point_cloud.removePoints(list(range(128)))
-        self.chunk.point_cloud.resetFilters()
-        self.chunk.point_cloud.compactPoints()
-        self.doc.save()
-        gt.update_log('Filtered points in dense point cloud for chunk ' +
-                      label + ' = ' + str(self.chunk.point_cloud.point_count) + ' points')
-        self.chunk.point_cloud.assignClass(0)
-        self.doc.save()
-        self.chunk.point_cloud.classifyGroundPoints(
-            max_angle=15.0,
-            max_distance=0.2,
-            cell_size=50.0,
-            erosion_radius=0.0)
-        self.doc.save()
-        self.chunk.exportPointCloud(
-            path=os.path.join(gt.output_path, label + '_point_cloud.las'),
-            source_data=Metashape.PointCloudData,
-            crs=self.project_crs,
-            clip_to_boundary=True,
-            save_point_color=True,
-            save_point_normal=False,
-            save_point_intensity=True,
-            save_point_classification=True,
-            save_point_confidence=True,
-            save_point_return_number=False,
-            save_point_scan_angle=False,
-            save_point_source_id=False,
-            save_point_timestamp=False,
-            save_point_index=False,
-        )
-        # TODO get ground count
-        gt.update_log('Classified ground points in dense point cloud for chunk ' + label)
+        if self.chunk.depth_maps is None:
+            self.chunk.buildDepthMaps(
+                downscale=params_quality[gt.params.get("PointCloud")["Quality"]],
+                filter_mode=params_filter[gt.params.get("PointCloud")["FilterMode"]],
+            )
+            self.doc.save()
+            self.chunk.buildPointCloud(point_confidence=True)
+            self.doc.save()
+            gt.update_log('Completed dense point cloud for chunk ' +
+                          label + ' = ' + str(self.chunk.point_cloud.point_count) + ' points')
+            self.chunk.point_cloud.setConfidenceFilter(0, 2)
+            self.chunk.point_cloud.removePoints(list(range(128)))
+            self.chunk.point_cloud.resetFilters()
+            self.chunk.point_cloud.compactPoints()
+            self.doc.save()
+            gt.update_log('Filtered dense point cloud for chunk ' +
+                          label + ' = ' + str(self.chunk.point_cloud.point_count) + ' points')
+            self.chunk.point_cloud.assignClass(0)
+            self.doc.save()
+            self.chunk.point_cloud.classifyGroundPoints(
+                max_angle=15.0,
+                max_distance=0.2,
+                cell_size=50.0,
+                erosion_radius=0.0)
+            self.doc.save()
+            self.chunk.exportPointCloud(
+                path=os.path.join(gt.output_path, label + '_point_cloud.las'),
+                source_data=Metashape.PointCloudData,
+                crs=self.project_crs,
+                clip_to_boundary=True,
+                save_point_color=True,
+                save_point_normal=False,
+                save_point_intensity=True,
+                save_point_classification=True,
+                save_point_confidence=True,
+                save_point_return_number=False,
+                save_point_scan_angle=False,
+                save_point_source_id=False,
+                save_point_timestamp=False,
+                save_point_index=False,
+            )
+            # TODO get ground count
+            gt.update_log('Classified ground in dense point cloud for chunk ' + label)
+        else:
+            gt.update_log('Founded dense point cloud for chunk ' + label)
 
     def process_report(self, label=gt.label):
         self.set_chunk(label)
@@ -1063,31 +1138,35 @@ class MetashapeTools:
         self.set_chunk(label)
         for shape in self.chunk.shapes:
             self.set_chunk(label)
-            if shape.group.label == 'TileGrid_layer':
-                label_tile = shape.label
-                gt.update_log('Creating chunk for tile = ' + label_tile)
-                path = gt.project_path.replace(".psx", "_" + label_tile + ".psx")
-                self.doc.save(path)
-                doc = Metashape.Document()
-                doc.open(path)
-                chunk = doc.chunk
-                chunk.label = label_tile
-                doc.save()
-                group = chunk.shapes.addGroup()
-                group.label = 'TileROI_layer'
-                group.color = (0, 0, 0)
-                group.show_labels = True
-                doc.save()
-                list = []
-                for shape in chunk.shapes:
-                    if shape.label == label_tile:
-                        new_shape = chunk.shapes.addShape()
-                        new_shape.label = 'TileROI'
-                        new_shape.group = group
-                        new_shape.geometry = shape.geometry
-                        doc.save()
-                        list.append(shape)
-                chunk.shapes.remove(list)
-                doc.save()
-                self.set_region(label=label_tile)
-        gt.update_log('Chunk splitting completed')
+            label_tile = shape.label
+            path = gt.project_path.replace(".psx", "_" + label_tile + ".psx")
+            if os.path.isfile(path) and os.path.exists(path):
+                gt.update_log('Founded chunk for tile = ' + label_tile)
+            else:
+                if shape.group.label == 'TileGrid_layer':
+                    gt.update_log('Creating chunk for tile = ' + label_tile)
+                    path = gt.project_path.replace(".psx", "_" + label_tile + ".psx")
+                    self.doc.save(path)
+                    doc = Metashape.Document()
+                    doc.open(path)
+                    chunk = doc.chunk
+                    chunk.label = label_tile
+                    doc.save()
+                    group = chunk.shapes.addGroup()
+                    group.label = 'TileROI_layer'
+                    group.color = (0, 0, 0)
+                    group.show_labels = True
+                    doc.save()
+                    list = []
+                    for shape in chunk.shapes:
+                        if shape.label == label_tile:
+                            new_shape = chunk.shapes.addShape()
+                            new_shape.label = 'TileROI'
+                            new_shape.group = group
+                            new_shape.geometry = shape.geometry
+                            doc.save()
+                            list.append(shape)
+                    chunk.shapes.remove(list)
+                    doc.save()
+                    self.set_region(label=label_tile)
+        gt.update_log('Completed chunk splitting')

@@ -7,6 +7,8 @@ mt = MetashapeTools()
 if eval(gt.params.get("Workflow")["CleanPrevious"]):
     gt.clear_output_folder()
 
+mt.check_initial()
+
 if eval(gt.params.get("Workflow")["Initialize"]):
     mt.initial_psx()
     mt.import_photos()

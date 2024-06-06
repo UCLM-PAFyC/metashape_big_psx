@@ -55,14 +55,10 @@ class GeneralTools:
         return params
 
     def update_log(self, text=None):
+        time.strftime("%Y%m%d %H:%M:%S")
         if not os.path.exists(self.log_file):
             with open(self.log_file, 'w') as f:
                 f.write(time.strftime("%d/%m/%Y %H:%M:%S") + ' Initialized process\n')
-                file = os.path.normpath(self.params_file)
-                with open(file) as config_file:
-                    parsed = json.load(config_file)
-                f.write('Input parameters = ' + json.dumps(parsed, indent=1) + '\n')
-        time.strftime("%Y%m%d %H:%M:%S")
         if text is None:
             text = '...'
         with open(self.log_file, 'a') as f:

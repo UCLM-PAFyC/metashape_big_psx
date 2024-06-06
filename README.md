@@ -10,6 +10,7 @@ A tool to process big metashape projects developed for AICEDRONE project
   * `pip install D:\Aicedrone\metashape_big_psx\Metashape-2.1.1-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl` Instalar módulo python de Metashape
   * `conda search -c conda-forge laspy` Comprobar última versión de laspy
   * `conda install -c conda-forge laspy=2.5.3` Instalar laspy
+  * `conda install -c conda-forge lazrs-python` Instalar lazrs
 * Agisoft Metashape 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/metashape-pro_2_1_1_x64.msi) + activar licencia en GUI.
 * Módulo python de Metashape Pro 2.1.1 [link](https://s3-eu-west-1.amazonaws.com/download.agisoft.com/Metashape-2.1.1-cp37.cp38.cp39.cp310.cp311-none-win_amd64.whl)
 * Modelos del geoide para descargar [link](https://www.agisoft.com/downloads/geoids/)
@@ -32,7 +33,7 @@ Para importar **orientaciones externas** desde archivo CSV, éste debe tener la 
 * Separador decimal `.`
 * Sin cabecera
 * Sin primera fila de títulos o encabezados
-* Para coordendas geodésicas:
+* Para coordenadas geodésicas:
   * Campos: `label,longitude,latitude,altitude`
   * Unidades: deg
 * Para coordenadas proyectadas:
@@ -46,7 +47,7 @@ Para importar **GCP** desde archivo CSV, éste debe tener la siquiente estructur
 * Separador decimal `.`
 * Sin cabecera
 * Sin primera fila de títulos o encabezados
-* Para coordendas geodésicas:
+* Para coordenadas geodésicas:
   * Campos: `label,longitude,latitude,altitude`
   * Unidades: deg
 * Para coordenadas proyectadas:
@@ -86,7 +87,7 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
 
 * `Workflow.CleanPrevious` Ejecuta la limpieza del trabajo anterior.
   * `True` | `False`
-* `Workflow.Initialize` Ejecuta la creacción del proyecto e importación de los datos de entrada.
+* `Workflow.Initialize` Ejecuta la creación del proyecto e importación de los datos de entrada.
   * `True` | `False`
 * `Workflow.Preprocess` Ejecuta el cosido y alineamiento inicial.
   * `True` | `False`
@@ -94,11 +95,11 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
   * `True` | `False`
 * `Workflow.Split` Ejecuta la partición del trabajo en tiles.
   * `True` | `False`
-* `Workflow.PointCloud` Ejecuta la creacción y exportación de la nube de puntos densa.
+* `Workflow.PointCloud` Ejecuta la creación y exportación de la nube de puntos densa.
   * `True` | `False`
-* `Workflow.DEMs` Ejecuta la creacción y exportación de los modelos digitales de elevaciones.
+* `Workflow.DEMs` Ejecuta la creación y exportación de los modelos digitales de elevaciones.
   * `True` | `False`
-* `Workflow.Orthomosaic` Ejecuta la creacción y exportación del orthomosaico.
+* `Workflow.Orthomosaic` Ejecuta la creación y exportación del orthomosaico.
   * `True` | `False`
 * `Workflow.Report` Ejecuta la exportación del informe de resultados.
   * `True` | `False`
@@ -113,8 +114,7 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
 * `Photo.EoPath` Ruta del archivo CSV con las orientaciones externas. [(Ver requisitos)](#importación-de-orientaciones-externas)
 
 * `ROI.Method` Método de definición de la región de interés. [(Ver requisitos)](#importación-de-región-de-interés)
-  * `0` Para utilizar el espacio máximo que abarquen los productos geométicos generados.
-  * `1` Para definir con las herramienta de dibujo en el GUI de Metashape. #TODO
+  * `0` Para utilizar el espacio máximo que abarquen los productos geométricos generados.
   * `SHP` Para importar un archivo SHP.
 * `ROI.Path` Ruta del archivo en el que se delimita la región de interés.
 
@@ -156,9 +156,9 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
 * `OptimizeAlignment.TiePointLimit` Selección del límite de tie points.
 
 * `SplitTile.TileSize` Dimensiones de tileado del bloque de vuelo para proyectos grandes en metros y unidades enteras.
-* `SplitTile.TileSizeBuffer` Porcentage de ampliación del perímetro de los tiles. Valores enteros comprendidos entre 5 y 100.
+* `SplitTile.TileSizeBuffer` Porcentaje de ampliación del perímetro de los tiles. Valores enteros comprendidos entre 5 y 100.
 * `SplitTile.Path` Opción de utilizar malla vectorial completa o editada por el usuario.
-  * `0` Crea de forma automática la malla vestorial que cubre todo el trabajo o la ROI aplicada.
+  * `0` Crea de forma automática la malla vectorial que cubre todo el trabajo o la ROI aplicada.
   * Ruta al archivo que contiene la malla vectorial editada por el usuario [(Ver requisitos)](#importación-de-malla-de-tileado). Si no encuentra el archivo, será creado y el proceso interrumpido. 
 * `SplitTile.MergeMethod` Selección de opciones para unión de los productos resultantes:
   * `Metashape` Utilizando la API de Metashape.
@@ -178,7 +178,7 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
   * `False` | `Mild` | `Moderate` | `Aggressive`
 
 * `InstallRequirement.Env` Ruta del entorno de instalación.
-* `InstallRequirement.Geoid` Ruta del directorio donde se encuentras los modelos del geoide.
+* `InstallRequirement.Geoid` Ruta del directorio donde se encuentra los modelos del geoide.
 
 2. Ejecutar el archivo `BigPsx.bat`.
 
