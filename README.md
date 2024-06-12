@@ -118,7 +118,7 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
   * `SHP` Para importar un archivo SHP.
 * `ROI.Path` Ruta del archivo en el que se delimita la región de interés.
 
-* `CameraCalibration.f` Selección si calibra y no se fija el parámetro de orientación interna: focal length coefficient:
+* `CameraCalibration.f` Selección si calibra y no se fija el parámetro de orientación interna: focal length coefficient.
   * `True` | `False`
 * `CameraCalibration.cx` Selección si calibra y no se fija el parámetro de orientación interna: X principal point coordinates.
   * `True` | `False`
@@ -141,7 +141,7 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
 * `CameraCalibration.p2` Selección si calibra y no se fija el parámetro de orientación interna: p2 tangential distortion coefficient.
   * `True` | `False`
   
-* `OptimizeAlignment.Method` Selección si se calibra el alineamiento inicial:
+* `OptimizeAlignment.Method` Método de fotointerpretación de puntos de apoyo:
   * `PSX` Para optimizar alineamiento inicial con puntos de apoyo fotointerpretados en la GUI de Metashape [(Ver requisitos)](#fotointerpretación-de-los-puntos-de-apoyo).
   * `XML` Para optimizar alineamiento inicial con puntos de apoyo importados de archivo XML con formato de markers de Metashape. OPCIÓN EN PRUEBAS.
 * `OptimizeAlignment.EPSG` Código EPSG con el que se importarán los puntos de apoyo.
@@ -161,8 +161,8 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
   * `0` Crea de forma automática la malla vectorial que cubre todo el trabajo o la ROI aplicada.
   * Ruta al archivo que contiene la malla vectorial editada por el usuario [(Ver requisitos)](#importación-de-malla-de-tileado). Si no encuentra el archivo, será creado y el proceso interrumpido. 
 * `SplitTile.MergeMethod` Selección de opciones para unión de los productos resultantes:
-  * `Metashape` Utilizando la API de Metashape.
-  * `OsgeoLaspy` Utilizando las librerías `osgeo` (ráster) y `laspy` (nubes de puntos). #TODO
+  * `Metashape` Metashape.
+  * `OsgeoLaspy` Utilizando las librerías `osgeo` (ráster) y `laspy` (nubes de puntos).
 * `SplitTile.MergePointClouds` Selección si une la nube de puntos:
   * `True` | `False`
 * `SplitTile.MergeElevations` Selección si une los modelos digitales de elevaciones (DSM y DTM):
@@ -172,7 +172,7 @@ Para utilizar **una malla vectorial en archivo GPKG** el archivo debe haber sido
 * `SplitTile.MergedDEM` Selección si une DSM o DTM como modelo de elevación predeterminado (Recomendado `DSM`):
   * `DSM` | `DTM`
 
-* `PointCloud.Quality` Selección de la calidad:
+* `PointCloud.Quality` Selección de la calidad final de la nube de puntos:
   * `Ultrahigh` | `High` | `Medium` | `Low` | `Lowest`
 * `PointCloud.FilterMode` Selección del filtro:
   * `False` | `Mild` | `Moderate` | `Aggressive`

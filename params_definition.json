@@ -1,0 +1,293 @@
+{
+	"Project": {
+		"Label": {
+			"definition": "Etiqueta con la que se nombrarán los productos resultantes.",
+			"type": "string",
+			"len": 50
+		},
+		"EPSG": {
+			"definition": "Código EPSG con el que se exportarán los productos resultantes",
+			"type": "string",
+			"len": 11
+		},
+		"Path": {
+			"definition": "Ruta del directorio de resultados",
+			"type": "folder"
+		},
+		"DemGSD": {
+			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno",
+			"type": "values",
+			"values": {
+				"0": "Resolución máxima posible",
+				"value": "float"
+			}
+		},
+		"OrthoGSD": {
+			"definition": "Resolución en metros con la que se exportará la ortoimagen",
+			"type": "values",
+			"values": {
+				"0": "Resolución máxima posible",
+				"value": "float"
+			}
+		}
+	},
+	"Workflow":{
+		"CleanPrevious": {
+			"definition": "Proceso que ejecuta la limpieza del trabajo anterior",
+			"type": "boolean"
+		},
+		"Initialize": {
+			"definition": "Proceso que ejecuta la creación del proyecto e importación de los datos de entrada",
+			"type": "boolean"
+		},
+		"Preprocess": {
+			"definition": "Proceso que ejecuta el cosido y alineamiento inicial",
+			"type": "boolean"
+		},
+		"Optimize": {
+			"definition": "Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo",
+			"type": "boolean"
+		},
+		"Split": {
+			"definition": "Proceso que ejecuta la partición del trabajo en tiles",
+			"type": "boolean"
+		},
+		"PointCloud": {
+			"definition": "Proceso que ejecuta la creación y exportación de la nube de puntos densa",
+			"type": "boolean"
+		},
+		"DEMs": {
+			"definition": "Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones",
+			"type": "boolean"
+		},
+		"Orthomosaic": {
+			"definition": "Proceso que ejecuta la creación y exportación del orthomosaico",
+			"type": "boolean"
+		},
+		"Report": {
+			"definition": "Proceso que ejecuta la exportación del informe de resultados",
+			"type": "boolean"
+		}
+	},
+	"Photo": {
+		"Path": {
+			"definition": "Ruta del directorio donde se localizan las imágenes",
+			"type": "folder"
+		},
+		"LocationAccuracy2D": {
+			"definition": "Precisión horizontal de la orientación externa de las imágenes en metros",
+			"type": "float"
+		},
+		"LocationAccuracyHeight": {
+			"definition": "Precisión vertical de la orientación externa de las imágenes en metros",
+			"type": "float"
+		},
+		"Method": {
+			"definition": "Fuente de la que se importarán las orientaciones externas de las imágenes",
+			"type": "values",
+			"values": {
+				"CSV": "Fichero CSV",
+				"EXIF": "Metadatos de las fotos"
+			}
+		},
+		"EPSG": {
+			"definition": "Código EPSG con el que se importarán las imágenes",
+			"type": "string",
+			"len": 11
+		},
+		"EoPath": {
+			"definition": "Ruta del archivo CSV con las orientaciones externas",
+			"type": "file"
+		}
+	},
+	"ROI": {
+		"Path": {
+			"definition": "Ruta del archivo en el que se delimita la región de interés.",
+			"type": "file"
+		},
+		"Method": {
+			"definition": "Método de definición de la región de interés",
+			"type": "values",
+			"values": {
+				"0": "Utiliza el espacio máximo que abarquen los productos geométricos generados",
+				"SHP": "Importar un archivo SHP"
+			}
+		}
+	},
+	"CameraCalibration": {
+		"f": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: focal length coefficient",
+			"type": "boolean"
+		},
+		"cx": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: X principal point coordinates",
+			"type": "boolean"
+		},
+		"cy": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: Y principal point coordinates",
+			"type": "boolean"
+		},
+		"k1": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k1 radial distortion coefficient",
+			"type": "boolean"
+		},
+		"k2": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k2 radial distortion coefficient",
+			"type": "boolean"
+		},
+		"k3": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k3 radial distortion coefficient",
+			"type": "boolean"
+		},
+		"k4": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k4 radial distortion coefficient",
+			"type": "boolean"
+		},
+		"b1": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: aspect ratio",
+			"type": "boolean"
+		},
+		"b2": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: skew coefficient",
+			"type": "boolean"
+		},
+		"p1": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: p1 tangential distortion coefficient",
+			"type": "boolean"
+		},
+		"p2": {
+			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: p2 tangential distortion coefficient",
+			"type": "boolean"
+		}
+	},
+	"OptimizeAlignment": {
+		"Method": {
+			"definition": "Método de fotointerpretación de puntos de apoyo",
+			"type": "values",
+			"values": {
+				"PSX": "Optimiza alineamiento inicial con puntos de apoyo fotointerpretados en la GUI de Metashape",
+				"XML": "Optimiza alineamiento inicial con puntos de apoyo importados de archivo XML con formato de markers de Metashape"
+			}
+		},
+		"EPSG": {
+			"definition": "Código EPSG con el que se importarán los puntos de apoyo",
+			"type": "string",
+			"len": 11
+		},
+		"Path": {
+			"definition": "Ruta del archivo de puntos de apoyo",
+			"type": "file"
+		},
+		"Accuracy": {
+			"definition": "Precisión establecida para el alineamiento",
+			"type": "values",
+			"values": {
+				"Highest": "Highest",
+				"High": "High",
+				"Medium": "Medium",
+				"Low": "Low",
+				"Lowest": "Lowest"
+			}
+		},
+		"ReferencePreselection": {
+			"definition": "Método de preselección de imágenes según su localización",
+			"type": "values",
+			"values": {
+				"False": "Método genérico sin localización",
+				"Source": "Método según la localización de origen (importada desde EXIF o CSV)",
+				"Estimated": "Método según la localización estimada",
+				"Sequential": "Método de imágenes consecutivas"
+			}
+		},
+		"TiePointLimit": {
+			"definition": "Límite de tie points",
+			"type": "integer"
+		}
+	},
+	"SplitTile": {
+		"TileSize": {
+			"definition": "Dimensiones de tileado del bloque de vuelo para proyectos grandes en metros y unidades enteras",
+			"type": "integer"
+		},
+		"TileSizeBuffer": {
+			"definition": "Porcentaje de ampliación del perímetro de los tiles",
+			"type": "integer",
+			"max": 100,
+			"min": 5
+		},
+		"Method": {
+			"definition": "Método de automático o manual de edición de la malla vectorial de tiles a procesar",
+			"type": "values",
+			"values": {
+				"AUTO": "Crea de forma automática la malla vectorial que cubre todo el trabajo o la ROI aplicada",
+				"MANUAL": "Crea la capa y espera la edición manual de la misma"
+			}
+		},
+		"Path": {
+			"definition": "Ruta al archivo que contiene la malla vectorial editada por el usuario",
+			"type": "file",
+			"format": ".gpkg"
+		},
+		"MergeMethod": {
+			"definition": "Estrategias de unión de los productos resultantes",
+			"type": "values",
+			"values": {
+				"Metashape": "Metashape",
+				"OsgeoLaspy": "Utilizando las librerías osgeo (ráster) y laspy (nubes de puntos)"
+			}
+		},
+		"MergePointClouds": {
+			"definition": "Selección si une la nube de puntos",
+			"type": "boolean"
+		},
+		"MergeElevations": {
+			"definition": "Selección si une los modelos digitales de elevaciones (DSM y DTM)",
+			"type": "boolean"
+		},
+		"MergeOrthomosaics": {
+			"definition": "Selección si une el ortomosaico",
+			"type": "boolean"
+		},
+		"MergedDEM": {
+			"definition": "Selección del DEM a unir con estrategia Metashape (Recomendado `DSM`)",
+			"type": "values",
+			"values": {
+				"DSM": "Digital Surface Model",
+				"DTM": "Digital Terrain Model"
+			}
+		}
+	},
+	"PointCloud": {
+		"Quality": {
+			"definition": "Selección de la calidad final de la nube de puntos densa",
+			"type": "values",
+			"values": {
+				"Ultrahigh": "Ultrahigh",
+				"High": "High",
+				"Medium": "Medium",
+				"Low": "Low",
+				"Lowest": "Lowest"
+			}
+		},
+		"FilterMode": {
+			"definition": "Selección del filtro de creación  de la nube de puntos densa",
+			"type": "values",
+			"values": {
+				"False": "False",
+				"Mild": "Mild",
+				"Moderate": "Moderate",
+				"Aggressive": "Aggressive"
+			}
+		}
+	},
+	"InstallRequirement": {
+		"Env": {
+			"definition": "Ruta del entorno de instalación",
+			"type": "folder"
+		},
+		"Geoid": {
+			"definition": "Ruta del directorio donde se encuentra los modelos del geoide",
+			"type": "folder"
+		}
+	}
+}
