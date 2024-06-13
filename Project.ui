@@ -38,7 +38,7 @@
              
           
         <property name="text">
-            <string>example</string>
+            <string>Example project</string>
         </property>
         
      </widget>
@@ -99,7 +99,7 @@
                    
           
         <property name="text">
-            <string>None</string>
+            <string></string>
         </property>
         
      </widget>
@@ -134,15 +134,15 @@
   <item row="3" column="0">
      <widget class="QLabel" name="label">
           <property name="text">
-          <string>Dem_gsd:</string>
+          <string>Demgsd:</string>
           </property>
      </widget>
      </item>
 <item row="3" column="1">
      
-     <widget class="QDoubleSpinBox" name="dem_gsd">
+     <widget class="QDoubleSpinBox" name="demgsd">
           <property name="field_name" stdset="0">
-               <string>dem_gsd</string>
+               <string>demgsd</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
@@ -156,11 +156,11 @@
                     </property>
                             
                     <property name="minimum" stdset="0">
-                        <string>0.01</string>
+                        <string>0.0</string>
                     </property>
                             
                     <property name="maximum" stdset="0">
-                        <string>2.00</string>
+                        <string>2.0</string>
                     </property>
                             
                     <property name="singleStep" stdset="0">
@@ -178,15 +178,15 @@
   <item row="4" column="0">
      <widget class="QLabel" name="label">
           <property name="text">
-          <string>Ortho_gsd:</string>
+          <string>Orthogsd:</string>
           </property>
      </widget>
      </item>
 <item row="4" column="1">
      
-     <widget class="QDoubleSpinBox" name="ortho_gsd">
+     <widget class="QDoubleSpinBox" name="orthogsd">
           <property name="field_name" stdset="0">
-               <string>ortho_gsd</string>
+               <string>orthogsd</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
@@ -200,11 +200,11 @@
                     </property>
                             
                     <property name="minimum" stdset="0">
-                        <string>0.01</string>
+                        <string>0.0</string>
                     </property>
                             
                     <property name="maximum" stdset="0">
-                        <string>2.00</string>
+                        <string>2.0</string>
                     </property>
                             
                     <property name="singleStep" stdset="0">

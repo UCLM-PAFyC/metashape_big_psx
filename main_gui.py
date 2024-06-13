@@ -4,7 +4,7 @@
 
 import sys, os
 from PyQt5.QtWidgets import QApplication
-from MshBigPsxDialog import MshBigPsxDialog
+# from MshBigPsxDialog import MshBigPsxDialog
 from gui import gui_defines
 from BuildClassesDefinition import BuildClassesDefinition
 import Tools
@@ -22,6 +22,7 @@ def main():
         Tools.error_msg(str_error)
         return
 
+    from MshBigPsxDialog import MshBigPsxDialog
     dialog = MshBigPsxDialog()
     dialog.show()
     app.exec()

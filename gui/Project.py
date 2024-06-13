@@ -1,55 +1,49 @@
 from . import gui_defines
+
 class Project:
-    def __init__(self,
-                 label=gui_defines.PROJECT_LABEL_DEFAULT,
-                 epsg=gui_defines.PROJECT_EPSG_DEFAULT,
-                 path=None,
-                 dem_gsd=gui_defines.PROJECT_DEM_GSD_DEFAULT,
-                 ortho_gsd=gui_defines.PROJECT_DEM_GSD_DEFAULT):
-        self.__label = label
-        self.__epsg = epsg
-        self.__path = path
-        self.__dem_gsd = dem_gsd
-        self.__ortho_gsd = ortho_gsd
+	def __init__(self):
+		self.__label = "Example project"
+		self.__epsg = "25830+5782"
+		self.__path = ""
+		self.__demgsd = 0.05
+		self.__orthogsd = 0.05
 
-    @property
-    def label(self):
-        return self.__label
+	@property
+	def label(self):
+		return self.__label
 
-    @label.setter
-    def label(self, value: 'widget:QLineEdit'):
-        self.__label = value
+	@label.setter
+	def label(self, value: 'widget:QLineEdit'):
+		self.__label = value
 
-    @property
-    def epsg(self):
-        return self.__epsg
+	@property
+	def epsg(self):
+		return self.__epsg
 
-    @epsg.setter
-    def epsg(self, value: 'widget:QLineEdit'):
-        self.__epsg = value
+	@epsg.setter
+	def epsg(self, value: 'widget:QLineEdit'):
+		self.__epsg = value
 
-    @property
-    def path(self):
-        return self.__path
+	@property
+	def path(self):
+		return self.__path
 
-    @path.setter
-    # def path(self, value: 'widget:file'):
-    # def path(self, value: 'widget:file, type:save'):
-    def path(self, value: 'widget:file, type:folder'):
-        self.__path = value
+	@path.setter
+	def path(self, value: 'widget:file, type:folder'):
+		self.__path = value
 
-    @property
-    def dem_gsd(self):
-        return self.__dem_gsd
+	@property
+	def demgsd(self):
+		return self.__demgsd
 
-    @dem_gsd.setter
-    def dem_gsd(self, value: 'widget:QDoubleSpinBox, decimals:2,minimum:0.01, maximum:2.00, singleStep:0.01'):
-        self.__dem_gsd = value
+	@demgsd.setter
+	def demgsd(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01'):
+		self.__demgsd = value
 
-    @property
-    def ortho_gsd(self):
-        return self.__ortho_gsd
+	@property
+	def orthogsd(self):
+		return self.__orthogsd
 
-    @ortho_gsd.setter
-    def ortho_gsd(self, value: 'widget:QDoubleSpinBox, decimals:2,minimum:0.01, maximum:2.00, singleStep:0.01'):
-        self.__ortho_gsd = value
+	@orthogsd.setter
+	def orthogsd(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01'):
+		self.__orthogsd = value

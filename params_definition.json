@@ -4,7 +4,7 @@
 			"definition": "Etiqueta con la que se nombrarán los productos resultantes.",
 			"type": "string",
 			"len": 50,
-			"default": "Project "
+			"default": "Example project"
 		},
 		"EPSG": {
 			"definition": "Código EPSG con el que se exportarán los productos resultantes",
@@ -15,23 +15,25 @@
 		"Path": {
 			"definition": "Ruta del directorio de resultados",
 			"type": "folder",
-			"default": "None"
+			"default": ""
 		},
 		"DemGSD": {
-			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno, 0 para máxima posbile",
-			"type": "float",
+			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno, 0 para máxima posible",
+			"type": "real",
 			"decimals": 2,
-			"minimum": 0.01,
+			"minimum": 0.0,
 			"maximum": 2.00,
-			"singleStep": 0.01
+			"singleStep": 0.01,
+			"default": 0.05
 		},
 		"OrthoGSD": {
-			"definition": "Resolución en metros con la que se exportará la ortoimagen, 0 para máxima posbile",
-			"type": "float",
+			"definition": "Resolución en metros con la que se exportará la ortoimagen, 0 para máxima posible",
+			"type": "real",
 			"decimals": 2,
-			"minimum": 0.01,
+			"minimum": 0.0,
 			"maximum": 2.00,
-			"singleStep": 0.01
+			"singleStep": 0.01,
+			"default": 0.05
 		}
 	},
 	"Workflow":{
@@ -79,11 +81,11 @@
 		},
 		"LocationAccuracy2D": {
 			"definition": "Precisión horizontal de la orientación externa de las imágenes en metros",
-			"type": "float"
+			"type": "real"
 		},
 		"LocationAccuracyHeight": {
 			"definition": "Precisión vertical de la orientación externa de las imágenes en metros",
-			"type": "float"
+			"type": "real"
 		},
 		"Method": {
 			"definition": "Fuente de la que se importarán las orientaciones externas de las imágenes",
@@ -100,13 +102,13 @@
 		},
 		"EoPath": {
 			"definition": "Ruta del archivo CSV con las orientaciones externas",
-			"type": "file"
+			"type": "file open"
 		}
 	},
 	"ROI": {
 		"Path": {
 			"definition": "Ruta del archivo en el que se delimita la región de interés.",
-			"type": "file"
+			"type": "file open"
 		},
 		"Method": {
 			"definition": "Método de definición de la región de interés",
@@ -179,7 +181,7 @@
 		},
 		"Path": {
 			"definition": "Ruta del archivo de puntos de apoyo",
-			"type": "file"
+			"type": "file open"
 		},
 		"Accuracy": {
 			"definition": "Precisión establecida para el alineamiento",
@@ -228,7 +230,7 @@
 		},
 		"Path": {
 			"definition": "Ruta al archivo que contiene la malla vectorial editada por el usuario",
-			"type": "file",
+			"type": "file open",
 			"format": ".gpkg"
 		},
 		"MergeMethod": {
