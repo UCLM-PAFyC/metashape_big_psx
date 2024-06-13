@@ -3,32 +3,35 @@
 		"Label": {
 			"definition": "Etiqueta con la que se nombrarán los productos resultantes.",
 			"type": "string",
-			"len": 50
+			"len": 50,
+			"default": "Project "
 		},
 		"EPSG": {
 			"definition": "Código EPSG con el que se exportarán los productos resultantes",
 			"type": "string",
-			"len": 11
+			"len": 11,
+			"default": "25830+5782"
 		},
 		"Path": {
 			"definition": "Ruta del directorio de resultados",
-			"type": "folder"
+			"type": "folder",
+			"default": "None"
 		},
 		"DemGSD": {
-			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno",
-			"type": "values",
-			"values": {
-				"0": "Resolución máxima posible",
-				"value": "float"
-			}
+			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno, 0 para máxima posbile",
+			"type": "float",
+			"decimals": 2,
+			"minimum": 0.01,
+			"maximum": 2.00,
+			"singleStep": 0.01
 		},
 		"OrthoGSD": {
-			"definition": "Resolución en metros con la que se exportará la ortoimagen",
-			"type": "values",
-			"values": {
-				"0": "Resolución máxima posible",
-				"value": "float"
-			}
+			"definition": "Resolución en metros con la que se exportará la ortoimagen, 0 para máxima posbile",
+			"type": "float",
+			"decimals": 2,
+			"minimum": 0.01,
+			"maximum": 2.00,
+			"singleStep": 0.01
 		}
 	},
 	"Workflow":{
