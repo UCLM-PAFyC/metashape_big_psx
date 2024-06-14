@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
 from gui.Project import Project
+from gui.Workflow import Workflow
+from gui.Photo import Photo
 from gui import gui_defines
 
 from gui.kekse.kekse import ProtoKeks
@@ -30,12 +32,28 @@ class MshBigPsxDialog(QDialog):
         self.class_path = os.path.dirname(os.path.realpath(__file__))
         # class_path = os.path.join(pluginsPath, class_path)
         self.template_path = self.class_path + gui_defines.TEMPLATE_PATH
-        self.project = Project()
         # Project
+        self.project = Project()
         self.projectPushButton.clicked.connect(self.edit_project)
+        # Workflow
+        self.workflow = Workflow()
+        self.workflowPushButton.clicked.connect(self.edit_workflow)
+        # Photo
+        self.photo = Photo()
+        self.photoPushButton.clicked.connect(self.edit_photo)
         return
+
+    def edit_photo(self):
+        project_dlg = VPyGUIGenerator.create_gui(self.photo)
+        # project_dlg.show()
+        project_dlg.exec()
 
     def edit_project(self):
         project_dlg = VPyGUIGenerator.create_gui(self.project)
+        # project_dlg.show()
+        project_dlg.exec()
+
+    def edit_workflow(self):
+        project_dlg = VPyGUIGenerator.create_gui(self.workflow)
         # project_dlg.show()
         project_dlg.exec()

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Project</string>
+   <string>Photo</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -19,75 +19,11 @@
         <item row="0" column="0">
      <widget class="QLabel" name="label">
           <property name="text">
-          <string>Label:</string>
-          </property>
-     </widget>
-     </item>
-<item row="0" column="1">
-     
-     <widget class="QLineEdit" name="label">
-          <property name="field_name" stdset="0">
-               <string>label</string>
-          </property>
-          <property name="key" stdset="0">
-               <string>lineedit</string>
-          </property>
-          <property name="prop_name" stdset="0">
-               <string>text</string>
-          </property> 
-                      
-                    <property name="toolTip" stdset="0">
-                        <string>Etiqueta con la que se nombrarán los productos resultantes</string>
-                    </property>
-                   
-          
-        <property name="text">
-            <string>Example project</string>
-        </property>
-        
-     </widget>
-     
-</item>
-  <item row="1" column="0">
-     <widget class="QLabel" name="label">
-          <property name="text">
-          <string>Epsg:</string>
-          </property>
-     </widget>
-     </item>
-<item row="1" column="1">
-     
-     <widget class="QLineEdit" name="epsg">
-          <property name="field_name" stdset="0">
-               <string>epsg</string>
-          </property>
-          <property name="key" stdset="0">
-               <string>lineedit</string>
-          </property>
-          <property name="prop_name" stdset="0">
-               <string>text</string>
-          </property> 
-                      
-                    <property name="toolTip" stdset="0">
-                        <string>Código EPSG con el que se exportarán los productos resultantes</string>
-                    </property>
-                   
-          
-        <property name="text">
-            <string>25830+5782</string>
-        </property>
-        
-     </widget>
-     
-</item>
-  <item row="2" column="0">
-     <widget class="QLabel" name="label">
-          <property name="text">
           <string>Path:</string>
           </property>
      </widget>
      </item>
-<item row="2" column="1">
+<item row="0" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QLineEdit" name="path">
@@ -106,7 +42,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Ruta del directorio de resultados</string>
+                        <string>Ruta del directorio donde se localizan las imágenes</string>
                     </property>
                    
           
@@ -143,18 +79,18 @@
 </item>
 </layout>
 </item>
-  <item row="3" column="0">
+  <item row="1" column="0">
      <widget class="QLabel" name="label">
           <property name="text">
-          <string>Demgsd:</string>
+          <string>Locationaccuracy2d:</string>
           </property>
      </widget>
      </item>
-<item row="3" column="1">
+<item row="1" column="1">
      
-     <widget class="QDoubleSpinBox" name="demgsd">
+     <widget class="QDoubleSpinBox" name="locationaccuracy2d">
           <property name="field_name" stdset="0">
-               <string>demgsd</string>
+               <string>locationaccuracy2d</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
@@ -164,7 +100,7 @@
           </property> 
                       
                     <property name="decimals" stdset="0">
-                        <number>2</number>
+                        <number>3</number>
                     </property>
                             
                     <property name="minimum" stdset="0">
@@ -172,7 +108,7 @@
                     </property>
                             
                     <property name="maximum" stdset="0">
-                        <string>2.0</string>
+                        <string>5.0</string>
                     </property>
                             
                     <property name="singleStep" stdset="0">
@@ -180,64 +116,201 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)</string>
+                        <string>Precisión horizontal de la orientación externa de las imágenes en metros</string>
                     </property>
                    
           
         <property name="value">
-            <double>0.05</double>
+            <double>0.08</double>
         </property>
         
+     </widget>
+     
+</item>
+  <item row="2" column="0">
+     <widget class="QLabel" name="label">
+          <property name="text">
+          <string>Locationaccuracyheight:</string>
+          </property>
+     </widget>
+     </item>
+<item row="2" column="1">
+     
+     <widget class="QDoubleSpinBox" name="locationaccuracyheight">
+          <property name="field_name" stdset="0">
+               <string>locationaccuracyheight</string>
+          </property>
+          <property name="key" stdset="0">
+               <string>double</string>
+          </property>
+          <property name="prop_name" stdset="0">
+               <string>value</string>
+          </property> 
+                      
+                    <property name="decimals" stdset="0">
+                        <number>3</number>
+                    </property>
+                            
+                    <property name="minimum" stdset="0">
+                        <string>0.0</string>
+                    </property>
+                            
+                    <property name="maximum" stdset="0">
+                        <string>5.0</string>
+                    </property>
+                            
+                    <property name="singleStep" stdset="0">
+                        <string>0.01</string>
+                    </property>
+                            
+                    <property name="toolTip" stdset="0">
+                        <string>Precisión vertical de la orientación externa de las imágenes en metros</string>
+                    </property>
+                   
+          
+        <property name="value">
+            <double>0.12</double>
+        </property>
+        
+     </widget>
+     
+</item>
+  <item row="3" column="0">
+     <widget class="QLabel" name="label">
+          <property name="text">
+          <string>Method:</string>
+          </property>
+     </widget>
+     </item>
+<item row="3" column="1">
+     
+     <widget class="QComboBox" name="method">
+          <property name="field_name" stdset="0">
+               <string>method</string>
+          </property>
+          <property name="key" stdset="0">
+               <string>combo</string>
+          </property>
+          <property name="prop_name" stdset="0">
+               <string>currentIndex</string>
+          </property> 
+                      
+                    <property name="toolTip" stdset="0">
+                        <string>Fuente de la que se importarán las orientaciones externas de las imágenes</string>
+                    </property>
+                   
+          
+            <item>
+                <property name="text">
+                <string>Metadatos de las fotos</string>
+                </property>
+                <property name="flags">
+                    <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+                </property>
+            </item>
+            
+            <item>
+                <property name="text">
+                <string> Fichero CSV</string>
+                </property>
+                <property name="flags">
+                    <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+                </property>
+            </item>
+            
      </widget>
      
 </item>
   <item row="4" column="0">
      <widget class="QLabel" name="label">
           <property name="text">
-          <string>Orthogsd:</string>
+          <string>Epsg:</string>
           </property>
      </widget>
      </item>
 <item row="4" column="1">
      
-     <widget class="QDoubleSpinBox" name="orthogsd">
+     <widget class="QLineEdit" name="epsg">
           <property name="field_name" stdset="0">
-               <string>orthogsd</string>
+               <string>epsg</string>
           </property>
           <property name="key" stdset="0">
-               <string>double</string>
+               <string>lineedit</string>
           </property>
           <property name="prop_name" stdset="0">
-               <string>value</string>
+               <string>text</string>
           </property> 
                       
-                    <property name="decimals" stdset="0">
-                        <number>2</number>
-                    </property>
-                            
-                    <property name="minimum" stdset="0">
-                        <string>0.0</string>
-                    </property>
-                            
-                    <property name="maximum" stdset="0">
-                        <string>2.0</string>
-                    </property>
-                            
-                    <property name="singleStep" stdset="0">
-                        <string>0.01</string>
-                    </property>
-                            
                     <property name="toolTip" stdset="0">
-                        <string>Resolución en metros con la que se exportará la ortoimagen (0 para máxima posible)</string>
+                        <string>Código EPSG con el que se importarán las imágenes</string>
                     </property>
                    
           
-        <property name="value">
-            <double>0.05</double>
+        <property name="text">
+            <string>4326</string>
         </property>
         
      </widget>
      
+</item>
+  <item row="5" column="0">
+     <widget class="QLabel" name="label">
+          <property name="text">
+          <string>Eopath:</string>
+          </property>
+     </widget>
+     </item>
+<item row="5" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLineEdit" name="eopath">
+          <property name="field_name" stdset="0">
+               <string>eopath</string>
+          </property>
+          <property name="key" stdset="0">
+               <string>file</string>
+          </property>
+          <property name="prop_name" stdset="0">
+               <string>text</string>
+          </property> 
+                      
+                    <property name="toolTip" stdset="0">
+                        <string>Ruta del archivo CSV con las orientaciones externas</string>
+                    </property>
+                   
+          
+        <property name="text">
+            <string></string>
+        </property>
+        
+     </widget>
+     </item>
+<item>
+    <widget class="QPushButton" name="fileWidgetButton_eopath">
+    <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+    </sizepolicy>
+    </property>
+    <property name="maximumSize">
+    <size>
+    <width>50</width>
+    <height>16777215</height>
+    </size>
+    </property>
+    <property name="font">
+    <font>
+    <pointsize>12</pointsize>
+    <bold>true</bold>
+    </font>
+    </property>
+    <property name="for_file_widget" stdset="0">
+        <string>eopath</string>
+    </property>  
+    </widget>
+</item>
+</layout>
 </item>
   
       </layout>

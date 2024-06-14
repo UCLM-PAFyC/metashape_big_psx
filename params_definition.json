@@ -1,24 +1,48 @@
 {
+	"Language": "spanish",
 	"Project": {
+		"Text":{
+			"spanish": "Proyecto",
+			"english": "Project"
+		},
 		"Label": {
-			"definition": "Etiqueta con la que se nombrarán los productos resultantes.",
+			"Text":{
+				"spanish": "Etiqueta",
+				"english": "Label"
+			},
+			"definition":{
+				"spanish": "Etiqueta con la que se nombrarán los productos resultantes",
+				"english": "Etiqueta con la que se nombrarán los productos resultantes"
+			},
 			"type": "string",
 			"len": 50,
 			"default": "Example project"
 		},
 		"EPSG": {
+			"Text":{
+				"spanish": "Código EPSG",
+				"english": "EPSG code"
+			},
 			"definition": "Código EPSG con el que se exportarán los productos resultantes",
 			"type": "string",
 			"len": 11,
 			"default": "25830+5782"
 		},
 		"Path": {
+			"Text":{
+				"spanish": "Directorio de resultados",
+				"english": "Output path"
+			},
 			"definition": "Ruta del directorio de resultados",
 			"type": "folder",
 			"default": ""
 		},
 		"DemGSD": {
-			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno, 0 para máxima posible",
+			"Text":{
+				"spanish": "GSD del MDE",
+				"english": "DEM GSD"
+			},
+			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)",
 			"type": "real",
 			"decimals": 2,
 			"minimum": 0.0,
@@ -27,7 +51,11 @@
 			"default": 0.05
 		},
 		"OrthoGSD": {
-			"definition": "Resolución en metros con la que se exportará la ortoimagen, 0 para máxima posible",
+			"Text":{
+				"spanish": "GSD del ortomosaico",
+				"english": "Orthomosaic GSD"
+			},
+			"definition": "Resolución en metros con la que se exportará la ortoimagen (0 para máxima posible)",
 			"type": "real",
 			"decimals": 2,
 			"minimum": 0.0,
@@ -37,55 +65,83 @@
 		}
 	},
 	"Workflow":{
+		"Text":{
+			"spanish": "Flujo de trabajo",
+			"english": "Workflow"
+		},
 		"CleanPrevious": {
 			"definition": "Proceso que ejecuta la limpieza del trabajo anterior",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"Initialize": {
 			"definition": "Proceso que ejecuta la creación del proyecto e importación de los datos de entrada",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"Preprocess": {
 			"definition": "Proceso que ejecuta el cosido y alineamiento inicial",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"Optimize": {
 			"definition": "Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"Split": {
 			"definition": "Proceso que ejecuta la partición del trabajo en tiles",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"PointCloud": {
 			"definition": "Proceso que ejecuta la creación y exportación de la nube de puntos densa",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"DEMs": {
 			"definition": "Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"Orthomosaic": {
 			"definition": "Proceso que ejecuta la creación y exportación del orthomosaico",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"Report": {
 			"definition": "Proceso que ejecuta la exportación del informe de resultados",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		}
 	},
 	"Photo": {
+		"Text":{
+			"spanish": "Imágenes",
+			"english": "Photo"
+		},
 		"Path": {
 			"definition": "Ruta del directorio donde se localizan las imágenes",
-			"type": "folder"
+			"type": "folder",
+			"default": ""
 		},
 		"LocationAccuracy2D": {
 			"definition": "Precisión horizontal de la orientación externa de las imágenes en metros",
-			"type": "real"
+			"type": "real",
+			"decimals": 3,
+			"minimum": 0.0,
+			"maximum": 5.00,
+			"singleStep": 0.01,
+			"default": 0.08
 		},
 		"LocationAccuracyHeight": {
 			"definition": "Precisión vertical de la orientación externa de las imágenes en metros",
-			"type": "real"
+			"type": "real",
+			"decimals": 3,
+			"minimum": 0.0,
+			"maximum": 5.00,
+			"singleStep": 0.01,
+			"default": 0.12
 		},
 		"Method": {
 			"definition": "Fuente de la que se importarán las orientaciones externas de las imágenes",
@@ -93,19 +149,30 @@
 			"values": {
 				"CSV": "Fichero CSV",
 				"EXIF": "Metadatos de las fotos"
-			}
+			},
+			"default": "Metadatos de las fotos"
 		},
 		"EPSG": {
+			"Text":{
+				"spanish": "Código EPSG",
+				"english": "EPSG code"
+			},
 			"definition": "Código EPSG con el que se importarán las imágenes",
 			"type": "string",
-			"len": 11
+			"len": 11,
+			"default": "4326"
 		},
 		"EoPath": {
 			"definition": "Ruta del archivo CSV con las orientaciones externas",
-			"type": "file open"
+			"type": "file open",
+			"default": ""
 		}
 	},
 	"ROI": {
+		"Text":{
+			"spanish": "Región de interés",
+			"english": "Region of interest"
+		},
 		"Path": {
 			"definition": "Ruta del archivo en el que se delimita la región de interés.",
 			"type": "file open"
@@ -120,6 +187,10 @@
 		}
 	},
 	"CameraCalibration": {
+		"Text":{
+			"spanish": "Calibración de cámara",
+			"english": "Camera calibration"
+		},
 		"f": {
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: focal length coefficient",
 			"type": "boolean"
@@ -166,6 +237,10 @@
 		}
 	},
 	"OptimizeAlignment": {
+		"Text":{
+			"spanish": "Orientación",
+			"english": "Optimize alignment"
+		},
 		"Method": {
 			"definition": "Método de fotointerpretación de puntos de apoyo",
 			"type": "values",
@@ -181,7 +256,8 @@
 		},
 		"Path": {
 			"definition": "Ruta del archivo de puntos de apoyo",
-			"type": "file open"
+			"type": "file open",
+			"formats": [".csv", ".txt"]
 		},
 		"Accuracy": {
 			"definition": "Precisión establecida para el alineamiento",
@@ -210,6 +286,10 @@
 		}
 	},
 	"SplitTile": {
+		"Text":{
+			"spanish": "División en celdas",
+			"english": "Split tiles"
+		},
 		"TileSize": {
 			"definition": "Dimensiones de tileado del bloque de vuelo para proyectos grandes en metros y unidades enteras",
 			"type": "integer"
@@ -231,7 +311,7 @@
 		"Path": {
 			"definition": "Ruta al archivo que contiene la malla vectorial editada por el usuario",
 			"type": "file open",
-			"format": ".gpkg"
+			"formats": [".gpkg"]
 		},
 		"MergeMethod": {
 			"definition": "Estrategias de unión de los productos resultantes",
@@ -263,6 +343,10 @@
 		}
 	},
 	"PointCloud": {
+		"Text":{
+			"spanish": "Nube de puntos",
+			"english": "Point cloud"
+		},
 		"Quality": {
 			"definition": "Selección de la calidad final de la nube de puntos densa",
 			"type": "values",
@@ -286,6 +370,10 @@
 		}
 	},
 	"InstallRequirement": {
+		"Text":{
+			"spanish": "Requisitos de instalación",
+			"english": "Install requirements"
+		},
 		"Env": {
 			"definition": "Ruta del entorno de instalación",
 			"type": "folder"
