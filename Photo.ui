@@ -17,7 +17,7 @@
    <item>
       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_path">
           <property name="text">
           <string>Path:</string>
           </property>
@@ -80,7 +80,7 @@
 </layout>
 </item>
   <item row="1" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_locationaccuracy2d">
           <property name="text">
           <string>Locationaccuracy2d:</string>
           </property>
@@ -128,7 +128,7 @@
      
 </item>
   <item row="2" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_locationaccuracyheight">
           <property name="text">
           <string>Locationaccuracyheight:</string>
           </property>
@@ -176,7 +176,7 @@
      
 </item>
   <item row="3" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_method">
           <property name="text">
           <string>Method:</string>
           </property>
@@ -222,7 +222,7 @@
      
 </item>
   <item row="4" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_epsg">
           <property name="text">
           <string>Epsg:</string>
           </property>
@@ -254,7 +254,7 @@
      
 </item>
   <item row="5" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_eopath">
           <property name="text">
           <string>Eopath:</string>
           </property>

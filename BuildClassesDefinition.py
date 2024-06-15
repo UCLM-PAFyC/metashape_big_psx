@@ -10,6 +10,7 @@ class BuildClassesDefinition:
 
     def build_class_file(self,
                          class_name,
+                         language,
                          json_class_content):
         str_error = ""
         current_path = os.path.dirname(os.path.realpath(__file__))
@@ -27,6 +28,7 @@ class BuildClassesDefinition:
         f.write('from . import gui_defines\n')
         f.write('\nclass {}:\n'.format(class_name))
         f.write('\tdef __init__(self):\n')
+        f.write('\t\tself.__text_by_propierty = {}\n')
         propierty_field_definition = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_DEFINITION_TAG
         propierty_field_type = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_TYPE_TAG
         propierty_field_default = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_DEFAULT_TAG
@@ -36,7 +38,30 @@ class BuildClassesDefinition:
         propierty_field_single_step = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_SINGLE_STEP_TAG
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
+            if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
+                if not language in json_propierty_content:
+                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error += ("\nFor class: {}, in attribute: {}, not exists language: {}"
+                                  .format(class_name, gui_defines.GUI_CLASSES_TEXT_TAG, language))
+                    return str_error
+                text = '\t\tself.__' + propierty_name.lower() + " = \'" + json_propierty_content[language] + "\'"
+                text += "\n"
+                f.write(text)
+                continue
+            if not gui_defines.GUI_CLASSES_TEXT_TAG in json_propierty_content:
+                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
+                              .format(class_name, propierty_name, gui_defines.GUI_CLASSES_TEXT_TAG))
+                return str_error
             propierty_name = propierty_name.lower()
+            if not language in json_propierty_content[gui_defines.GUI_CLASSES_TEXT_TAG]:
+                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error += ("\nFor class: {}, in attribute: {}, in field: {}, not exists language: {}"
+                              .format(class_name, propierty_name, gui_defines.GUI_CLASSES_TEXT_TAG, language))
+                return str_error
+            f.write('\t\tself.__text_by_propierty[\'{}\'] = \'{}\'\n'.
+                    format(propierty_name, json_propierty_content[gui_defines.GUI_CLASSES_TEXT_TAG][language]))
+            propierty_type = json_propierty_content[propierty_field_type]
             if not propierty_field_type in json_propierty_content:
                 str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
@@ -100,8 +125,14 @@ class BuildClassesDefinition:
                 text += '\"'
             text += "\n"
             f.write(text)
+        f.write('\n\tdef get_text(self):\n')
+        f.write('\t\treturn self.__text\n')
+        f.write('\n\tdef get_text_by_propierty(self):\n')
+        f.write('\t\treturn self.__text_by_propierty\n')
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
+            if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
+                continue
             propierty_name = propierty_name.lower()
             propiertyIsString = False
             propiertyIsReal = False
@@ -116,7 +147,13 @@ class BuildClassesDefinition:
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, propierty_field_definition))
                 return str_error
-            propierty_definition = json_propierty_content[propierty_field_definition]
+            if not language in json_propierty_content[propierty_field_definition]:
+                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error += ("\nFor class: {}, in attribute: {}, in field: {}, not exists language: {}"
+                              .format(class_name, propierty_name,
+                                      propierty_field_definition, language))
+                return str_error
+            propierty_definition = json_propierty_content[propierty_field_definition][language]
             if not propierty_field_type in json_propierty_content:
                 str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
@@ -200,17 +237,23 @@ class BuildClassesDefinition:
             f.close()
             return str_error
         f.close()
+        if not gui_defines.GUI_LANGUAGE_TAG in json_content:
+            str_error = BuildClassesDefinition.__name__ + "." + self.set_from_json_file.__name__
+            str_error += ("\n{} not in JSON file: {}".format(gui_defines.GUI_LANGUAGE_TAG, definitions_file))
+            return str_error
+        language = json_content[gui_defines.GUI_LANGUAGE_TAG]
         gui_classes = gui_defines.GUI_CLASSES
         for class_name in gui_classes:
             if not class_name in json_content:
                 str_error = BuildClassesDefinition.__name__ + "." + self.set_from_json_file.__name__
                 str_error += ("\nClass: {} not in JSON file: {}".format(class_name, definitions_file))
-                f.close()
                 return str_error
-            if class_name != 'Project' and class_name != 'Workflow' and class_name != 'Photo':
+            if class_name != 'Project' and class_name != 'Workflow' and class_name != 'Photo'\
+                    and class_name != 'Roi':
                 continue
             json_class_content = json_content[class_name]
             str_error = self.build_class_file(class_name,
+                                              language,
                                               json_class_content)
             if str_error:
                 return str_error

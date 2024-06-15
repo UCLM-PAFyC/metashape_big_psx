@@ -212,6 +212,10 @@ class VPyGUIGenerator:
             raise TypeError(f"Invalid widget for property '{name}'")
         widget_info.set_properties(property_dict)
         new_widget = widget_template.replace("__row__", str(row))
+        #dhl
+        new_widget = new_widget.replace("class=\"QLabel\" name=\"label\"",
+                                        f"class=\"QLabel\" name=\"label_{name}\"")
+        #dhl
         new_widget = new_widget.replace("__label__", name.capitalize())
         new_widget = new_widget.replace("__widget__", widget_info.widget_name)        
         

@@ -4,7 +4,8 @@
 
 PARAMS_DEFINITION_FILE = "params_definition.json"
 TEMPLATE_PATH = "\\templates"
-GUI_CLASSES = ["Project", "Workflow", "Photo", "ROI", "CameraCalibration",
+GUI_LANGUAGE_TAG = "Language"
+GUI_CLASSES = ["Project", "Workflow", "Photo", "Roi", "CameraCalibration",
                "OptimizeAlignment", "SplitTile", "PointCloud", "InstallRequirement"]
 GUI_CLASSES_PROPIERTY_FIELD_DEFINITION_TAG = 'definition'
 GUI_CLASSES_PROPIERTY_FIELD_TYPE_TAG = 'type'
@@ -23,6 +24,7 @@ GUI_CLASSES_PROPIERTY_TYPE_FILE_SAVE_TAG = 'file save'
 GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG = 'values'
 GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TRUE = 'True'
 GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_FALSE = 'False'
+GUI_CLASSES_TEXT_TAG = 'text'
 
 GUI_CLASSES_PATH = "\\gui"
 PROJECT_LABEL_DEFAULT = "example"

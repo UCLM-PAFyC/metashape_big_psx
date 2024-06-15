@@ -2,12 +2,26 @@ from . import gui_defines
 
 class Photo:
 	def __init__(self):
+		self.__text_by_propierty = {}
+		self.__text = 'Imágenes'
+		self.__text_by_propierty['path'] = 'Ruta imágenes'
 		self.__path = ""
+		self.__text_by_propierty['locationaccuracy2d'] = 'Precisión 2D de OE'
 		self.__locationaccuracy2d = 0.08
+		self.__text_by_propierty['locationaccuracyheight'] = 'Precisión Z de OE'
 		self.__locationaccuracyheight = 0.12
+		self.__text_by_propierty['method'] = 'Fuente OE'
 		self.__method = ['Metadatos de las fotos' ,' Fichero CSV']
+		self.__text_by_propierty['epsg'] = 'Código EPSG'
 		self.__epsg = "4326"
+		self.__text_by_propierty['eopath'] = 'Ruta OE'
 		self.__eopath = ""
+
+	def get_text(self):
+		return self.__text
+
+	def get_text_by_propierty(self):
+		return self.__text_by_propierty
 
 	@property
 	def path(self):

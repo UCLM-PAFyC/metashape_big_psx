@@ -1,48 +1,57 @@
 {
 	"Language": "spanish",
 	"Project": {
-		"Text":{
+		"text":{
 			"spanish": "Proyecto",
 			"english": "Project"
 		},
 		"Label": {
-			"Text":{
+			"text":{
 				"spanish": "Etiqueta",
 				"english": "Label"
 			},
 			"definition":{
 				"spanish": "Etiqueta con la que se nombrarán los productos resultantes",
-				"english": "Etiqueta con la que se nombrarán los productos resultantes"
+				"english": "Label to be used to name the resulting products"
 			},
 			"type": "string",
 			"len": 50,
 			"default": "Example project"
 		},
 		"EPSG": {
-			"Text":{
+			"text":{
 				"spanish": "Código EPSG",
 				"english": "EPSG code"
 			},
-			"definition": "Código EPSG con el que se exportarán los productos resultantes",
+			"definition": {
+				"spanish": "Código EPSG con el que se exportarán los productos resultantes",
+				"english": "EPSG code under which the resulting products are to be exported"
+			},
 			"type": "string",
 			"len": 11,
 			"default": "25830+5782"
 		},
 		"Path": {
-			"Text":{
+			"text":{
 				"spanish": "Directorio de resultados",
 				"english": "Output path"
 			},
-			"definition": "Ruta del directorio de resultados",
+			"definition": {
+				"spanish": "Ruta del directorio de resultados",
+				"english": "Results directory path"
+			},
 			"type": "folder",
 			"default": ""
 		},
 		"DemGSD": {
-			"Text":{
-				"spanish": "GSD del MDE",
-				"english": "DEM GSD"
+			"text":{
+				"spanish": "GSD para MDT y MDS",
+				"english": "GSD for DTM and DSM"
 			},
-			"definition": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)",
+			"definition": {
+				"spanish": "Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)",
+				"english": "Resolution in metres at which the digital surface and terrain model will be exported (0 for maximum possible)."
+			},
 			"type": "real",
 			"decimals": 2,
 			"minimum": 0.0,
@@ -51,11 +60,14 @@
 			"default": 0.05
 		},
 		"OrthoGSD": {
-			"Text":{
-				"spanish": "GSD del ortomosaico",
-				"english": "Orthomosaic GSD"
+			"text":{
+				"spanish": "GSD para ortomosaico",
+				"english": "GSD for Orthomosaic"
 			},
-			"definition": "Resolución en metros con la que se exportará la ortoimagen (0 para máxima posible)",
+			"definition": {
+				"spanish": "Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)",
+				"english": "Resolution in metres at which the orthomosaic will be exported (0 for maximum possible)"
+			},
 			"type": "real",
 			"decimals": 2,
 			"minimum": 0.0,
@@ -65,68 +77,145 @@
 		}
 	},
 	"Workflow":{
-		"Text":{
+		"text":{
 			"spanish": "Flujo de trabajo",
 			"english": "Workflow"
 		},
 		"CleanPrevious": {
-			"definition": "Proceso que ejecuta la limpieza del trabajo anterior",
+			"text":{
+				"spanish": "Reseteo directorio previo",
+				"english": "Reset previous directory"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la limpieza del trabajo anterior",
+				"english": "Process that executes the cleanup of the previous job"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"Initialize": {
-			"definition": "Proceso que ejecuta la creación del proyecto e importación de los datos de entrada",
+			"text":{
+				"spanish": "Project inicialización",
+				"english": "Project initialization"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la creación del proyecto e importación de los datos de entrada",
+				"english": "Process that executes project creation and import of input data"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"Preprocess": {
-			"definition": "Proceso que ejecuta el cosido y alineamiento inicial",
+			"text":{
+				"spanish": "Project preproceso",
+				"english": "Project preprocess"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta el cosido y alineamiento inicial",
+				"english": "Process performing initial matching and alignment"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"Optimize": {
-			"definition": "Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo",
+			"text":{
+				"spanish": "Optimización de OI",
+				"english": "Optimization of IO"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo",
+				"english": "Process that performs the optimization of the initial alignment with reference points."
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"Split": {
-			"definition": "Proceso que ejecuta la partición del trabajo en tiles",
+			"text":{
+				"spanish": "Partición del proyecto",
+				"english": "Project splitting"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la partición del trabajo en tiles",
+				"english": "Process that executes the splitting of the job into tiles."
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"PointCloud": {
-			"definition": "Proceso que ejecuta la creación y exportación de la nube de puntos densa",
+			"text":{
+				"spanish": "Construcción de nube de puntos",
+				"english": "Point cloud creation"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la creación y exportación de la nube de puntos densa",
+				"english": "Process that executes the creation and export of the dense point cloud"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"DEMs": {
-			"definition": "Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones",
+			"text":{
+				"spanish": "Construcción de los modelos digitales de elevaciones",
+				"english": "Digital elevation models creation"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones",
+				"english": "Process that executes the creation and export of digital elevation models"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"Orthomosaic": {
-			"definition": "Proceso que ejecuta la creación y exportación del orthomosaico",
+			"text":{
+				"spanish": "Construcción del ortomosaico",
+				"english": "Orthomosaic creation"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la creación y exportación del orthomosaico",
+				"english": "Process that executes the creation and export of the orthomosaic"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"Report": {
-			"definition": "Proceso que ejecuta la exportación del informe de resultados",
+			"text":{
+				"spanish": "Construcción del informe",
+				"english": "Report creation"
+			},
+			"definition": {
+				"spanish": "Proceso que ejecuta la exportación del informe de resultados",
+				"english": "Process that executes the export of the results report"
+			},
 			"type": "boolean",
 			"default": "True"
 		}
 	},
 	"Photo": {
-		"Text":{
+		"text":{
 			"spanish": "Imágenes",
 			"english": "Photo"
 		},
 		"Path": {
-			"definition": "Ruta del directorio donde se localizan las imágenes",
+			"text":{
+				"spanish": "Ruta imágenes",
+				"english": "Images path"
+			},
+			"definition": {
+				"spanish": "Ruta del directorio donde se localizan las imágenes",
+				"english": "Path of the directory where the images are located"
+			},
 			"type": "folder",
 			"default": ""
 		},
 		"LocationAccuracy2D": {
-			"definition": "Precisión horizontal de la orientación externa de las imágenes en metros",
+			"text":{
+				"spanish": "Precisión 2D de OE",
+				"english": "2D accuracy of EO"
+			},
+			"definition": {
+				"spanish": "Precisión horizontal de la orientación externa de las imágenes en metros",
+				"english": "Horizontal accuracy of external orientation of images in meters"
+			},
 			"type": "real",
 			"decimals": 3,
 			"minimum": 0.0,
@@ -135,7 +224,14 @@
 			"default": 0.08
 		},
 		"LocationAccuracyHeight": {
-			"definition": "Precisión vertical de la orientación externa de las imágenes en metros",
+			"text":{
+				"spanish": "Precisión Z de OE",
+				"english": "Z accuracy of EO"
+			},
+			"definition": {
+				"spanish": "Precisión vertical de la orientación externa de las imágenes en metros",
+				"english": "Vertical accuracy of the external orientation of images in meters"
+			},
 			"type": "real",
 			"decimals": 3,
 			"minimum": 0.0,
@@ -144,7 +240,14 @@
 			"default": 0.12
 		},
 		"Method": {
-			"definition": "Fuente de la que se importarán las orientaciones externas de las imágenes",
+			"text":{
+				"spanish": "Fuente OE",
+				"english": "Source EO"
+			},
+			"definition": {
+				"spanish": "Fuente de la que se importarán las orientaciones externas de las imágenes",
+				"english": "Source from which the external orientations of the images will be imported"
+			},
 			"type": "values",
 			"values": {
 				"CSV": "Fichero CSV",
@@ -153,95 +256,169 @@
 			"default": "Metadatos de las fotos"
 		},
 		"EPSG": {
-			"Text":{
+			"text":{
 				"spanish": "Código EPSG",
 				"english": "EPSG code"
 			},
-			"definition": "Código EPSG con el que se importarán las imágenes",
+			"definition": {
+				"spanish": "Código EPSG con el que se importarán las imágenes",
+				"english": "EPSG code with which images will be imported"
+			},
 			"type": "string",
 			"len": 11,
 			"default": "4326"
 		},
 		"EoPath": {
-			"definition": "Ruta del archivo CSV con las orientaciones externas",
+			"text":{
+				"spanish": "Ruta OE",
+				"english": "OE path"
+			},
+			"definition": {
+				"spanish": "Ruta del archivo CSV con las orientaciones externas",
+				"english": "CSV file path with external orientations"
+			},
 			"type": "file open",
 			"default": ""
 		}
 	},
-	"ROI": {
-		"Text":{
+	"Roi": {
+		"text":{
 			"spanish": "Región de interés",
 			"english": "Region of interest"
 		},
 		"Path": {
-			"definition": "Ruta del archivo en el que se delimita la región de interés.",
-			"type": "file open"
+			"text": {
+				"spanish": "Ruta ROI",
+				"english": "ROI path"
+			},
+			"definition": {
+				"spanish": "Ruta del archivo de la ROI",
+				"english": "ROI path file"
+			},
+			"type": "file open",
+			"default": ""
 		},
 		"Method": {
-			"definition": "Método de definición de la región de interés",
+			"text": {
+				"spanish": "Fuente ROI",
+				"english": "ROI source"
+			},
+			"definition": { 
+				"spanish": "Método de definición de la ROI",
+				"english": "Method for definition of ROI"
+			},
 			"type": "values",
 			"values": {
 				"0": "Utiliza el espacio máximo que abarquen los productos geométricos generados",
 				"SHP": "Importar un archivo SHP"
-			}
+			},
+			"default": "Utiliza el espacio máximo que abarquen los productos geométricos generados"
 		}
 	},
 	"CameraCalibration": {
-		"Text":{
+		"text": {
 			"spanish": "Calibración de cámara",
 			"english": "Camera calibration"
 		},
 		"f": {
+			"text":{
+				"spanish": "Focal",
+				"english": "Focal"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: focal length coefficient",
 			"type": "boolean"
 		},
 		"cx": {
+			"text":{
+				"spanish": "X punto principal",
+				"english": "X principal point"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: X principal point coordinates",
 			"type": "boolean"
 		},
 		"cy": {
+			"text":{
+				"spanish": "Y principal punto",
+				"english": "Y principal point"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: Y principal point coordinates",
 			"type": "boolean"
 		},
 		"k1": {
+			"text":{
+				"spanish": "k1 distorsión radial",
+				"english": "k1 radial distortion"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k1 radial distortion coefficient",
 			"type": "boolean"
 		},
 		"k2": {
+			"text":{
+				"spanish": "k2 distorsión radial",
+				"english": "k2 radial distortion"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k2 radial distortion coefficient",
 			"type": "boolean"
 		},
 		"k3": {
+			"text":{
+				"spanish": "k3 distorsión radial",
+				"english": "k3 radial distortion"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k3 radial distortion coefficient",
 			"type": "boolean"
 		},
 		"k4": {
+			"text":{
+				"spanish": "k4 distorsión radial",
+				"english": "k4 radial distortion"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k4 radial distortion coefficient",
 			"type": "boolean"
 		},
 		"b1": {
+			"text":{
+				"spanish": "Afinidad",
+				"english": "Affinity"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: aspect ratio",
 			"type": "boolean"
 		},
 		"b2": {
+			"text":{
+				"spanish": "Asimetría",
+				"english": "Skew"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: skew coefficient",
 			"type": "boolean"
 		},
 		"p1": {
+			"text":{
+				"spanish": "p1 distorsión tangencial",
+				"english": "p1 tangential distortion"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: p1 tangential distortion coefficient",
 			"type": "boolean"
 		},
 		"p2": {
+			"text":{
+				"spanish": "p2 distorsión tangencial",
+				"english": "p2 tangential distortion"
+			},
 			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: p2 tangential distortion coefficient",
 			"type": "boolean"
 		}
 	},
 	"OptimizeAlignment": {
-		"Text":{
+		"text":{
 			"spanish": "Orientación",
 			"english": "Optimize alignment"
 		},
 		"Method": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Método de fotointerpretación de puntos de apoyo",
 			"type": "values",
 			"values": {
@@ -250,16 +427,28 @@
 			}
 		},
 		"EPSG": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Código EPSG con el que se importarán los puntos de apoyo",
 			"type": "string",
 			"len": 11
 		},
 		"Path": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Ruta del archivo de puntos de apoyo",
 			"type": "file open",
 			"formats": [".csv", ".txt"]
 		},
 		"Accuracy": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Precisión establecida para el alineamiento",
 			"type": "values",
 			"values": {
@@ -271,6 +460,10 @@
 			}
 		},
 		"ReferencePreselection": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Método de preselección de imágenes según su localización",
 			"type": "values",
 			"values": {
@@ -281,26 +474,42 @@
 			}
 		},
 		"TiePointLimit": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Límite de tie points",
 			"type": "integer"
 		}
 	},
 	"SplitTile": {
-		"Text":{
+		"text":{
 			"spanish": "División en celdas",
 			"english": "Split tiles"
 		},
 		"TileSize": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Dimensiones de tileado del bloque de vuelo para proyectos grandes en metros y unidades enteras",
 			"type": "integer"
 		},
 		"TileSizeBuffer": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Porcentaje de ampliación del perímetro de los tiles",
 			"type": "integer",
 			"max": 100,
 			"min": 5
 		},
 		"Method": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Método de automático o manual de edición de la malla vectorial de tiles a procesar",
 			"type": "values",
 			"values": {
@@ -309,11 +518,19 @@
 			}
 		},
 		"Path": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Ruta al archivo que contiene la malla vectorial editada por el usuario",
 			"type": "file open",
 			"formats": [".gpkg"]
 		},
 		"MergeMethod": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Estrategias de unión de los productos resultantes",
 			"type": "values",
 			"values": {
@@ -322,18 +539,34 @@
 			}
 		},
 		"MergePointClouds": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Selección si une la nube de puntos",
 			"type": "boolean"
 		},
 		"MergeElevations": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Selección si une los modelos digitales de elevaciones (DSM y DTM)",
 			"type": "boolean"
 		},
 		"MergeOrthomosaics": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Selección si une el ortomosaico",
 			"type": "boolean"
 		},
 		"MergedDEM": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Selección del DEM a unir con estrategia Metashape (Recomendado `DSM`)",
 			"type": "values",
 			"values": {
@@ -343,11 +576,15 @@
 		}
 	},
 	"PointCloud": {
-		"Text":{
+		"text":{
 			"spanish": "Nube de puntos",
 			"english": "Point cloud"
 		},
 		"Quality": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Selección de la calidad final de la nube de puntos densa",
 			"type": "values",
 			"values": {
@@ -359,6 +596,10 @@
 			}
 		},
 		"FilterMode": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Selección del filtro de creación  de la nube de puntos densa",
 			"type": "values",
 			"values": {
@@ -370,15 +611,23 @@
 		}
 	},
 	"InstallRequirement": {
-		"Text":{
+		"text":{
 			"spanish": "Requisitos de instalación",
 			"english": "Install requirements"
 		},
 		"Env": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Ruta del entorno de instalación",
 			"type": "folder"
 		},
 		"Geoid": {
+			"text":{
+				"spanish": "",
+				"english": ""
+			},
 			"definition": "Ruta del directorio donde se encuentra los modelos del geoide",
 			"type": "folder"
 		}
