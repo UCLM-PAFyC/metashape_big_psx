@@ -9,12 +9,6 @@ class Roi:
 		self.__text_by_propierty['method'] = 'Fuente ROI'
 		self.__method = ['Región total con recubrimiento' ,' Importada de shapefile']
 
-	def get_values_as_dictionary(self):
-		values = {}
-		values['Path'] = self.__path
-		values['Method'] = self.__method
-		return values
-
 	def get_text(self):
 		return self.__text
 

@@ -25,7 +25,12 @@ GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG = 'values'
 GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TRUE = 'True'
 GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_FALSE = 'False'
 GUI_CLASSES_TEXT_TAG = 'text'
-
+PARAMETER_JSON_CONTENT = "json_content"
+parameters = {}
+for gui_class in GUI_CLASSES:
+    parameter = {}
+    parameter[PARAMETER_JSON_CONTENT] = None
+    parameters[gui_class] = parameter
 GUI_CLASSES_PATH = "\\gui"
 PROJECT_LABEL_DEFAULT = "example"
 PROJECT_EPSG_DEFAULT = "25830+5782"

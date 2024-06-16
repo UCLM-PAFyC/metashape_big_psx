@@ -4,14 +4,16 @@ from pathlib import Path
 from gui import gui_defines
 
 
-class BuildClassesDefinition:
+class ParametersManager:
     def __init__(self):
-        self.definitions_file = None
+        self.json_file = None
+        self.json_content = None
+        self.parameters = gui_defines.parameters
 
-    def build_class_file(self,
-                         class_name,
-                         language,
-                         json_class_content):
+    def build_parameter_file(self,
+                             class_name,
+                             language,
+                             json_class_content):
         str_error = ""
         current_path = os.path.dirname(os.path.realpath(__file__))
         class_file_path = current_path + gui_defines.GUI_CLASSES_PATH
@@ -19,7 +21,7 @@ class BuildClassesDefinition:
         if not os.path.exists(class_file_path):
             os.makedirs(class_file_path)
             if not os.path.exists(class_file_path):
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nError making Classes path: {}".format(class_file_path))
                 return str_error
         class_file = class_file_path + "/" + class_name + ".py"
@@ -40,7 +42,7 @@ class BuildClassesDefinition:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 if not language in json_propierty_content:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, not exists language: {}"
                                   .format(class_name, gui_defines.GUI_CLASSES_TEXT_TAG, language))
                     return str_error
@@ -49,13 +51,13 @@ class BuildClassesDefinition:
                 f.write(text)
                 continue
             if not gui_defines.GUI_CLASSES_TEXT_TAG in json_propierty_content:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, gui_defines.GUI_CLASSES_TEXT_TAG))
                 return str_error
             propierty_name = propierty_name.lower()
             if not language in json_propierty_content[gui_defines.GUI_CLASSES_TEXT_TAG]:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, in field: {}, not exists language: {}"
                               .format(class_name, propierty_name, gui_defines.GUI_CLASSES_TEXT_TAG, language))
                 return str_error
@@ -63,13 +65,13 @@ class BuildClassesDefinition:
                     format(propierty_name, json_propierty_content[gui_defines.GUI_CLASSES_TEXT_TAG][language]))
             propierty_type = json_propierty_content[propierty_field_type]
             if not propierty_field_type in json_propierty_content:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, propierty_field_type))
                 return str_error
             propierty_type = json_propierty_content[propierty_field_type]
             if not propierty_field_default in json_propierty_content:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, propierty_field_default))
                 return str_error
@@ -77,7 +79,7 @@ class BuildClassesDefinition:
             if propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TAG:
                 if propierty_default_value != gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TRUE \
                         and propierty_default_value != gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_FALSE:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, field: {} must be {} or {}"
                                   .format(class_name, propierty_name, propierty_field_default,
                                           gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TRUE,
@@ -90,14 +92,22 @@ class BuildClassesDefinition:
                 pos_default_in_values_content = -1
                 cont = 0
                 for value_tag in values_content:
-                    value = values_content[value_tag]
+                    value_content = values_content[value_tag]
+                    if not language in value_content:
+                        str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
+                        str_error += ("\nFor class: {}, in attribute: {}, in field: {}, "
+                                      "in value: {}, not exists language: {}"
+                                      .format(class_name, propierty_name,
+                                              propierty_field_definition, value_tag, language))
+                        return str_error
+                    value = value_content[language]
                     if value == propierty_default_value:
                         text += ('\'{}\''.format(value))
                         pos_default_in_values_content = cont
                         break
                     cont = cont + 1
                 if pos_default_in_values_content == -1:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, field: {}, "
                                   "default value: {} is not in valid values"
                                   .format(class_name, propierty_name, propierty_field_type,
@@ -107,7 +117,15 @@ class BuildClassesDefinition:
                     if cont == pos_default_in_values_content:
                         cont = cont + 1
                         continue
-                    value = values_content[value_tag]
+                    value_content = values_content[value_tag]
+                    if not language in value_content:
+                        str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
+                        str_error += ("\nFor class: {}, in attribute: {}, in field: {}, "
+                                      "in value: {}, not exists language: {}"
+                                      .format(class_name, propierty_name,
+                                              propierty_field_definition, value_tag, language))
+                        return str_error
+                    value = value_content[language]
                     text += (' ,\' {}\''.format(value))
                     cont = cont + 1
                 text += "]"
@@ -125,6 +143,14 @@ class BuildClassesDefinition:
                 text += '\"'
             text += "\n"
             f.write(text)
+        f.write('\n\tdef get_values_as_dictionary(self):\n')
+        f.write('\t\tvalues = {}\n')
+        for propierty_name in json_class_content:
+            json_propierty_content = json_class_content[propierty_name]
+            if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
+                continue
+            f.write('\t\tvalues[\'{}\'] = self.__{}\n'.format(propierty_name, propierty_name.lower()))
+        f.write('\t\treturn values\n')
         f.write('\n\tdef get_text(self):\n')
         f.write('\t\treturn self.__text\n')
         f.write('\n\tdef get_text_by_propierty(self):\n')
@@ -143,19 +169,19 @@ class BuildClassesDefinition:
             propiertyIsValuesList = False
             propiertyIsBoolean = False
             if not propierty_field_definition in json_propierty_content:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, propierty_field_definition))
                 return str_error
             if not language in json_propierty_content[propierty_field_definition]:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, in field: {}, not exists language: {}"
                               .format(class_name, propierty_name,
                                       propierty_field_definition, language))
                 return str_error
             propierty_definition = json_propierty_content[propierty_field_definition][language]
             if not propierty_field_type in json_propierty_content:
-                str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, propierty_field_type))
                 return str_error
@@ -170,25 +196,25 @@ class BuildClassesDefinition:
             elif propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_REAL_TAG:
                 propiertyIsReal = True
                 if not propierty_field_decimalS in json_propierty_content:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                                   .format(class_name, propierty_name, propierty_field_decimalS))
                     return str_error
                 propierty_decimals = json_propierty_content[propierty_field_decimalS]
                 if not propierty_field_minimum in json_propierty_content:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                                   .format(class_name, propierty_name, propierty_field_minimum))
                     return str_error
                 propierty_minimum = json_propierty_content[propierty_field_minimum]
                 if not propierty_field_maximum in json_propierty_content:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                                   .format(class_name, propierty_name, propierty_field_maximum))
                     return str_error
                 propierty_maximum = json_propierty_content[propierty_field_maximum]
                 if not propierty_field_single_step in json_propierty_content:
-                    str_error = BuildClassesDefinition.__name__ + "." + self.build_class_file.__name__
+                    str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                                   .format(class_name, propierty_name, propierty_field_single_step))
                     return str_error
@@ -221,40 +247,43 @@ class BuildClassesDefinition:
         f.close()
         return str_error
 
-    def set_from_json_file(self,
-                           definitions_file):
+    def from_json_file(self,
+                       definitions_file):
         str_error = ""
         if not os.path.isfile(definitions_file):
-            str_error = BuildClassesDefinition.__name__ + "." + self.set_from_json_file.__name__
+            str_error = ParametersManager.__name__ + "." + self.from_json_file.__name__
             str_error += ("\nNot exists file: {}".format(definitions_file))
             return str_error
         f = open(definitions_file)
         try:
             json_content = json.load(f)
         except:
-            str_error = BuildClassesDefinition.__name__ + "." + self.set_from_json_file.__name__
+            str_error = ParametersManager.__name__ + "." + self.from_json_file.__name__
             str_error += ("\nInvalid JSON file: {}".format(definitions_file))
             f.close()
             return str_error
         f.close()
         if not gui_defines.GUI_LANGUAGE_TAG in json_content:
-            str_error = BuildClassesDefinition.__name__ + "." + self.set_from_json_file.__name__
+            str_error = ParametersManager.__name__ + "." + self.from_json_file.__name__
             str_error += ("\n{} not in JSON file: {}".format(gui_defines.GUI_LANGUAGE_TAG, definitions_file))
             return str_error
         language = json_content[gui_defines.GUI_LANGUAGE_TAG]
         gui_classes = gui_defines.GUI_CLASSES
-        for class_name in gui_classes:
+        for class_name in self.parameters:
             if not class_name in json_content:
-                str_error = BuildClassesDefinition.__name__ + "." + self.set_from_json_file.__name__
+                str_error = ParametersManager.__name__ + "." + self.from_json_file.__name__
                 str_error += ("\nClass: {} not in JSON file: {}".format(class_name, definitions_file))
                 return str_error
             if class_name != 'Project' and class_name != 'Workflow' and class_name != 'Photo'\
-                    and class_name != 'Roi':
+                    and class_name != 'Roi' and class_name != 'CameraCalibration':
                 continue
             json_class_content = json_content[class_name]
-            str_error = self.build_class_file(class_name,
-                                              language,
-                                              json_class_content)
+            str_error = self.build_parameter_file(class_name,
+                                                  language,
+                                                  json_class_content)
             if str_error:
                 return str_error
+            self.parameters[class_name][gui_defines.PARAMETER_JSON_CONTENT] = json_class_content
+        self.json_file = definitions_file
+        self.json_content = json_content
         return str_error

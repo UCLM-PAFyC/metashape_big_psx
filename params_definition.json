@@ -250,8 +250,14 @@
 			},
 			"type": "values",
 			"values": {
-				"CSV": "Fichero CSV",
-				"EXIF": "Metadatos de las fotos"
+				"CSV": {
+					"spanish": "Fichero CSV",
+					"english": "CSV file"
+				},
+				"EXIF": {
+					"spanish": "Metadatos de las fotos",
+					"english": "EXIF"
+				}
 			},
 			"default": "Metadatos de las fotos"
 		},
@@ -309,10 +315,16 @@
 			},
 			"type": "values",
 			"values": {
-				"0": "Utiliza el espacio máximo que abarquen los productos geométricos generados",
-				"SHP": "Importar un archivo SHP"
+				"0": {
+					"spanish": "Región total con recubrimiento",
+					"english": "Full stereoscopic region"
+				},
+				"SHP": {
+					"spanish": "Importada de shapefile",
+					"english": "From shapefile"
+				}
 			},
-			"default": "Utiliza el espacio máximo que abarquen los productos geométricos generados"
+			"default": "Región total con recubrimiento"
 		}
 	},
 	"CameraCalibration": {
@@ -325,88 +337,132 @@
 				"spanish": "Focal",
 				"english": "Focal"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: focal length coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra la focal",
+				"english": "Select calibrate focal"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"cx": {
 			"text":{
-				"spanish": "X punto principal",
-				"english": "X principal point"
+				"spanish": "X PPA",
+				"english": "X PPA"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: X principal point coordinates",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra la coordenada X del PPA",
+				"english": "Select calibrate PPA X coordinate"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"cy": {
 			"text":{
-				"spanish": "Y principal punto",
-				"english": "Y principal point"
+				"spanish": "Y PPA",
+				"english": "Y PPA"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: Y principal point coordinates",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra la coordenada Y del PPA",
+				"english": "Select calibrate PPA Y coordinate"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"k1": {
 			"text":{
-				"spanish": "k1 distorsión radial",
-				"english": "k1 radial distortion"
+				"spanish": "k1",
+				"english": "k1"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k1 radial distortion coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra k1 de distorsión radial",
+				"english": "Select calibrate k1 radial distortion"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"k2": {
 			"text":{
-				"spanish": "k2 distorsión radial",
-				"english": "k2 radial distortion"
+				"spanish": "k2",
+				"english": "k2"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k2 radial distortion coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra k2 de distorsión radial",
+				"english": "Select calibrate k2 radial distortion"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"k3": {
 			"text":{
-				"spanish": "k3 distorsión radial",
-				"english": "k3 radial distortion"
+				"spanish": "k3",
+				"english": "k3"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k3 radial distortion coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra k3 de distorsión radial",
+				"english": "Select calibrate k3 radial distortion"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"k4": {
 			"text":{
-				"spanish": "k4 distorsión radial",
-				"english": "k4 radial distortion"
+				"spanish": "k4",
+				"english": "k4"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: k4 radial distortion coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra k4 de distorsión radial",
+				"english": "Select calibrate k4 radial distortion"
+			},
+			"type": "boolean",
+			"default": "False"
 		},
 		"b1": {
 			"text":{
 				"spanish": "Afinidad",
 				"english": "Affinity"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: aspect ratio",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra la relación de aspecto",
+				"english": "Select calibrate aspect ratio"
+			},
+			"type": "boolean",
+			"default": "False"
 		},
 		"b2": {
 			"text":{
 				"spanish": "Asimetría",
 				"english": "Skew"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: skew coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra la asimetría",
+				"english": "Select calibrate skew"
+			},
+			"type": "boolean",
+			"default": "False"
 		},
 		"p1": {
 			"text":{
-				"spanish": "p1 distorsión tangencial",
-				"english": "p1 tangential distortion"
+				"spanish": "p1",
+				"english": "p1"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: p1 tangential distortion coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra p1 de distorsión tangencial",
+				"english": "Select calibrate p1 tangential distortion"
+			},
+			"type": "boolean",
+			"default": "True"
 		},
 		"p2": {
 			"text":{
-				"spanish": "p2 distorsión tangencial",
-				"english": "p2 tangential distortion"
+				"spanish": "p2",
+				"english": "p2"
 			},
-			"definition": "Selección si calibra y no se fija el parámetro de orientación interna: p2 tangential distortion coefficient",
-			"type": "boolean"
+			"definition": {
+				"spanish": "Seleccionar si se calibra p2 de distorsión tangencial",
+				"english": "Select calibrate p2 tangential distortion"
+			},
+			"type": "boolean",
+			"default": "True"
 		}
 	},
 	"OptimizeAlignment": {
@@ -416,8 +472,8 @@
 		},
 		"Method": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Método",
+				"english": "Method"
 			},
 			"definition": "Método de fotointerpretación de puntos de apoyo",
 			"type": "values",
@@ -428,17 +484,18 @@
 		},
 		"EPSG": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Código EPSG",
+				"english": "EPSG code"
 			},
 			"definition": "Código EPSG con el que se importarán los puntos de apoyo",
 			"type": "string",
-			"len": 11
+			"len": 11,
+			"default": "25830+5782"
 		},
 		"Path": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Carpeta",
+				"english": "Path"
 			},
 			"definition": "Ruta del archivo de puntos de apoyo",
 			"type": "file open",
@@ -446,8 +503,8 @@
 		},
 		"Accuracy": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Precisión",
+				"english": "Accuracy"
 			},
 			"definition": "Precisión establecida para el alineamiento",
 			"type": "values",
@@ -461,8 +518,8 @@
 		},
 		"ReferencePreselection": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Preselección",
+				"english": "Preselection"
 			},
 			"definition": "Método de preselección de imágenes según su localización",
 			"type": "values",
@@ -475,8 +532,8 @@
 		},
 		"TiePointLimit": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Límite",
+				"english": "Limit"
 			},
 			"definition": "Límite de tie points",
 			"type": "integer"
@@ -489,16 +546,16 @@
 		},
 		"TileSize": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Tamaño",
+				"english": "Size"
 			},
 			"definition": "Dimensiones de tileado del bloque de vuelo para proyectos grandes en metros y unidades enteras",
 			"type": "integer"
 		},
 		"TileSizeBuffer": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Ampliación",
+				"english": "Buffer"
 			},
 			"definition": "Porcentaje de ampliación del perímetro de los tiles",
 			"type": "integer",
@@ -507,8 +564,8 @@
 		},
 		"Method": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Método",
+				"english": "Method"
 			},
 			"definition": "Método de automático o manual de edición de la malla vectorial de tiles a procesar",
 			"type": "values",
@@ -519,8 +576,8 @@
 		},
 		"Path": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Carpeta",
+				"english": "Folder"
 			},
 			"definition": "Ruta al archivo que contiene la malla vectorial editada por el usuario",
 			"type": "file open",
@@ -528,8 +585,8 @@
 		},
 		"MergeMethod": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Método de unión",
+				"english": "Merge method"
 			},
 			"definition": "Estrategias de unión de los productos resultantes",
 			"type": "values",
@@ -540,38 +597,41 @@
 		},
 		"MergePointClouds": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Unir nubes de puntos",
+				"english": "Merge point clouds"
 			},
 			"definition": "Selección si une la nube de puntos",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"MergeElevations": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Unir MDE",
+				"english": "Merge DEM"
 			},
 			"definition": "Selección si une los modelos digitales de elevaciones (DSM y DTM)",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"MergeOrthomosaics": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Unir ortomosaicos",
+				"english": "Merge orthomosaics"
 			},
 			"definition": "Selección si une el ortomosaico",
-			"type": "boolean"
+			"type": "boolean",
+			"default": "True"
 		},
 		"MergedDEM": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "MDE a unir",
+				"english": "Merge DEM"
 			},
-			"definition": "Selección del DEM a unir con estrategia Metashape (Recomendado `DSM`)",
+			"definition": "Selección del DEM a unir con estrategia Metashape",
 			"type": "values",
 			"values": {
-				"DSM": "Digital Surface Model",
-				"DTM": "Digital Terrain Model"
+				"DSM": "Digital Surface Model (DSM)",
+				"DTM": "Digital Terrain Model (DTM)"
 			}
 		}
 	},
@@ -582,8 +642,8 @@
 		},
 		"Quality": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Densidad ",
+				"english": "Density"
 			},
 			"definition": "Selección de la calidad final de la nube de puntos densa",
 			"type": "values",
@@ -597,8 +657,8 @@
 		},
 		"FilterMode": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Filtro",
+				"english": "Filter"
 			},
 			"definition": "Selección del filtro de creación  de la nube de puntos densa",
 			"type": "values",
@@ -617,16 +677,16 @@
 		},
 		"Env": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Carpeta del entorno conda",
+				"english": "Conda environment folder"
 			},
 			"definition": "Ruta del entorno de instalación",
 			"type": "folder"
 		},
 		"Geoid": {
 			"text":{
-				"spanish": "",
-				"english": ""
+				"spanish": "Geoide",
+				"english": "Geoid"
 			},
 			"definition": "Ruta del directorio donde se encuentra los modelos del geoide",
 			"type": "folder"

@@ -17,16 +17,6 @@ class Photo:
 		self.__text_by_propierty['eopath'] = 'Ruta OE'
 		self.__eopath = ""
 
-	def get_values_as_dictionary(self):
-		values = {}
-		values['Path'] = self.__path
-		values['LocationAccuracy2D'] = self.__locationaccuracy2d
-		values['LocationAccuracyHeight'] = self.__locationaccuracyheight
-		values['Method'] = self.__method
-		values['EPSG'] = self.__epsg
-		values['EoPath'] = self.__eopath
-		return values
-
 	def get_text(self):
 		return self.__text
 

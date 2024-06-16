@@ -15,15 +15,6 @@ class Project:
 		self.__text_by_propierty['orthogsd'] = 'GSD para ortomosaico'
 		self.__orthogsd = 0.05
 
-	def get_values_as_dictionary(self):
-		values = {}
-		values['Label'] = self.__label
-		values['EPSG'] = self.__epsg
-		values['Path'] = self.__path
-		values['DemGSD'] = self.__demgsd
-		values['OrthoGSD'] = self.__orthogsd
-		return values
-
 	def get_text(self):
 		return self.__text
 

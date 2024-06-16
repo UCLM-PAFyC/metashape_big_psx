@@ -23,19 +23,6 @@ class Workflow:
 		self.__text_by_propierty['report'] = 'Construcción del informe'
 		self.__report = True
 
-	def get_values_as_dictionary(self):
-		values = {}
-		values['CleanPrevious'] = self.__cleanprevious
-		values['Initialize'] = self.__initialize
-		values['Preprocess'] = self.__preprocess
-		values['Optimize'] = self.__optimize
-		values['Split'] = self.__split
-		values['PointCloud'] = self.__pointcloud
-		values['DEMs'] = self.__dems
-		values['Orthomosaic'] = self.__orthomosaic
-		values['Report'] = self.__report
-		return values
-
 	def get_text(self):
 		return self.__text
 
