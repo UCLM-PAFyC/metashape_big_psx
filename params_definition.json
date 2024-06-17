@@ -255,11 +255,11 @@
 					"english": "CSV file"
 				},
 				"EXIF": {
-					"spanish": "Metadatos de las fotos",
+					"spanish": "Metadatos de las imágenes",
 					"english": "EXIF"
 				}
 			},
-			"default": "Metadatos de las fotos"
+			"default": "Metadatos de las imágenes"
 		},
 		"EPSG": {
 			"text":{
