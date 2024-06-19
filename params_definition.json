@@ -259,7 +259,7 @@
 					"english": "EXIF"
 				}
 			},
-			"default": "Metadatos de las imágenes"
+			"default": "EXIF"
 		},
 		"EPSG": {
 			"text":{
@@ -311,7 +311,7 @@
 			},
 			"definition": { 
 				"spanish": "Método de definición de la ROI",
-				"english": "Method for definition of ROI"
+				"english": "Method for ROI definition"
 			},
 			"type": "values",
 			"values": {
@@ -472,71 +472,130 @@
 		},
 		"Method": {
 			"text":{
-				"spanish": "Método",
-				"english": "Method"
+				"spanish": "Método de medida en las imágenes de los puntos de apoyo",
+				"english": "Method for GCPs measurements in images"
 			},
-			"definition": "Método de fotointerpretación de puntos de apoyo",
+			"definition": {
+				"spanish": "Método de medida de los puntos de apoyo en las imágenes",
+				"english": "Method for GCPs measurements in images"
+			},
 			"type": "values",
 			"values": {
-				"PSX": "Optimiza alineamiento inicial con puntos de apoyo fotointerpretados en la GUI de Metashape",
-				"XML": "Optimiza alineamiento inicial con puntos de apoyo importados de archivo XML con formato de markers de Metashape"
-			}
+				"PSX": {
+					"spanish": "Medidas en la interfaz gráfica de Metashape",
+					"english": "Measurements in Metashape GUI"
+				},
+				"XML": {
+					"spanish": "Medidas importadas de fichero markers XML de Metashape",
+					"english": "Measurements imported from Metashape Markers XML file"
+				} 
+			},
+			"default": "Medidas en la interfaz gráfica de Metashape"
 		},
 		"EPSG": {
 			"text":{
 				"spanish": "Código EPSG",
 				"english": "EPSG code"
 			},
-			"definition": "Código EPSG con el que se importarán los puntos de apoyo",
+			"definition": {
+				"spanish": "Código EPSG de las coordenadas terreno de los puntos de apoyo",
+				"english": "EPSG code for GCPs terrain coordinates"
+			},
 			"type": "string",
 			"len": 11,
 			"default": "25830+5782"
 		},
 		"Path": {
 			"text":{
-				"spanish": "Carpeta",
-				"english": "Path"
+				"spanish": "Fichero de puntos de apoyo",
+				"english": "GCPs file"
 			},
-			"definition": "Ruta del archivo de puntos de apoyo",
+			"definition": {
+				"spanish": "Archivo de puntos de apoyo",
+				"english": "GCPs file"
+			},
 			"type": "file open",
-			"formats": [".csv", ".txt"]
+			"formats": [".csv", ".txt"],
+			"default": ""
 		},
 		"Accuracy": {
 			"text":{
 				"spanish": "Precisión",
 				"english": "Accuracy"
 			},
-			"definition": "Precisión establecida para el alineamiento",
+			"definition": {
+				"spanish": "Precisión establecida para el alineamiento",
+				"english": "Accuracy for aligment"
+			},
 			"type": "values",
 			"values": {
-				"Highest": "Highest",
-				"High": "High",
-				"Medium": "Medium",
-				"Low": "Low",
-				"Lowest": "Lowest"
-			}
+				"Highest": {
+					"spanish": "Mayor posible",
+					"english": "Highest"
+				},
+				"High": {
+					"spanish": "Alto",
+					"english": "High"
+				},
+				"Medium": {
+					"spanish": "Medio",
+					"english": "Medium"
+				},
+				"Low": {
+					"spanish": "Bajo",
+					"english": "Low"
+				},
+				"Lowest": {
+					"spanish": "Menor posible",
+					"english": "Lowest"
+				}
+			},
+			"default": "Mayor posible"
 		},
 		"ReferencePreselection": {
 			"text":{
 				"spanish": "Preselección",
 				"english": "Preselection"
 			},
-			"definition": "Método de preselección de imágenes según su localización",
+			"definition":{
+				"spanish": "Método de preselección de imágenes según su localización",
+				"english": "Method for preselection of images based in their positions"
+			},
 			"type": "values",
 			"values": {
-				"False": "Método genérico sin localización",
-				"Source": "Método según la localización de origen (importada desde EXIF o CSV)",
-				"Estimated": "Método según la localización estimada",
-				"Sequential": "Método de imágenes consecutivas"
-			}
+				"False": {
+					"spanish": "Sin localización",
+					"english": "Generic without position"
+				},
+				"Source": {
+					"spanish": "Con localización de origen (importada desde EXIF o CSV)",
+					"english": "From imported position (CSV or EXIF)"
+				},
+				"Estimated": {
+					"spanish": "Con localización estimada",
+					"english": "From estimated position"
+				},
+				"Sequential": {
+					"spanish": "Con imágenes consecutivas",
+					"english": "From consecutive images"
+				}
+			},
+			"default": "Con localización de origen (importada desde EXIF o CSV)"
 		},
 		"TiePointLimit": {
 			"text":{
 				"spanish": "Límite",
 				"english": "Limit"
 			},
-			"definition": "Límite de tie points",
-			"type": "integer"
+			"definition":{
+				"spanish": "Límite de puntos de enlace",
+				"english": "Tie points limit"
+			},
+			"type": "integer",
+			"minimum": 1000,
+			"maximum": 100000,
+			"singleStep": 1000,
+			"default": 4000
 		}
 	},
 	"SplitTile": {

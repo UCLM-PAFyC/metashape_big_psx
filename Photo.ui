@@ -202,7 +202,7 @@
           
             <item>
                 <property name="text">
-                <string>Metadatos de las fotos</string>
+                <string>Metadatos de las imágenes</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
