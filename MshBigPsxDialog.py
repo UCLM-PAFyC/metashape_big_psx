@@ -12,7 +12,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
-# from gui.CameraCalibration import CameraCalibration
+from gui.CameraCalibration import CameraCalibration
 # from gui.Photo import Photo
 from gui.Project import Project
 # from gui.Roi import Roi
@@ -44,11 +44,11 @@ class MshBigPsxDialog(QDialog):
         # class_path = os.path.join(pluginsPath, class_path)
         self.template_path = self.class_path + gui_defines.TEMPLATE_PATH
         self.processPushButton.clicked.connect(self.process)
-        # # CameraCalibration
-        # self.cameraCalibration = CameraCalibration()
-        # self.cameraCalibrationPushButton.setText(self.cameraCalibration.get_text())
-        # self.cameraCalibrationPushButton.clicked.connect(self.edit_cameraCalibration)
-        # self.cameraCalibration_dlg = None
+        # CameraCalibration
+        self.cameraCalibration = CameraCalibration()
+        self.cameraCalibrationPushButton.setText(self.cameraCalibration.get_text())
+        self.cameraCalibrationPushButton.clicked.connect(self.edit_cameraCalibration)
+        self.cameraCalibration_dlg = None
         # # Photo
         # self.photo = Photo()
         # self.photoPushButton.setText(self.photo.get_text())
@@ -71,17 +71,18 @@ class MshBigPsxDialog(QDialog):
         # self.roi_dlg = None
         return
 
-    # def edit_cameraCalibration(self):
-    #     if not self.cameraCalibration_dlg:
-    #         self.cameraCalibration_dlg = VPyGUIGenerator.create_gui(self.cameraCalibration)
-    #         self.cameraCalibration_dlg.setWindowTitle(self.cameraCalibration.get_text())
-    #         text_by_propierty = self.cameraCalibration.get_text_by_propierty()
-    #         for propierty in text_by_propierty:
-    #             label_propierty = 'label_' + propierty
-    #             self.cameraCalibration_dlg.get_widget(label_propierty).setText(text_by_propierty[propierty])
-    #     # roi_dlg.show()
-    #     self.cameraCalibration_dlg.exec()
-    #
+    def edit_cameraCalibration(self):
+        if not self.cameraCalibration_dlg:
+            self.cameraCalibration_dlg = VPyGUIGenerator.create_gui(self.cameraCalibration)
+            self.cameraCalibration_dlg.setWindowTitle(self.cameraCalibration.get_text())
+            text_by_propierty = self.cameraCalibration.get_text_by_propierty()
+            for propierty in text_by_propierty:
+                label_propierty = 'label_' + propierty
+                self.cameraCalibration_dlg.get_widget(label_propierty).setText(text_by_propierty[propierty])
+            self.cameraCalibration.set_widget(self.cameraCalibration_dlg)
+        # roi_dlg.show()
+        self.cameraCalibration_dlg.exec()
+
     # def edit_photo(self):
     #     if not self.photo_dlg:
     #         self.photo_dlg = VPyGUIGenerator.create_gui(self.photo)
@@ -140,6 +141,7 @@ class MshBigPsxDialog(QDialog):
         #     Tools.error_msg(str_error)
         #     return
         project_values = self.project.get_values_as_dictionary()
+        cameraCalibration_values = self.cameraCalibration.get_values_as_dictionary()
 
         json_object = json.dumps(json_content, indent=4)
         with open("sample.json", "w") as outfile:

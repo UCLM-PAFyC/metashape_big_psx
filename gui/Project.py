@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QDoubleSpinBox, QComboBox, QLineEdit
+from PyQt5.QtWidgets import QDoubleSpinBox, QComboBox, QLineEdit, QCheckBox
 from . import gui_defines
 
 class Project:
@@ -59,6 +59,8 @@ class Project:
 			self.__label_value = propierty_label_widget.currentText()
 		elif isinstance(propierty_label_widget, QLineEdit):
 			self.__label_value = propierty_label_widget.text()
+		elif isinstance(propierty_label_widget, QCheckBox):
+			self.__label_value = propierty_label_widget.isChecked()
 
 	@property
 	def epsg(self):
@@ -76,6 +78,8 @@ class Project:
 			self.__epsg_value = propierty_epsg_widget.currentText()
 		elif isinstance(propierty_epsg_widget, QLineEdit):
 			self.__epsg_value = propierty_epsg_widget.text()
+		elif isinstance(propierty_epsg_widget, QCheckBox):
+			self.__epsg_value = propierty_epsg_widget.isChecked()
 
 	@property
 	def path(self):
@@ -93,6 +97,8 @@ class Project:
 			self.__path_value = propierty_path_widget.currentText()
 		elif isinstance(propierty_path_widget, QLineEdit):
 			self.__path_value = propierty_path_widget.text()
+		elif isinstance(propierty_path_widget, QCheckBox):
+			self.__path_value = propierty_path_widget.isChecked()
 
 	@property
 	def demgsd(self):
@@ -110,6 +116,8 @@ class Project:
 			self.__demgsd_value = propierty_demgsd_widget.currentText()
 		elif isinstance(propierty_demgsd_widget, QLineEdit):
 			self.__demgsd_value = propierty_demgsd_widget.text()
+		elif isinstance(propierty_demgsd_widget, QCheckBox):
+			self.__demgsd_value = propierty_demgsd_widget.isChecked()
 
 	@property
 	def orthogsd(self):
@@ -127,6 +135,8 @@ class Project:
 			self.__orthogsd_value = propierty_orthogsd_widget.currentText()
 		elif isinstance(propierty_orthogsd_widget, QLineEdit):
 			self.__orthogsd_value = propierty_orthogsd_widget.text()
+		elif isinstance(propierty_orthogsd_widget, QCheckBox):
+			self.__orthogsd_value = propierty_orthogsd_widget.isChecked()
 
 	def set_widget(self, widget):
 		self.__widget = widget
@@ -138,6 +148,8 @@ class Project:
 		elif isinstance(propierty_label_widget, QLineEdit):
 			propierty_label_widget.editingFinished.connect(self.set_label_value)
 			propierty_label_widget.textChanged.connect(self.set_label_value)
+		elif isinstance(propierty_label_widget, QCheckBox):
+			propierty_label_widget.stateChanged.connect(self.set_label_value)
 		self.__widget_by_propierty['label'] = propierty_label_widget
 		propierty_epsg_widget = self.__widget.get_widget('epsg')
 		if isinstance(propierty_epsg_widget, QDoubleSpinBox):
@@ -147,6 +159,8 @@ class Project:
 		elif isinstance(propierty_epsg_widget, QLineEdit):
 			propierty_epsg_widget.editingFinished.connect(self.set_epsg_value)
 			propierty_epsg_widget.textChanged.connect(self.set_epsg_value)
+		elif isinstance(propierty_epsg_widget, QCheckBox):
+			propierty_epsg_widget.stateChanged.connect(self.set_epsg_value)
 		self.__widget_by_propierty['epsg'] = propierty_epsg_widget
 		propierty_path_widget = self.__widget.get_widget('path')
 		if isinstance(propierty_path_widget, QDoubleSpinBox):
@@ -156,6 +170,8 @@ class Project:
 		elif isinstance(propierty_path_widget, QLineEdit):
 			propierty_path_widget.editingFinished.connect(self.set_path_value)
 			propierty_path_widget.textChanged.connect(self.set_path_value)
+		elif isinstance(propierty_path_widget, QCheckBox):
+			propierty_path_widget.stateChanged.connect(self.set_path_value)
 		self.__widget_by_propierty['path'] = propierty_path_widget
 		propierty_demgsd_widget = self.__widget.get_widget('demgsd')
 		if isinstance(propierty_demgsd_widget, QDoubleSpinBox):
@@ -165,6 +181,8 @@ class Project:
 		elif isinstance(propierty_demgsd_widget, QLineEdit):
 			propierty_demgsd_widget.editingFinished.connect(self.set_demgsd_value)
 			propierty_demgsd_widget.textChanged.connect(self.set_demgsd_value)
+		elif isinstance(propierty_demgsd_widget, QCheckBox):
+			propierty_demgsd_widget.stateChanged.connect(self.set_demgsd_value)
 		self.__widget_by_propierty['demgsd'] = propierty_demgsd_widget
 		propierty_orthogsd_widget = self.__widget.get_widget('orthogsd')
 		if isinstance(propierty_orthogsd_widget, QDoubleSpinBox):
@@ -174,4 +192,6 @@ class Project:
 		elif isinstance(propierty_orthogsd_widget, QLineEdit):
 			propierty_orthogsd_widget.editingFinished.connect(self.set_orthogsd_value)
 			propierty_orthogsd_widget.textChanged.connect(self.set_orthogsd_value)
+		elif isinstance(propierty_orthogsd_widget, QCheckBox):
+			propierty_orthogsd_widget.stateChanged.connect(self.set_orthogsd_value)
 		self.__widget_by_propierty['orthogsd'] = propierty_orthogsd_widget
