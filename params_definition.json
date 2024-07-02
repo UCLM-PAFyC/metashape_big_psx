@@ -605,70 +605,112 @@
 		},
 		"TileSize": {
 			"text":{
-				"spanish": "Tamaño",
-				"english": "Size"
+				"spanish": "Tamaño de la celda",
+				"english": "Tile Size"
 			},
-			"definition": "Dimensiones de tileado del bloque de vuelo para proyectos grandes en metros y unidades enteras",
-			"type": "integer"
+			"definition":{
+				"spanish": "Tamaño de las celdas en metros (ej. 50)",
+				"english": "Tile size in meters (ex. 50)"
+			},
+			"type": "integer",
+			"minimum": 10,
+			"maximum": 1000,
+			"singleStep": 10,
+			"default": 50
 		},
 		"TileSizeBuffer": {
 			"text":{
 				"spanish": "Ampliación",
 				"english": "Buffer"
 			},
-			"definition": "Porcentaje de ampliación del perímetro de los tiles",
+			"definition":{
+				"spanish": "Porcentaje de solape entre celdas (ej. 5)",
+				"english": "Tiles percentage overlaps (ex. 5)"
+			},
 			"type": "integer",
-			"max": 100,
-			"min": 5
+			"minimum": 1,
+			"maximum": 100,
+			"singleStep": 1,
+			"default": 5
 		},
 		"Method": {
 			"text":{
-				"spanish": "Método",
-				"english": "Method"
+				"spanish": "Definición de la malla de celdas a procesar",
+				"english": "Grid tiles to process definition"
 			},
-			"definition": "Método de automático o manual de edición de la malla vectorial de tiles a procesar",
+			"definition":{
+				"spanish": "Definición de la malla de celdas a procesar",
+				"english": "Grid tiles to process definition"
+			},
 			"type": "values",
 			"values": {
-				"AUTO": "Crea de forma automática la malla vectorial que cubre todo el trabajo o la ROI aplicada",
-				"MANUAL": "Crea la capa y espera la edición manual de la misma"
-			}
+				"AUTO": {
+					"spanish": "Automático para toda la ROI o zona estereoscópica",
+					"english": "Automatic to ROI or stereoscopi area"
+				},
+				"MANUAL": {
+					"spanish": "Malla editada por el usuario",
+					"english": "User edited Grid"
+				}
+			},
+			"default": "Malla editada por el usuario"
 		},
 		"Path": {
 			"text":{
-				"spanish": "Carpeta",
-				"english": "Folder"
+				"spanish": "Fichero de la malla",
+				"english": "Grid file"
 			},
-			"definition": "Ruta al archivo que contiene la malla vectorial editada por el usuario",
+			"definition":{
+				"spanish": "Fichero de la malla editado por el usario",
+				"english": "Grid file edited by user"
+			},
 			"type": "file open",
-			"formats": [".gpkg"]
+			"formats": [".gpkg"],
+			"default": ""
 		},
 		"MergeMethod": {
 			"text":{
 				"spanish": "Método de unión",
 				"english": "Merge method"
 			},
-			"definition": "Estrategias de unión de los productos resultantes",
+			"definition":{
+				"spanish": "Estrategia de unión de los productos resultantes",
+				"english": "Merged method"
+			},
 			"type": "values",
 			"values": {
-				"Metashape": "Metashape",
-				"OsgeoLaspy": "Utilizando las librerías osgeo (ráster) y laspy (nubes de puntos)"
-			}
+				"Metashape":{
+					"spanish": "Metashape",
+					"english": "Metashape"
+				},
+				"OsgeoLaspy":{
+					"spanish": "OSGeo (ráster) y laspy (nubes de puntos)",
+					"english": "OSGeo (raster) and laspy (points clouds)"
+				}
+			},
+			"default": "OSGeo (ráster) y laspy (nubes de puntos)"
 		},
 		"MergePointClouds": {
 			"text":{
 				"spanish": "Unir nubes de puntos",
-				"english": "Merge point clouds"
+				"english": "Merge points clouds"
 			},
-			"definition": "Selección si une la nube de puntos",
+			"definition":{
+				"spanish": "Unir nubes de puntos",
+				"english": "Merge points clouds"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"MergeElevations": {
 			"text":{
-				"spanish": "Unir MDE",
-				"english": "Merge DEM"
+				"spanish": "Unir MDEs",
+				"english": "Merge DEMs"
 			},
-			"definition": "Selección si une los modelos digitales de elevaciones (DSM y DTM)",
+			"definition":{
+				"spanish": "Unir MDEs",
+				"english": "Merge DEMs"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
@@ -677,21 +719,34 @@
 				"spanish": "Unir ortomosaicos",
 				"english": "Merge orthomosaics"
 			},
-			"definition": "Selección si une el ortomosaico",
+			"definition":{
+				"spanish": "Unir ortomosaicos",
+				"english": "Merge orthomosaics"
+			},
 			"type": "boolean",
 			"default": "True"
 		},
 		"MergedDEM": {
 			"text":{
-				"spanish": "MDE a unir",
-				"english": "Merge DEM"
+				"spanish": "Tipo de MDE a unir",
+				"english": "Type of DEM to merge"
 			},
-			"definition": "Selección del DEM a unir con estrategia Metashape",
+			"definition":{
+				"spanish": "Tipo de MDE a unir",
+				"english": "Type of DEM to merge"
+			},
 			"type": "values",
 			"values": {
-				"DSM": "Digital Surface Model (DSM)",
-				"DTM": "Digital Terrain Model (DTM)"
-			}
+				"DSM":{
+					"spanish": "Modelo Digital de Superficies (MDS)",
+					"english": "Digital Surface Model (DSM)"
+				},
+				"DTM":{
+					"spanish": "Modelo Digital del Terreno (MDT)",
+					"english": "Digital Terrain Model (DTM)"
+				}
+			},
+			"default": "Modelo Digital de Superficies (MDS)"
 		}
 	},
 	"PointCloud": {
@@ -704,29 +759,64 @@
 				"spanish": "Densidad ",
 				"english": "Density"
 			},
-			"definition": "Selección de la calidad final de la nube de puntos densa",
+			"definition":{
+				"spanish": "Calidad final de la nube de puntos densa",
+				"english": "Dense point cloud quality"
+			},
 			"type": "values",
 			"values": {
-				"Ultrahigh": "Ultrahigh",
-				"High": "High",
-				"Medium": "Medium",
-				"Low": "Low",
-				"Lowest": "Lowest"
-			}
+				"Highest": {
+					"spanish": "Mayor posible",
+					"english": "Ultrahigh"
+				},
+				"High": {
+					"spanish": "Alto",
+					"english": "High"
+				},
+				"Medium": {
+					"spanish": "Medio",
+					"english": "Medium"
+				},
+				"Low": {
+					"spanish": "Bajo",
+					"english": "Low"
+				},
+				"Lowest": {
+					"spanish": "Menor posible",
+					"english": "Lowest"
+				}
+			},
+			"default": "Mayor posible"
 		},
 		"FilterMode": {
 			"text":{
-				"spanish": "Filtro",
-				"english": "Filter"
+				"spanish": "Tipo de filtrado",
+				"english": "Filter type"
 			},
-			"definition": "Selección del filtro de creación  de la nube de puntos densa",
+			"definition":{
+				"spanish": "Tipo de filtrado",
+				"english": "Filter type"
+			},
 			"type": "values",
 			"values": {
-				"False": "False",
-				"Mild": "Mild",
-				"Moderate": "Moderate",
-				"Aggressive": "Aggressive"
-			}
+				"False": {
+					"spanish": "Falso",
+					"english": "False"
+				},
+				"Mild": {
+					"spanish": "Medio",
+					"english": "Mild"
+				},
+				"Moderate": {
+					"spanish": "Moderado",
+					"english": "Moderate"
+				},
+				"Aggressive": {
+					"spanish": "Agresivo",
+					"english": "Aggressive"
+				}
+			},
+			"default": "Agresivo"
 		}
 	},
 	"InstallRequirement": {
@@ -739,16 +829,24 @@
 				"spanish": "Carpeta del entorno conda",
 				"english": "Conda environment folder"
 			},
-			"definition": "Ruta del entorno de instalación",
-			"type": "folder"
+			"definition":{
+				"spanish": "Carpeta del entorno conda",
+				"english": "Conda environment folder"
+			},
+			"type": "folder",
+			"default": ""
 		},
 		"Geoid": {
 			"text":{
-				"spanish": "Geoide",
-				"english": "Geoid"
+				"spanish": "Carpeta con los modelos del Geoide",
+				"english": "Geoids folder"
 			},
-			"definition": "Ruta del directorio donde se encuentra los modelos del geoide",
-			"type": "folder"
+			"definition":{
+				"spanish": "Carpeta con los modelos del Geoide",
+				"english": "Geoids folder"
+			},
+			"type": "folder",
+			"default": ""
 		}
 	}
 }

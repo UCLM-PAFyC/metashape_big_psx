@@ -13,11 +13,14 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
 from gui.CameraCalibration import CameraCalibration
+from gui.InstallRequirement import InstallRequirement
 from gui.Photo import Photo
+from gui.PointCloud import PointCloud
 from gui.Project import Project
 from gui.Roi import Roi
 from gui.Workflow import Workflow
 from gui.OptimizeAlignment import OptimizeAlignment
+from gui.SplitTile import SplitTile
 from gui import gui_defines
 from ParameterManager import ParametersManager
 
@@ -50,11 +53,21 @@ class MshBigPsxDialog(QDialog):
         self.cameraCalibrationPushButton.setText(self.cameraCalibration.get_text())
         self.cameraCalibrationPushButton.clicked.connect(self.edit_cameraCalibration)
         self.cameraCalibration_dlg = None
+        # InstallRequirement
+        self.installRequirement = InstallRequirement()
+        self.installRequirementPushButton.setText(self.installRequirement.get_text())
+        self.installRequirementPushButton.clicked.connect(self.edit_installRequirement)
+        self.installRequirement_dlg = None
         # Photo
         self.photo = Photo()
         self.photoPushButton.setText(self.photo.get_text())
         self.photoPushButton.clicked.connect(self.edit_photo)
         self.photo_dlg = None
+        # PointCloud
+        self.pointCloud = PointCloud()
+        self.pointCloudPushButton.setText(self.pointCloud.get_text())
+        self.pointCloudPushButton.clicked.connect(self.edit_pointCloud)
+        self.pointCloud_dlg = None
         # Project
         self.project = Project()
         self.projectPushButton.setText(self.project.get_text())
@@ -70,11 +83,16 @@ class MshBigPsxDialog(QDialog):
         self.roiPushButton.setText(self.roi.get_text())
         self.roiPushButton.clicked.connect(self.edit_roi)
         self.roi_dlg = None
-        # Roi
+        # OptimizeAlignment
         self.optimizeAlignment = OptimizeAlignment()
         self.optimizeAlignmentPushButton.setText(self.optimizeAlignment.get_text())
         self.optimizeAlignmentPushButton.clicked.connect(self.edit_optimizeAlignment)
         self.optimizeAlignment_dlg = None
+        # SplitTile
+        self.splitTile = SplitTile()
+        self.splitTilePushButton.setText(self.splitTile.get_text())
+        self.splitTilePushButton.clicked.connect(self.edit_splitTile)
+        self.splitTile_dlg = None
         return
 
     def edit_cameraCalibration(self):
@@ -88,6 +106,18 @@ class MshBigPsxDialog(QDialog):
             self.cameraCalibration.set_widget(self.cameraCalibration_dlg)
         # roi_dlg.show()
         self.cameraCalibration_dlg.exec()
+
+    def edit_installRequirement(self):
+        if not self.installRequirement_dlg:
+            self.installRequirement_dlg = VPyGUIGenerator.create_gui(self.installRequirement)
+            self.installRequirement_dlg.setWindowTitle(self.installRequirement.get_text())
+            text_by_propierty = self.installRequirement.get_text_by_propierty()
+            for propierty in text_by_propierty:
+                label_propierty = 'label_' + propierty
+                self.installRequirement_dlg.get_widget(label_propierty).setText(text_by_propierty[propierty])
+            self.installRequirement.set_widget(self.installRequirement_dlg)
+        # roi_dlg.show()
+        self.installRequirement_dlg.exec()
 
     def edit_photo(self):
         if not self.photo_dlg:
@@ -113,6 +143,18 @@ class MshBigPsxDialog(QDialog):
         # roi_dlg.show()
         self.optimizeAlignment_dlg.exec()
 
+    def edit_pointCloud(self):
+        if not self.pointCloud_dlg:
+            self.pointCloud_dlg = VPyGUIGenerator.create_gui(self.pointCloud)
+            self.pointCloud_dlg.setWindowTitle(self.pointCloud.get_text())
+            text_by_propierty = self.pointCloud.get_text_by_propierty()
+            for propierty in text_by_propierty:
+                label_propierty = 'label_' + propierty
+                self.pointCloud_dlg.get_widget(label_propierty).setText(text_by_propierty[propierty])
+            self.pointCloud.set_widget(self.pointCloud_dlg)
+        # project_dlg.show()
+        self.pointCloud_dlg.exec()
+
     def edit_project(self):
         if not self.project_dlg:
             self.project_dlg = VPyGUIGenerator.create_gui(self.project)
@@ -136,6 +178,18 @@ class MshBigPsxDialog(QDialog):
             self.roi.set_widget(self.roi_dlg)
         # roi_dlg.show()
         self.roi_dlg.exec()
+
+    def edit_splitTile(self):
+        if not self.splitTile_dlg:
+            self.splitTile_dlg = VPyGUIGenerator.create_gui(self.splitTile)
+            self.splitTile_dlg.setWindowTitle(self.splitTile.get_text())
+            text_by_propierty = self.splitTile.get_text_by_propierty()
+            for propierty in text_by_propierty:
+                label_propierty = 'label_' + propierty
+                self.splitTile_dlg.get_widget(label_propierty).setText(text_by_propierty[propierty])
+            self.splitTile.set_widget(self.splitTile_dlg)
+        # roi_dlg.show()
+        self.splitTile_dlg.exec()
 
     def edit_workflow(self):
         if not self.workflow_dlg:
@@ -167,6 +221,9 @@ class MshBigPsxDialog(QDialog):
         roi_values = self.roi.get_values_as_dictionary()
         cameraCalibration_values = self.cameraCalibration.get_values_as_dictionary()
         optimizeAlignment_values = self.optimizeAlignment.get_values_as_dictionary()
+        splitTile_values = self.splitTile.get_values_as_dictionary()
+        pointCloud_values = self.pointCloud.get_values_as_dictionary()
+        installRequirement_values = self.installRequirement.get_values_as_dictionary()
 
         json_object = json.dumps(json_content, indent=4)
         with open("sample.json", "w") as outfile:

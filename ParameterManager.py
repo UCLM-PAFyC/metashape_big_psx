@@ -368,7 +368,8 @@ class ParametersManager:
                 return str_error
             if ((class_name != 'Project' and class_name != 'Workflow' and class_name != 'Photo'
                     and class_name != 'Roi' and class_name != 'CameraCalibration')
-                    and class_name != "OptimizeAlignment"):
+                    and class_name != "OptimizeAlignment" and class_name != "SplitTile"
+                    and class_name != "PointCloud") and class_name != "InstallRequirement":
                 continue
             # if class_name != 'Project' and class_name != 'Workflow' and class_name != 'Photo'\
             #         and class_name != 'Roi' and class_name != 'CameraCalibration':
