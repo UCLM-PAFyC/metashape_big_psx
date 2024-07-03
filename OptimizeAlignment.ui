@@ -118,6 +118,10 @@
                     <property name="toolTip" stdset="0">
                         <string>Archivo de puntos de apoyo</string>
                     </property>
+                            
+                    <property name="filters" stdset="0">
+                        <string>*.txt *.csv</string>
+                    </property>
                    
           
         <property name="text">

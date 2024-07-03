@@ -131,7 +131,7 @@ class SplitTile:
 		return self.__path
 
 	@path.setter
-	def path(self, value: 'widget:file, toolTip:Fichero de la malla editado por el usario'):
+	def path(self, value: 'widget:file, toolTip:Fichero de la malla editado por el usario, filters: *.gpkg'):
 		self.__path = value
 
 	def set_path_value(self):

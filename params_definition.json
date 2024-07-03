@@ -515,7 +515,7 @@
 				"english": "GCPs file"
 			},
 			"type": "file open",
-			"formats": [".csv", ".txt"],
+			"formats": "*.txt *.csv",
 			"default": ""
 		},
 		"Accuracy": {
@@ -665,7 +665,7 @@
 				"english": "Grid file edited by user"
 			},
 			"type": "file open",
-			"formats": [".gpkg"],
+			"formats": "*.gpkg",
 			"default": ""
 		},
 		"MergeMethod": {

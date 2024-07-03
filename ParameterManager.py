@@ -40,6 +40,7 @@ class ParametersManager:
         propierty_field_maximum = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_MAXIMUM_TAG
         propierty_field_minimum = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_MINIMUM_TAG
         propierty_field_single_step = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_SINGLE_STEP_TAG
+        propierty_field_formats = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_FORMATS_TAG
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
@@ -274,7 +275,14 @@ class ParametersManager:
                 propierty_text = ('widget:file, type:folder, toolTip:{}'.format(propierty_definition))
             elif propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_FILE_OPEN_TAG:
                 propiertyIsFileOpen = True
-                propierty_text = ('widget:file, toolTip:{}'.format(propierty_definition))
+                str_propierty_formats = None
+                if propierty_field_formats in json_propierty_content:
+                    str_propierty_formats = json_propierty_content[propierty_field_formats]
+                if not str_propierty_formats:
+                    propierty_text = ('widget:file, toolTip:{}'.format(propierty_definition))
+                else:
+                    propierty_text = ('widget:file, toolTip:{}, filters: {}'.
+                                      format(propierty_definition, str_propierty_formats))
             elif propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_FILE_SAVE_TAG:
                 propiertyIsFileSave = True
             f.write('\n\t@property\n')

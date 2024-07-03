@@ -95,7 +95,7 @@ class OptimizeAlignment:
 		return self.__path
 
 	@path.setter
-	def path(self, value: 'widget:file, toolTip:Archivo de puntos de apoyo'):
+	def path(self, value: 'widget:file, toolTip:Archivo de puntos de apoyo, filters: *.txt *.csv'):
 		self.__path = value
 
 	def set_path_value(self):
