@@ -2,7 +2,11 @@
 # David Hernandez Lopez, david.hernandez@uclm.es
 # Ana del Campo Sanchez, ana.delcampo@usal.es
 
+DEFAULT_GEOIDS_PATH = "Agisoft/Metashape Pro/geoids"
 PARAMS_DEFINITION_FILE = "params_definition.json"
+CONST_PROJECTS_STRING_SEPARATOR = ";"
+CONST_NO_COMBO_SELECT = " ... "
+SETTINGS_FILE = "setting.ini"
 TEMPLATE_PATH = "\\templates"
 GUI_LANGUAGE_TAG = "Language"
 GUI_CLASSES = ["Project", "Workflow", "Photo", "Roi", "CameraCalibration",

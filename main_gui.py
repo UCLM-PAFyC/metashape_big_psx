@@ -3,6 +3,7 @@
 # Ana del Campo Sanchez, ana.delcampo@usal.es
 
 import sys, os
+from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
 from PyQt5.QtWidgets import QApplication
 # from MshBigPsxDialog import MshBigPsxDialog
 from gui import gui_defines
@@ -12,9 +13,10 @@ import Tools
 
 def main():
     app = QApplication(sys.argv)
-
-    parametersManager = ParametersManager()
     current_path = os.path.dirname(os.path.realpath(__file__))
+    path_file_qsettings = current_path + "/" + gui_defines.SETTINGS_FILE
+    settings = QSettings(path_file_qsettings, QSettings.IniFormat)
+    parametersManager = ParametersManager()
     params_definitions_file = current_path + "/" + gui_defines.PARAMS_DEFINITION_FILE
     params_definitions_file = os.path.normpath(params_definitions_file)
     str_error = parametersManager.from_json_file(params_definitions_file)
@@ -23,7 +25,8 @@ def main():
         return
 
     from MshBigPsxDialog import MshBigPsxDialog
-    dialog = MshBigPsxDialog(parametersManager)
+    dialog = MshBigPsxDialog(settings,
+                             parametersManager)
     dialog.show()
     app.exec()
 

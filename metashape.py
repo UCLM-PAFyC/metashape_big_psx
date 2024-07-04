@@ -138,19 +138,20 @@ class MetashapeTools:
     def check_split_path(self, label=gt.label):
         self.set_chunk(label)
         path = gt.params.get("SplitTile")["Path"]
-        if path == "0":
+        if gt.params.get("SplitTile")["Method"] == "AUTO":
             gt.update_log('Spliting method = automatic for the whole area.')
             self.create_tile_grid(label)
             self.export_tile_grid(label=label)
-        elif os.path.exists(path) and os.path.isfile(path):
-            gt.update_log('Spliting method = manual selection of tiles from file\n' + path )
-            self.import_tile_grid(label)
-        else:
-            self.create_tile_grid(label)
-            self.export_tile_grid(label=label)
-            self.export_tile_grid(output_path=path, label=label)
-            gt.update_log('Spliting method:\nAWAITING FOR THE EDITING OF THE TILING LAYER AND RESTART.')
-            raise SystemExit(0)
+        elif gt.params.get("SplitTile")["Method"] == "MANUAL":
+            gt.update_log('Spliting method = manual selection of tiles from file\n' + path)
+            if os.path.exists(path) and os.path.isfile(path):
+                self.import_tile_grid(label)
+            else:
+                self.create_tile_grid(label)
+                self.export_tile_grid(label=label)
+                self.export_tile_grid(output_path=path, label=label)
+                gt.update_log('Spliting method:\nAWAITING FOR THE EDITING OF THE TILING LAYER AND RESTART.')
+                raise SystemExit(0)
 
     def create_tile_grid(self, label=gt.label):
         self.set_chunk(label)

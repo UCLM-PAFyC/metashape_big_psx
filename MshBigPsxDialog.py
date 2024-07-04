@@ -9,7 +9,8 @@ from PyQt5 import QtGui, QtWidgets, uic
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import pyqtSignal
 import sys
-from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog
+from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog
+from PyQt5.QtCore import QDir, QFileInfo
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
 from gui.CameraCalibration import CameraCalibration
@@ -30,20 +31,90 @@ from PyQt5 import QtCore, QtWidgets
 import json
 import Tools
 
+
 class MshBigPsxDialog(QDialog):
     """Employee dialog."""
 
     def __init__(self,
+                 settings,
                  parametersManager,
                  parent=None):
         super().__init__(parent)
         # Load the dialog's GUI
         # loadUi("./gui/MshBigPsxDialog.ui", self)
         loadUi("MshBigPsxDialog.ui", self)
+        self.settings = settings
         self.parametersManager = parametersManager
         self.initialize()
 
+    def addProject(self):
+        title = "Select Project File"
+        fileName, aux = QFileDialog.getOpenFileName(self, title, self.path, "Project File (*.json)")
+        if fileName:
+            if not fileName in self.projects:
+                self.projects.append(fileName)
+                self.projectsComboBox.addItem(fileName)
+                strProjects = ""
+                cont = 0
+                for project in self.projects:
+                    if cont > 0:
+                        strProjects = strProjects + gui_defines.CONST_PROJECTS_STRING_SEPARATOR
+                    strProjects += project
+                    cont = cont + 1
+                self.settings.setValue("projects", strProjects)
+                self.settings.sync()
+            pos = self.projectsComboBox.findText(fileName)
+            if pos >= 0:
+                self.projectsComboBox.setCurrentIndex(pos)
+            self.path = QFileInfo(fileName).absolutePath()
+            self.settings.setValue("last_path", self.path)
+            self.settings.sync()
+        return
+
     def initialize(self):
+        self.path = self.settings.value("last_path")
+        current_dir = QDir.current()
+        if not self.path:
+            self.path = QDir.currentPath()
+            self.settings.setValue("last_path", self.path)
+            self.settings.sync()
+        self.geoids_path = self.settings.value("geoids_path")
+        if self.geoids_path:
+            if not current_dir.exists(self.geoids_path):
+                self.geoids_path = None
+        if not current_dir.exists(self.geoids_path):
+            program_files_path = os.environ["ProgramFiles"]
+            geoids_path = program_files_path + "/" + gui_defines.DEFAULT_GEOIDS_PATH
+            geoids_path = os.path.normpath(geoids_path)
+            if current_dir.exists(geoids_path):
+                self.geoids_path = geoids_path
+        self.settings.setValue("geoids_path", self.geoids_path)
+        self.settings.sync()
+        self.conda_env_path = self.settings.value("conda_env_path")
+        if self.conda_env_path:
+            if not current_dir.exists(self.conda_env_path):
+                self.conda_env_path = None
+        self.settings.setValue("conda_env_path", self.conda_env_path)
+        self.settings.sync()
+        strProjects = self.settings.value("project")
+        self.projects = []
+        if strProjects:
+            self.projects = strProjects.split(gui_defines.CONST_PROJECTS_STRING_SEPARATOR)
+        self.projectsComboBox.clear()
+        self.projectsComboBox.addItem(gui_defines.CONST_NO_COMBO_SELECT)
+        for project in self.projects:
+            self.projectsComboBox.addItem(project)
+        self.addProjectPushButton.clicked.connect(self.addProject)
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFileEditionGroupBox.setEnabled(False)
+        self.saveProjectPushButton.setEnabled(False)
+        self.projectLineEdit.clear()
+        self.processPushButton.setEnabled(False)
+        self.projectsComboBox.currentIndexChanged.connect(self.selectProject)
+        self.projectFile = None
+
         self.class_path = os.path.dirname(os.path.realpath(__file__))
         # class_path = os.path.join(pluginsPath, class_path)
         self.template_path = self.class_path + gui_defines.TEMPLATE_PATH
@@ -93,6 +164,17 @@ class MshBigPsxDialog(QDialog):
         self.splitTilePushButton.setText(self.splitTile.get_text())
         self.splitTilePushButton.clicked.connect(self.edit_splitTile)
         self.splitTile_dlg = None
+        return
+
+    def closeProject(self):
+        if not self.projectPath:
+            return
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFile = None
+        # self.projectsComboBox.setEnabled(True)
+        self.projectsComboBox.setCurrentIndex(0)
         return
 
     def edit_cameraCalibration(self):
@@ -228,4 +310,25 @@ class MshBigPsxDialog(QDialog):
         json_object = json.dumps(json_content, indent=4)
         with open("sample.json", "w") as outfile:
             outfile.write(json_object)
+        return
+
+    def selectProject(self):
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        projectFilePath = self.projectsComboBox.currentText()
+        if projectFilePath == gui_defines.CONST_NO_COMBO_SELECT:
+            self.projectFileEditionGroupBox.setEnabled(False)
+            self.saveProjectPushButton.setEnabled(False)
+            self.projectLineEdit.clear()
+            self.processPushButton.setEnabled(False)
+            if self.projectFile:
+                self.closeProject()
+        else:
+            self.projectFileEditionGroupBox.setEnabled(False)
+            self.openProjectPushButton.setEnabled(True)
+            self.closeProjectPushButton.setEnabled(False)
+            self.removeProjectPushButton.setEnabled(True)
+        # if self.connectionFileName:
+        #     self.openProject()
         return
