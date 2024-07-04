@@ -174,6 +174,21 @@ class Photo:
 		elif isinstance(propierty_eopath_widget, QCheckBox):
 			self.__eopath_value = propierty_eopath_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__path_value = values['Path']
+		self.__path = values['Path']
+		self.__locationaccuracy2d_value = values['LocationAccuracy2D']
+		self.__locationaccuracy2d = values['LocationAccuracy2D']
+		self.__locationaccuracyheight_value = values['LocationAccuracyHeight']
+		self.__locationaccuracyheight = values['LocationAccuracyHeight']
+		self.__method_value = values['Method']
+		self.__method = values['Method']
+		self.__epsg_value = values['EPSG']
+		self.__epsg = values['EPSG']
+		self.__eopath_value = values['EoPath']
+		self.__eopath = values['EoPath']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_path_widget = self.__widget.get_widget('path')

@@ -314,7 +314,17 @@ class ParametersManager:
             f.write('\t\t\tself.__{}_value = propierty_{}_widget.isChecked()\n'
                     .format(propierty_name, propierty_name))
 
-
+        f.write('\n\tdef set_values_from_dictionary(self, values):\n')
+        for propierty_name in json_class_content:
+            json_propierty_content = json_class_content[propierty_name]
+            if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
+                continue
+            f.write('\t\tself.__{}{} = values[\'{}\']\n'
+                    .format(propierty_name.lower(),
+                            gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX, propierty_name))
+            f.write('\t\tself.__{} = values[\'{}\']\n'
+                    .format(propierty_name.lower(), propierty_name))
+        f.write('\t\treturn\n')
 
         f.write('\n\tdef set_widget(self, widget):\n')
         f.write('\t\tself.__widget = widget\n')

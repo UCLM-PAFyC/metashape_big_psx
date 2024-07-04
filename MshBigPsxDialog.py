@@ -9,7 +9,8 @@ from PyQt5 import QtGui, QtWidgets, uic
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import pyqtSignal
 import sys
-from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog
+from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog
+from PyQt5.QtCore import QDir, QFileInfo
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
 from gui.CameraCalibration import CameraCalibration
@@ -30,68 +31,141 @@ from PyQt5 import QtCore, QtWidgets
 import json
 import Tools
 
+
 class MshBigPsxDialog(QDialog):
     """Employee dialog."""
 
     def __init__(self,
+                 settings,
                  parametersManager,
                  parent=None):
         super().__init__(parent)
         # Load the dialog's GUI
         # loadUi("./gui/MshBigPsxDialog.ui", self)
         loadUi("MshBigPsxDialog.ui", self)
+        self.settings = settings
         self.parametersManager = parametersManager
         self.initialize()
+
+    def addProject(self):
+        title = "Select Project File"
+        fileName, aux = QFileDialog.getOpenFileName(self, title, self.path, "Project File (*.json)")
+        if fileName:
+            if not fileName in self.projects:
+                self.projects.append(fileName)
+                self.projectsComboBox.addItem(fileName)
+                strProjects = ""
+                cont = 0
+                for project in self.projects:
+                    if cont > 0:
+                        strProjects = strProjects + gui_defines.CONST_PROJECTS_STRING_SEPARATOR
+                    strProjects += project
+                    cont = cont + 1
+                self.settings.setValue("projects", strProjects)
+                self.settings.sync()
+            pos = self.projectsComboBox.findText(fileName)
+            if pos >= 0:
+                self.projectsComboBox.setCurrentIndex(pos)
+            self.path = QFileInfo(fileName).absolutePath()
+            self.settings.setValue("last_path", self.path)
+            self.settings.sync()
+        return
 
     def initialize(self):
         self.class_path = os.path.dirname(os.path.realpath(__file__))
         # class_path = os.path.join(pluginsPath, class_path)
         self.template_path = self.class_path + gui_defines.TEMPLATE_PATH
+        self.path = self.settings.value("last_path")
+        current_dir = QDir.current()
+        if not self.path:
+            self.path = QDir.currentPath()
+            self.settings.setValue("last_path", self.path)
+            self.settings.sync()
+        self.geoids_path = self.settings.value("geoids_path")
+        if self.geoids_path:
+            if not current_dir.exists(self.geoids_path):
+                self.geoids_path = None
+        if not current_dir.exists(self.geoids_path):
+            program_files_path = os.environ["ProgramFiles"]
+            geoids_path = program_files_path + "/" + gui_defines.DEFAULT_GEOIDS_PATH
+            geoids_path = os.path.normpath(geoids_path)
+            if current_dir.exists(geoids_path):
+                self.geoids_path = geoids_path
+        self.settings.setValue("geoids_path", self.geoids_path)
+        self.settings.sync()
+        self.conda_env_path = self.settings.value("conda_env_path")
+        if self.conda_env_path:
+            if not current_dir.exists(self.conda_env_path):
+                self.conda_env_path = None
+        self.settings.setValue("conda_env_path", self.conda_env_path)
+        self.settings.sync()
+        strProjects = self.settings.value("projects")
+        self.projects = []
+        if strProjects:
+            self.projects = strProjects.split(gui_defines.CONST_PROJECTS_STRING_SEPARATOR)
+        self.projectsComboBox.clear()
+        self.projectsComboBox.addItem(gui_defines.CONST_NO_COMBO_SELECT)
+        for project in self.projects:
+            self.projectsComboBox.addItem(project)
+        self.addProjectPushButton.clicked.connect(self.addProject)
+        self.projectsComboBox.currentIndexChanged.connect(self.selectProject)
+        self.openProjectPushButton.clicked.connect(self.openProject)
+        self.closeProjectPushButton.clicked.connect(self.closeProject)
         self.processPushButton.clicked.connect(self.process)
-        # CameraCalibration
-        self.cameraCalibration = CameraCalibration()
-        self.cameraCalibrationPushButton.setText(self.cameraCalibration.get_text())
-        self.cameraCalibrationPushButton.clicked.connect(self.edit_cameraCalibration)
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFileEditionGroupBox.setEnabled(False)
+        self.saveProjectPushButton.setEnabled(False)
+        self.projectLineEdit.clear()
+        self.processPushButton.setEnabled(False)
+        self.projectFile = None
+        self.cameraCalibration = None
         self.cameraCalibration_dlg = None
-        # InstallRequirement
-        self.installRequirement = InstallRequirement()
-        self.installRequirementPushButton.setText(self.installRequirement.get_text())
-        self.installRequirementPushButton.clicked.connect(self.edit_installRequirement)
+        self.installRequirement = None
         self.installRequirement_dlg = None
-        # Photo
-        self.photo = Photo()
-        self.photoPushButton.setText(self.photo.get_text())
-        self.photoPushButton.clicked.connect(self.edit_photo)
+        self.photo = None
         self.photo_dlg = None
-        # PointCloud
-        self.pointCloud = PointCloud()
-        self.pointCloudPushButton.setText(self.pointCloud.get_text())
-        self.pointCloudPushButton.clicked.connect(self.edit_pointCloud)
+        self.pointCloud = None
         self.pointCloud_dlg = None
-        # Project
-        self.project = Project()
-        self.projectPushButton.setText(self.project.get_text())
-        self.projectPushButton.clicked.connect(self.edit_project)
+        self.project = None
         self.project_dlg = None
-        # # Workflow
-        self.workflow = Workflow()
-        self.workflowPushButton.setText(self.workflow.get_text())
-        self.workflowPushButton.clicked.connect(self.edit_workflow)
+        self.workflow = None
         self.workflow_dlg = None
-        # Roi
-        self.roi = Roi()
-        self.roiPushButton.setText(self.roi.get_text())
-        self.roiPushButton.clicked.connect(self.edit_roi)
+        self.roi = None
         self.roi_dlg = None
-        # OptimizeAlignment
-        self.optimizeAlignment = OptimizeAlignment()
-        self.optimizeAlignmentPushButton.setText(self.optimizeAlignment.get_text())
-        self.optimizeAlignmentPushButton.clicked.connect(self.edit_optimizeAlignment)
+        self.optimizeAlignment = None
         self.optimizeAlignment_dlg = None
-        # SplitTile
-        self.splitTile = SplitTile()
-        self.splitTilePushButton.setText(self.splitTile.get_text())
-        self.splitTilePushButton.clicked.connect(self.edit_splitTile)
+        self.splitTile = None
+        self.splitTile_dlg = None
+
+    def closeProject(self):
+        if not self.projectFile:
+            return
+        self.addProjectPushButton.setEnabled(True)
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFile = None
+        self.projectsComboBox.setEnabled(True)
+        self.projectsComboBox.setCurrentIndex(0)
+        self.cameraCalibration = None
+        self.cameraCalibration_dlg = None
+        self.installRequirement = None
+        self.installRequirement_dlg = None
+        self.photo = None
+        self.photo_dlg = None
+        self.pointCloud = None
+        self.pointCloud_dlg = None
+        self.project = None
+        self.project_dlg = None
+        self.workflow = None
+        self.workflow_dlg = None
+        self.roi = None
+        self.roi_dlg = None
+        self.optimizeAlignment = None
+        self.optimizeAlignment_dlg = None
+        self.splitTile = None
         self.splitTile_dlg = None
         return
 
@@ -203,6 +277,166 @@ class MshBigPsxDialog(QDialog):
         # project_dlg.show()
         self.workflow_dlg.exec()
 
+    def loadProjectFromJSonFile(self,
+                                project_file):
+        str_error = ""
+        if not os.path.isfile(project_file):
+            str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
+            str_error += ("\nNot exists file: {}".format(project_file))
+            return str_error
+        f = open(project_file)
+        try:
+            json_content = json.load(f)
+        except:
+            str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
+            str_error += ("\nInvalid JSON file: {}".format(project_file))
+            f.close()
+            return str_error
+        f.close()
+        # if not gui_defines.GUI_LANGUAGE_TAG in json_content:
+        #     str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
+        #     str_error += ("\n{} not in JSON file: {}".format(gui_defines.GUI_LANGUAGE_TAG, project_file))
+        #     return str_error
+        # language = json_content[gui_defines.GUI_LANGUAGE_TAG]
+        gui_classes = gui_defines.GUI_CLASSES
+        class_in_json_file_by_gui_class = {}
+        for class_name in gui_classes:
+            if class_name in json_content:
+                class_in_json_file_by_gui_class[class_name] = class_name
+            else:
+                for class_in_json in json_content:
+                    if class_name.lower() == class_in_json.lower():
+                        class_in_json_file_by_gui_class[class_name] = class_in_json
+        for class_name in gui_classes:
+            class_name = class_in_json_file_by_gui_class[class_name]
+            if not class_name in json_content:
+                str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
+                str_error += ("\nClass: {} not in JSON file: {}".format(class_name, project_file))
+                return str_error
+            # if ((class_name != 'Project' and class_name != 'Workflow' and class_name != 'Photo'
+            #         and class_name != 'Roi' and class_name != 'CameraCalibration')
+            #         and class_name != "OptimizeAlignment" and class_name != "SplitTile"
+            #         and class_name != "PointCloud") and class_name != "InstallRequirement":
+            #     continue
+            if class_name != 'Project' and class_name != 'Workflow':
+                continue
+            json_class_content = json_content[class_name]
+            attributes_tag = None
+            if class_name == 'Project':
+                attributes_tag = self.project.get_values_as_dictionary()
+            elif class_name == 'Workflow':
+                attributes_tag = self.workflow.get_values_as_dictionary()
+            values = {}
+            for attributes_in_definitions in attributes_tag:
+                if not attributes_in_definitions in json_class_content:
+                    str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
+                    str_error += ("\nAttribute: {} not in class: {} not in JSON file: {}"
+                                  .format(attributes_in_definitions, class_name, project_file))
+                    return str_error
+                value = json_class_content[attributes_in_definitions]
+                if type(attributes_tag[attributes_in_definitions]) == bool:
+                    if type(value) == str:
+                        if value.lower() == 'true':
+                            value = True
+                        elif value.lower() == 'false':
+                            value = False
+                        else:
+                            str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
+                            str_error += ("\nAttribute: {} in class: {} in JSON file: {} invalid boolean: {}"
+                                          .format(attributes_in_definitions, class_name, project_file, value))
+                            return str_error
+                values[attributes_in_definitions] = value
+                yo = 1
+            if class_name == 'Project':
+                self.project.set_values_from_dictionary(values)
+            elif class_name == 'Workflow':
+                self.workflow.set_values_from_dictionary(values)
+            yo = 1
+        return str_error
+
+    def openProject(self):
+        self.addProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFileEditionGroupBox.setEnabled(False)
+        self.saveProjectPushButton.setEnabled(False)
+        self.processPushButton.setEnabled(False)
+        self.projectFile = None
+        projectFile = self.projectsComboBox.currentText()
+        if projectFile == gui_defines.CONST_NO_COMBO_SELECT:
+            msgBox = QMessageBox(self)
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setWindowTitle(self.windowTitle)
+            msgBox.setText("Select project before")
+            msgBox.exec_()
+            return
+        self.cameraCalibration = None
+        self.cameraCalibration_dlg = None
+        self.installRequirement = None
+        self.installRequirement_dlg = None
+        self.photo = None
+        self.photo_dlg = None
+        self.pointCloud = None
+        self.pointCloud_dlg = None
+        self.project = None
+        self.project_dlg = None
+        self.workflow = None
+        self.workflow_dlg = None
+        self.roi = None
+        self.roi_dlg = None
+        self.optimizeAlignment = None
+        self.optimizeAlignment_dlg = None
+        self.splitTile = None
+        self.splitTile_dlg = None
+        # CameraCalibration
+        self.cameraCalibration = CameraCalibration()
+        self.cameraCalibrationPushButton.setText(self.cameraCalibration.get_text())
+        self.cameraCalibrationPushButton.clicked.connect(self.edit_cameraCalibration)
+        # InstallRequirement
+        self.installRequirement = InstallRequirement()
+        self.installRequirementPushButton.setText(self.installRequirement.get_text())
+        self.installRequirementPushButton.clicked.connect(self.edit_installRequirement)
+        # Photo
+        self.photo = Photo()
+        self.photoPushButton.setText(self.photo.get_text())
+        self.photoPushButton.clicked.connect(self.edit_photo)
+        # PointCloud
+        self.pointCloud = PointCloud()
+        self.pointCloudPushButton.setText(self.pointCloud.get_text())
+        self.pointCloudPushButton.clicked.connect(self.edit_pointCloud)
+        # Project
+        self.project = Project()
+        self.projectPushButton.setText(self.project.get_text())
+        self.projectPushButton.clicked.connect(self.edit_project)
+        # # Workflow
+        self.workflow = Workflow()
+        self.workflowPushButton.setText(self.workflow.get_text())
+        self.workflowPushButton.clicked.connect(self.edit_workflow)
+        # Roi
+        self.roi = Roi()
+        self.roiPushButton.setText(self.roi.get_text())
+        self.roiPushButton.clicked.connect(self.edit_roi)
+        # OptimizeAlignment
+        self.optimizeAlignment = OptimizeAlignment()
+        self.optimizeAlignmentPushButton.setText(self.optimizeAlignment.get_text())
+        self.optimizeAlignmentPushButton.clicked.connect(self.edit_optimizeAlignment)
+        # SplitTile
+        self.splitTile = SplitTile()
+        self.splitTilePushButton.setText(self.splitTile.get_text())
+        self.splitTilePushButton.clicked.connect(self.edit_splitTile)
+        str_error = self.loadProjectFromJSonFile(projectFile)
+        if str_error:
+            Tools.error_msg(str_error)
+            return
+
+        self.projectFile = projectFile
+        self.closeProjectPushButton.setEnabled(True)
+        self.openProjectPushButton.setEnabled(False)
+        self.projectsComboBox.setEnabled(False)
+        self.projectFileEditionGroupBox.setEnabled(True)
+        self.saveProjectPushButton.setEnabled(True)
+
+
     def process(self):
         example_output_json_file_path = 'params_example_output.json'
         current_path = os.path.dirname(os.path.realpath(__file__))
@@ -228,4 +462,25 @@ class MshBigPsxDialog(QDialog):
         json_object = json.dumps(json_content, indent=4)
         with open("sample.json", "w") as outfile:
             outfile.write(json_object)
+        return
+
+    def selectProject(self):
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        projectFilePath = self.projectsComboBox.currentText()
+        if projectFilePath == gui_defines.CONST_NO_COMBO_SELECT:
+            self.projectFileEditionGroupBox.setEnabled(False)
+            self.saveProjectPushButton.setEnabled(False)
+            self.projectLineEdit.clear()
+            self.processPushButton.setEnabled(False)
+            if self.projectFile:
+                self.closeProject()
+        else:
+            self.projectFileEditionGroupBox.setEnabled(False)
+            self.openProjectPushButton.setEnabled(True)
+            self.closeProjectPushButton.setEnabled(False)
+            self.removeProjectPushButton.setEnabled(True)
+        # if self.connectionFileName:
+        #     self.openProject()
         return

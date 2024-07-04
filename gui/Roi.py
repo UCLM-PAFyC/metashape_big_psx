@@ -70,6 +70,13 @@ class Roi:
 		elif isinstance(propierty_method_widget, QCheckBox):
 			self.__method_value = propierty_method_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__path_value = values['Path']
+		self.__path = values['Path']
+		self.__method_value = values['Method']
+		self.__method = values['Method']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_path_widget = self.__widget.get_widget('path')

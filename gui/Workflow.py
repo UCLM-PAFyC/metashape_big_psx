@@ -252,6 +252,27 @@ class Workflow:
 		elif isinstance(propierty_report_widget, QCheckBox):
 			self.__report_value = propierty_report_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__cleanprevious_value = values['CleanPrevious']
+		self.__cleanprevious = values['CleanPrevious']
+		self.__initialize_value = values['Initialize']
+		self.__initialize = values['Initialize']
+		self.__preprocess_value = values['Preprocess']
+		self.__preprocess = values['Preprocess']
+		self.__optimize_value = values['Optimize']
+		self.__optimize = values['Optimize']
+		self.__split_value = values['Split']
+		self.__split = values['Split']
+		self.__pointcloud_value = values['PointCloud']
+		self.__pointcloud = values['PointCloud']
+		self.__dems_value = values['DEMs']
+		self.__dems = values['DEMs']
+		self.__orthomosaic_value = values['Orthomosaic']
+		self.__orthomosaic = values['Orthomosaic']
+		self.__report_value = values['Report']
+		self.__report = values['Report']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_cleanprevious_widget = self.__widget.get_widget('cleanprevious')

@@ -18,15 +18,15 @@
 		"Report": "True"
 	},
 	"Photo": {
-		"Path": "C://dev//metashape_big_psx//dataset//20230125_JoaquinSorollaTest",
+		"Path": "C://dev//metashape_big_psx//20230125_JoaquinSorollaTest",
 		"LocationAccuracy2D": 0.08,
 		"LocationAccuracyHeight": 0.12,
 		"Method": "EXIF",
 		"EPSG": "4326",
-		"EoPath": "0"
+		"EoPath": ""
 	},
 	"ROI": {
-		"Path": "C://dev//metashape_big_psx//dataset//20230125_JoaquinSorollaTest//roi_4326.shp",
+		"Path": "C://dev//metashape_big_psx//20230125_JoaquinSorollaTest//roi_4326.shp",
 		"Method": "SHP"
 	},
 	"CameraCalibration": {
@@ -45,7 +45,7 @@
 	"OptimizeAlignment": {
 		"Method": "XML",
 		"EPSG": "25830+5782",
-		"Path": "C://dev//metashape_big_psx//dataset//20230125_JoaquinSorollaTest//markers_25830-5782.xml",
+		"Path": "C://dev//metashape_big_psx//20230125_JoaquinSorollaTest//markers_25830-5782.xml",
 		"Accuracy": "Low",
 		"ReferencePreselection": "Source",
 		"TiePointLimit": 10000
@@ -53,19 +53,20 @@
 	"SplitTile": {
 		"TileSize": 10,
 		"TileSizeBuffer": 10,
-		"Path": "C://dev//metashape_big_psx//dataset//20230125_JoaquinSorollaTest//tile_grid_manual.gpkg",
+		"Method": "MANUAL",
+		"Path": "C://dev//metashape_big_psx//test//tile_grid_manual.gpkg",
 		"MergeMethod": "OsgeoLaspy",
 		"MergePointClouds": "True",
 		"MergeElevations": "True",
 		"MergeOrthomosaics": "True",
-		"MergedDEM": "DSM"
+		"MergedDEM": ""
 	},
 	"PointCloud": {
 		"Quality": "Low",
 		"FilterMode": "Aggressive"
 	},
 	"InstallRequirement": {
-		"Env": "C://miniconda//envs//metashape2.1.0_qgis3.28.13//",
+		"Env": "C://miniconda//envs//metashape2.1.1_qgis3.34.6//",
 		"Geoid": "C://Program Files//Agisoft//Metashape Pro//geoids"
 	}
 }

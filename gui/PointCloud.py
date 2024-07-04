@@ -70,6 +70,13 @@ class PointCloud:
 		elif isinstance(propierty_filtermode_widget, QCheckBox):
 			self.__filtermode_value = propierty_filtermode_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__quality_value = values['Quality']
+		self.__quality = values['Quality']
+		self.__filtermode_value = values['FilterMode']
+		self.__filtermode = values['FilterMode']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_quality_widget = self.__widget.get_widget('quality')

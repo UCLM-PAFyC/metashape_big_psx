@@ -148,6 +148,19 @@ class Project:
 		elif isinstance(propierty_orthogsd_widget, QCheckBox):
 			self.__orthogsd_value = propierty_orthogsd_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__label_value = values['Label']
+		self.__label = values['Label']
+		self.__epsg_value = values['EPSG']
+		self.__epsg = values['EPSG']
+		self.__path_value = values['Path']
+		self.__path = values['Path']
+		self.__demgsd_value = values['DemGSD']
+		self.__demgsd = values['DemGSD']
+		self.__orthogsd_value = values['OrthoGSD']
+		self.__orthogsd = values['OrthoGSD']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_label_widget = self.__widget.get_widget('label')

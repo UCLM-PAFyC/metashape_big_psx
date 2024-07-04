@@ -252,6 +252,27 @@ class SplitTile:
 		elif isinstance(propierty_mergeddem_widget, QCheckBox):
 			self.__mergeddem_value = propierty_mergeddem_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__tilesize_value = values['TileSize']
+		self.__tilesize = values['TileSize']
+		self.__tilesizebuffer_value = values['TileSizeBuffer']
+		self.__tilesizebuffer = values['TileSizeBuffer']
+		self.__method_value = values['Method']
+		self.__method = values['Method']
+		self.__path_value = values['Path']
+		self.__path = values['Path']
+		self.__mergemethod_value = values['MergeMethod']
+		self.__mergemethod = values['MergeMethod']
+		self.__mergepointclouds_value = values['MergePointClouds']
+		self.__mergepointclouds = values['MergePointClouds']
+		self.__mergeelevations_value = values['MergeElevations']
+		self.__mergeelevations = values['MergeElevations']
+		self.__mergeorthomosaics_value = values['MergeOrthomosaics']
+		self.__mergeorthomosaics = values['MergeOrthomosaics']
+		self.__mergeddem_value = values['MergedDEM']
+		self.__mergeddem = values['MergedDEM']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_tilesize_widget = self.__widget.get_widget('tilesize')

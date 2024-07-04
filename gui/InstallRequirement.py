@@ -70,6 +70,13 @@ class InstallRequirement:
 		elif isinstance(propierty_geoid_widget, QCheckBox):
 			self.__geoid_value = propierty_geoid_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__env_value = values['Env']
+		self.__env = values['Env']
+		self.__geoid_value = values['Geoid']
+		self.__geoid = values['Geoid']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_env_widget = self.__widget.get_widget('env')

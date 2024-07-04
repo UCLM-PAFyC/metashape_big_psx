@@ -174,6 +174,21 @@ class OptimizeAlignment:
 		elif isinstance(propierty_tiepointlimit_widget, QCheckBox):
 			self.__tiepointlimit_value = propierty_tiepointlimit_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__method_value = values['Method']
+		self.__method = values['Method']
+		self.__epsg_value = values['EPSG']
+		self.__epsg = values['EPSG']
+		self.__path_value = values['Path']
+		self.__path = values['Path']
+		self.__accuracy_value = values['Accuracy']
+		self.__accuracy = values['Accuracy']
+		self.__referencepreselection_value = values['ReferencePreselection']
+		self.__referencepreselection = values['ReferencePreselection']
+		self.__tiepointlimit_value = values['TiePointLimit']
+		self.__tiepointlimit = values['TiePointLimit']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_method_widget = self.__widget.get_widget('method')

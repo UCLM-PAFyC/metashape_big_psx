@@ -304,6 +304,31 @@ class CameraCalibration:
 		elif isinstance(propierty_p2_widget, QCheckBox):
 			self.__p2_value = propierty_p2_widget.isChecked()
 
+	def set_values_from_dictionary(self, values):
+		self.__f_value = values['f']
+		self.__f = values['f']
+		self.__cx_value = values['cx']
+		self.__cx = values['cx']
+		self.__cy_value = values['cy']
+		self.__cy = values['cy']
+		self.__k1_value = values['k1']
+		self.__k1 = values['k1']
+		self.__k2_value = values['k2']
+		self.__k2 = values['k2']
+		self.__k3_value = values['k3']
+		self.__k3 = values['k3']
+		self.__k4_value = values['k4']
+		self.__k4 = values['k4']
+		self.__b1_value = values['b1']
+		self.__b1 = values['b1']
+		self.__b2_value = values['b2']
+		self.__b2 = values['b2']
+		self.__p1_value = values['p1']
+		self.__p1 = values['p1']
+		self.__p2_value = values['p2']
+		self.__p2 = values['p2']
+		return
+
 	def set_widget(self, widget):
 		self.__widget = widget
 		propierty_f_widget = self.__widget.get_widget('f')
