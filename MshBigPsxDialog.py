@@ -72,6 +72,49 @@ class MshBigPsxDialog(QDialog):
         return
 
     def initialize(self):
+        self.path = self.settings.value("last_path")
+        current_dir = QDir.current()
+        if not self.path:
+            self.path = QDir.currentPath()
+            self.settings.setValue("last_path", self.path)
+            self.settings.sync()
+        self.geoids_path = self.settings.value("geoids_path")
+        if self.geoids_path:
+            if not current_dir.exists(self.geoids_path):
+                self.geoids_path = None
+        if not current_dir.exists(self.geoids_path):
+            program_files_path = os.environ["ProgramFiles"]
+            geoids_path = program_files_path + "/" + gui_defines.DEFAULT_GEOIDS_PATH
+            geoids_path = os.path.normpath(geoids_path)
+            if current_dir.exists(geoids_path):
+                self.geoids_path = geoids_path
+        self.settings.setValue("geoids_path", self.geoids_path)
+        self.settings.sync()
+        self.conda_env_path = self.settings.value("conda_env_path")
+        if self.conda_env_path:
+            if not current_dir.exists(self.conda_env_path):
+                self.conda_env_path = None
+        self.settings.setValue("conda_env_path", self.conda_env_path)
+        self.settings.sync()
+        strProjects = self.settings.value("project")
+        self.projects = []
+        if strProjects:
+            self.projects = strProjects.split(gui_defines.CONST_PROJECTS_STRING_SEPARATOR)
+        self.projectsComboBox.clear()
+        self.projectsComboBox.addItem(gui_defines.CONST_NO_COMBO_SELECT)
+        for project in self.projects:
+            self.projectsComboBox.addItem(project)
+        self.addProjectPushButton.clicked.connect(self.addProject)
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFileEditionGroupBox.setEnabled(False)
+        self.saveProjectPushButton.setEnabled(False)
+        self.projectLineEdit.clear()
+        self.processPushButton.setEnabled(False)
+        self.projectsComboBox.currentIndexChanged.connect(self.selectProject)
+        self.projectFile = None
+
         self.class_path = os.path.dirname(os.path.realpath(__file__))
         # class_path = os.path.join(pluginsPath, class_path)
         self.template_path = self.class_path + gui_defines.TEMPLATE_PATH
@@ -167,6 +210,17 @@ class MshBigPsxDialog(QDialog):
         self.optimizeAlignment_dlg = None
         self.splitTile = None
         self.splitTile_dlg = None
+        return
+
+    def closeProject(self):
+        if not self.projectPath:
+            return
+        self.openProjectPushButton.setEnabled(False)
+        self.closeProjectPushButton.setEnabled(False)
+        self.removeProjectPushButton.setEnabled(False)
+        self.projectFile = None
+        # self.projectsComboBox.setEnabled(True)
+        self.projectsComboBox.setCurrentIndex(0)
         return
 
     def edit_cameraCalibration(self):
