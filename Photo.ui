@@ -17,7 +17,7 @@
    <item>
       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
-     <widget class="QLabel" name="label_path">
+     <widget class="QLabel" name="label_Path">
           <property name="text">
           <string>Path:</string>
           </property>
@@ -26,9 +26,9 @@
 <item row="0" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="path">
+     <widget class="QLineEdit" name="Path">
           <property name="field_name" stdset="0">
-               <string>path</string>
+               <string>Path</string>
           </property>
           <property name="key" stdset="0">
                <string>file</string>
@@ -53,7 +53,7 @@
      </widget>
      </item>
 <item>
-    <widget class="QPushButton" name="fileWidgetButton_path">
+    <widget class="QPushButton" name="fileWidgetButton_Path">
     <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
@@ -73,14 +73,14 @@
     </font>
     </property>
     <property name="for_file_widget" stdset="0">
-        <string>path</string>
+        <string>Path</string>
     </property>  
     </widget>
 </item>
 </layout>
 </item>
   <item row="1" column="0">
-     <widget class="QLabel" name="label_locationaccuracy2d">
+     <widget class="QLabel" name="label_LocationAccuracy2D">
           <property name="text">
           <string>Locationaccuracy2d:</string>
           </property>
@@ -88,9 +88,9 @@
      </item>
 <item row="1" column="1">
      
-     <widget class="QDoubleSpinBox" name="locationaccuracy2d">
+     <widget class="QDoubleSpinBox" name="LocationAccuracy2D">
           <property name="field_name" stdset="0">
-               <string>locationaccuracy2d</string>
+               <string>LocationAccuracy2D</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
@@ -128,7 +128,7 @@
      
 </item>
   <item row="2" column="0">
-     <widget class="QLabel" name="label_locationaccuracyheight">
+     <widget class="QLabel" name="label_LocationAccuracyHeight">
           <property name="text">
           <string>Locationaccuracyheight:</string>
           </property>
@@ -136,9 +136,9 @@
      </item>
 <item row="2" column="1">
      
-     <widget class="QDoubleSpinBox" name="locationaccuracyheight">
+     <widget class="QDoubleSpinBox" name="LocationAccuracyHeight">
           <property name="field_name" stdset="0">
-               <string>locationaccuracyheight</string>
+               <string>LocationAccuracyHeight</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
@@ -176,7 +176,7 @@
      
 </item>
   <item row="3" column="0">
-     <widget class="QLabel" name="label_method">
+     <widget class="QLabel" name="label_Method">
           <property name="text">
           <string>Method:</string>
           </property>
@@ -184,9 +184,9 @@
      </item>
 <item row="3" column="1">
      
-     <widget class="QComboBox" name="method">
+     <widget class="QComboBox" name="Method">
           <property name="field_name" stdset="0">
-               <string>method</string>
+               <string>Method</string>
           </property>
           <property name="key" stdset="0">
                <string>combo</string>
@@ -211,7 +211,7 @@
             
             <item>
                 <property name="text">
-                <string> Fichero CSV</string>
+                <string>Fichero CSV</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -222,7 +222,7 @@
      
 </item>
   <item row="4" column="0">
-     <widget class="QLabel" name="label_epsg">
+     <widget class="QLabel" name="label_EPSG">
           <property name="text">
           <string>Epsg:</string>
           </property>
@@ -230,9 +230,9 @@
      </item>
 <item row="4" column="1">
      
-     <widget class="QLineEdit" name="epsg">
+     <widget class="QLineEdit" name="EPSG">
           <property name="field_name" stdset="0">
-               <string>epsg</string>
+               <string>EPSG</string>
           </property>
           <property name="key" stdset="0">
                <string>lineedit</string>
@@ -254,7 +254,7 @@
      
 </item>
   <item row="5" column="0">
-     <widget class="QLabel" name="label_eopath">
+     <widget class="QLabel" name="label_EoPath">
           <property name="text">
           <string>Eopath:</string>
           </property>
@@ -263,9 +263,9 @@
 <item row="5" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="eopath">
+     <widget class="QLineEdit" name="EoPath">
           <property name="field_name" stdset="0">
-               <string>eopath</string>
+               <string>EoPath</string>
           </property>
           <property name="key" stdset="0">
                <string>file</string>
@@ -286,7 +286,7 @@
      </widget>
      </item>
 <item>
-    <widget class="QPushButton" name="fileWidgetButton_eopath">
+    <widget class="QPushButton" name="fileWidgetButton_EoPath">
     <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
@@ -306,7 +306,7 @@
     </font>
     </property>
     <property name="for_file_widget" stdset="0">
-        <string>eopath</string>
+        <string>EoPath</string>
     </property>  
     </widget>
 </item>

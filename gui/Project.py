@@ -5,36 +5,43 @@ class Project:
 	def __init__(self):
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
+		self.__json_content_by_propierty = {}
+		self.__json_content_by_propierty['text'] = {'spanish': 'Proyecto', 'english': 'Project'}
 		self.__text = 'Proyecto'
-		self.__text_by_propierty['label'] = 'Etiqueta'
-		self.__widget_by_propierty['label'] = None
-		self.__label = "Example project"
-		self.__label_value = "Example project"
-		self.__text_by_propierty['epsg'] = 'Código EPSG'
-		self.__widget_by_propierty['epsg'] = None
-		self.__epsg = "25830+5782"
-		self.__epsg_value = "25830+5782"
-		self.__text_by_propierty['path'] = 'Directorio de resultados'
-		self.__widget_by_propierty['path'] = None
-		self.__path = ""
-		self.__path_value = ""
-		self.__text_by_propierty['demgsd'] = 'GSD para MDT y MDS'
-		self.__widget_by_propierty['demgsd'] = None
-		self.__demgsd = 0.05
-		self.__demgsd_value = 0.05
-		self.__text_by_propierty['orthogsd'] = 'GSD para ortomosaico'
-		self.__widget_by_propierty['orthogsd'] = None
-		self.__orthogsd = 0.05
-		self.__orthogsd_value = 0.05
+		self.__json_content_by_propierty['Label'] = {'text': {'spanish': 'Etiqueta', 'english': 'Label'}, 'definition': {'spanish': 'Etiqueta con la que se nombrarán los productos resultantes', 'english': 'Label to be used to name the resulting products'}, 'type': 'string', 'len': 50, 'default': 'Example project'}
+		self.__text_by_propierty['Label'] = 'Etiqueta'
+		self.__widget_by_propierty['Label'] = None
+		self.__Label = "Example project"
+		self.__Label_value = "Example project"
+		self.__json_content_by_propierty['EPSG'] = {'text': {'spanish': 'Código EPSG', 'english': 'EPSG code'}, 'definition': {'spanish': 'Código EPSG con el que se exportarán los productos resultantes', 'english': 'EPSG code under which the resulting products are to be exported'}, 'type': 'string', 'len': 11, 'default': '25830+5782'}
+		self.__text_by_propierty['EPSG'] = 'Código EPSG'
+		self.__widget_by_propierty['EPSG'] = None
+		self.__EPSG = "25830+5782"
+		self.__EPSG_value = "25830+5782"
+		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Directorio de resultados', 'english': 'Output path'}, 'definition': {'spanish': 'Ruta del directorio de resultados', 'english': 'Results directory path'}, 'type': 'folder', 'default': ''}
+		self.__text_by_propierty['Path'] = 'Directorio de resultados'
+		self.__widget_by_propierty['Path'] = None
+		self.__Path = ""
+		self.__Path_value = ""
+		self.__json_content_by_propierty['DemGSD'] = {'text': {'spanish': 'GSD para MDT y MDS', 'english': 'GSD for DTM and DSM'}, 'definition': {'spanish': 'Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)', 'english': 'Resolution in metres at which the digital surface and terrain model will be exported (0 for maximum possible).'}, 'type': 'real', 'decimals': 2, 'minimum': 0.0, 'maximum': 2.0, 'singleStep': 0.01, 'default': 0.05}
+		self.__text_by_propierty['DemGSD'] = 'GSD para MDT y MDS'
+		self.__widget_by_propierty['DemGSD'] = None
+		self.__DemGSD = 0.05
+		self.__DemGSD_value = 0.05
+		self.__json_content_by_propierty['OrthoGSD'] = {'text': {'spanish': 'GSD para ortomosaico', 'english': 'GSD for Orthomosaic'}, 'definition': {'spanish': 'Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)', 'english': 'Resolution in metres at which the orthomosaic will be exported (0 for maximum possible)'}, 'type': 'real', 'decimals': 2, 'minimum': 0.0, 'maximum': 2.0, 'singleStep': 0.01, 'default': 0.05}
+		self.__text_by_propierty['OrthoGSD'] = 'GSD para ortomosaico'
+		self.__widget_by_propierty['OrthoGSD'] = None
+		self.__OrthoGSD = 0.05
+		self.__OrthoGSD_value = 0.05
 		self.__widget = None
 
 	def get_values_as_dictionary(self):
 		values = {}
-		values['Label'] = self.__label_value
-		values['EPSG'] = self.__epsg_value
-		values['Path'] = self.__path_value
-		values['DemGSD'] = self.__demgsd_value
-		values['OrthoGSD'] = self.__orthogsd_value
+		values['Label'] = self.__Label_value
+		values['EPSG'] = self.__EPSG_value
+		values['Path'] = self.__Path_value
+		values['DemGSD'] = self.__DemGSD_value
+		values['OrthoGSD'] = self.__OrthoGSD_value
 		return values
 
 	def get_text(self):
@@ -44,187 +51,214 @@ class Project:
 		return self.__text_by_propierty
 
 	@property
-	def label(self):
-		return self.__label
+	def Label(self):
+		return self.__Label
 
-	@label.setter
-	def label(self, value: 'widget:QLineEdit, toolTip:Etiqueta con la que se nombrarán los productos resultantes'):
-		self.__label = value
+	@Label.setter
+	def Label(self, value: 'widget:QLineEdit, toolTip:Etiqueta con la que se nombrarán los productos resultantes'):
+		self.__Label = value
 
-	def set_label_value(self):
-		propierty_label_widget = self.__widget_by_propierty['label'] 
-		if isinstance(propierty_label_widget, QSpinBox):
-			self.__label_value = propierty_label_widget.value()
-		elif isinstance(propierty_label_widget, QDoubleSpinBox):
-			self.__label_value = propierty_label_widget.value()
-		elif isinstance(propierty_label_widget, QComboBox):
-			self.__label_value = propierty_label_widget.currentText()
-		elif isinstance(propierty_label_widget, QLineEdit):
-			self.__label_value = propierty_label_widget.text()
-		elif isinstance(propierty_label_widget, QCheckBox):
-			self.__label_value = propierty_label_widget.isChecked()
-
-	@property
-	def epsg(self):
-		return self.__epsg
-
-	@epsg.setter
-	def epsg(self, value: 'widget:QLineEdit, toolTip:Código EPSG con el que se exportarán los productos resultantes'):
-		self.__epsg = value
-
-	def set_epsg_value(self):
-		propierty_epsg_widget = self.__widget_by_propierty['epsg'] 
-		if isinstance(propierty_epsg_widget, QSpinBox):
-			self.__epsg_value = propierty_epsg_widget.value()
-		elif isinstance(propierty_epsg_widget, QDoubleSpinBox):
-			self.__epsg_value = propierty_epsg_widget.value()
-		elif isinstance(propierty_epsg_widget, QComboBox):
-			self.__epsg_value = propierty_epsg_widget.currentText()
-		elif isinstance(propierty_epsg_widget, QLineEdit):
-			self.__epsg_value = propierty_epsg_widget.text()
-		elif isinstance(propierty_epsg_widget, QCheckBox):
-			self.__epsg_value = propierty_epsg_widget.isChecked()
+	def set_Label_value(self):
+		propierty_Label_widget = self.__widget_by_propierty['Label'] 
+		if isinstance(propierty_Label_widget, QSpinBox):
+			self.__Label_value = propierty_Label_widget.value()
+		elif isinstance(propierty_Label_widget, QDoubleSpinBox):
+			self.__Label_value = propierty_Label_widget.value()
+		elif isinstance(propierty_Label_widget, QComboBox):
+			self.__Label_value = propierty_Label_widget.currentText()
+		elif isinstance(propierty_Label_widget, QLineEdit):
+			self.__Label_value = propierty_Label_widget.text()
+		elif isinstance(propierty_Label_widget, QCheckBox):
+			self.__Label_value = propierty_Label_widget.isChecked()
 
 	@property
-	def path(self):
-		return self.__path
+	def EPSG(self):
+		return self.__EPSG
 
-	@path.setter
-	def path(self, value: 'widget:file, type:folder, toolTip:Ruta del directorio de resultados'):
-		self.__path = value
+	@EPSG.setter
+	def EPSG(self, value: 'widget:QLineEdit, toolTip:Código EPSG con el que se exportarán los productos resultantes'):
+		self.__EPSG = value
 
-	def set_path_value(self):
-		propierty_path_widget = self.__widget_by_propierty['path'] 
-		if isinstance(propierty_path_widget, QSpinBox):
-			self.__path_value = propierty_path_widget.value()
-		elif isinstance(propierty_path_widget, QDoubleSpinBox):
-			self.__path_value = propierty_path_widget.value()
-		elif isinstance(propierty_path_widget, QComboBox):
-			self.__path_value = propierty_path_widget.currentText()
-		elif isinstance(propierty_path_widget, QLineEdit):
-			self.__path_value = propierty_path_widget.text()
-		elif isinstance(propierty_path_widget, QCheckBox):
-			self.__path_value = propierty_path_widget.isChecked()
-
-	@property
-	def demgsd(self):
-		return self.__demgsd
-
-	@demgsd.setter
-	def demgsd(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)'):
-		self.__demgsd = value
-
-	def set_demgsd_value(self):
-		propierty_demgsd_widget = self.__widget_by_propierty['demgsd'] 
-		if isinstance(propierty_demgsd_widget, QSpinBox):
-			self.__demgsd_value = propierty_demgsd_widget.value()
-		elif isinstance(propierty_demgsd_widget, QDoubleSpinBox):
-			self.__demgsd_value = propierty_demgsd_widget.value()
-		elif isinstance(propierty_demgsd_widget, QComboBox):
-			self.__demgsd_value = propierty_demgsd_widget.currentText()
-		elif isinstance(propierty_demgsd_widget, QLineEdit):
-			self.__demgsd_value = propierty_demgsd_widget.text()
-		elif isinstance(propierty_demgsd_widget, QCheckBox):
-			self.__demgsd_value = propierty_demgsd_widget.isChecked()
+	def set_EPSG_value(self):
+		propierty_EPSG_widget = self.__widget_by_propierty['EPSG'] 
+		if isinstance(propierty_EPSG_widget, QSpinBox):
+			self.__EPSG_value = propierty_EPSG_widget.value()
+		elif isinstance(propierty_EPSG_widget, QDoubleSpinBox):
+			self.__EPSG_value = propierty_EPSG_widget.value()
+		elif isinstance(propierty_EPSG_widget, QComboBox):
+			self.__EPSG_value = propierty_EPSG_widget.currentText()
+		elif isinstance(propierty_EPSG_widget, QLineEdit):
+			self.__EPSG_value = propierty_EPSG_widget.text()
+		elif isinstance(propierty_EPSG_widget, QCheckBox):
+			self.__EPSG_value = propierty_EPSG_widget.isChecked()
 
 	@property
-	def orthogsd(self):
-		return self.__orthogsd
+	def Path(self):
+		return self.__Path
 
-	@orthogsd.setter
-	def orthogsd(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)'):
-		self.__orthogsd = value
+	@Path.setter
+	def Path(self, value: 'widget:file, type:folder, toolTip:Ruta del directorio de resultados'):
+		self.__Path = value
 
-	def set_orthogsd_value(self):
-		propierty_orthogsd_widget = self.__widget_by_propierty['orthogsd'] 
-		if isinstance(propierty_orthogsd_widget, QSpinBox):
-			self.__orthogsd_value = propierty_orthogsd_widget.value()
-		elif isinstance(propierty_orthogsd_widget, QDoubleSpinBox):
-			self.__orthogsd_value = propierty_orthogsd_widget.value()
-		elif isinstance(propierty_orthogsd_widget, QComboBox):
-			self.__orthogsd_value = propierty_orthogsd_widget.currentText()
-		elif isinstance(propierty_orthogsd_widget, QLineEdit):
-			self.__orthogsd_value = propierty_orthogsd_widget.text()
-		elif isinstance(propierty_orthogsd_widget, QCheckBox):
-			self.__orthogsd_value = propierty_orthogsd_widget.isChecked()
+	def set_Path_value(self):
+		propierty_Path_widget = self.__widget_by_propierty['Path'] 
+		if isinstance(propierty_Path_widget, QSpinBox):
+			self.__Path_value = propierty_Path_widget.value()
+		elif isinstance(propierty_Path_widget, QDoubleSpinBox):
+			self.__Path_value = propierty_Path_widget.value()
+		elif isinstance(propierty_Path_widget, QComboBox):
+			self.__Path_value = propierty_Path_widget.currentText()
+		elif isinstance(propierty_Path_widget, QLineEdit):
+			self.__Path_value = propierty_Path_widget.text()
+		elif isinstance(propierty_Path_widget, QCheckBox):
+			self.__Path_value = propierty_Path_widget.isChecked()
+
+	@property
+	def DemGSD(self):
+		return self.__DemGSD
+
+	@DemGSD.setter
+	def DemGSD(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)'):
+		self.__DemGSD = value
+
+	def set_DemGSD_value(self):
+		propierty_DemGSD_widget = self.__widget_by_propierty['DemGSD'] 
+		if isinstance(propierty_DemGSD_widget, QSpinBox):
+			self.__DemGSD_value = propierty_DemGSD_widget.value()
+		elif isinstance(propierty_DemGSD_widget, QDoubleSpinBox):
+			self.__DemGSD_value = propierty_DemGSD_widget.value()
+		elif isinstance(propierty_DemGSD_widget, QComboBox):
+			self.__DemGSD_value = propierty_DemGSD_widget.currentText()
+		elif isinstance(propierty_DemGSD_widget, QLineEdit):
+			self.__DemGSD_value = propierty_DemGSD_widget.text()
+		elif isinstance(propierty_DemGSD_widget, QCheckBox):
+			self.__DemGSD_value = propierty_DemGSD_widget.isChecked()
+
+	@property
+	def OrthoGSD(self):
+		return self.__OrthoGSD
+
+	@OrthoGSD.setter
+	def OrthoGSD(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)'):
+		self.__OrthoGSD = value
+
+	def set_OrthoGSD_value(self):
+		propierty_OrthoGSD_widget = self.__widget_by_propierty['OrthoGSD'] 
+		if isinstance(propierty_OrthoGSD_widget, QSpinBox):
+			self.__OrthoGSD_value = propierty_OrthoGSD_widget.value()
+		elif isinstance(propierty_OrthoGSD_widget, QDoubleSpinBox):
+			self.__OrthoGSD_value = propierty_OrthoGSD_widget.value()
+		elif isinstance(propierty_OrthoGSD_widget, QComboBox):
+			self.__OrthoGSD_value = propierty_OrthoGSD_widget.currentText()
+		elif isinstance(propierty_OrthoGSD_widget, QLineEdit):
+			self.__OrthoGSD_value = propierty_OrthoGSD_widget.text()
+		elif isinstance(propierty_OrthoGSD_widget, QCheckBox):
+			self.__OrthoGSD_value = propierty_OrthoGSD_widget.isChecked()
 
 	def set_values_from_dictionary(self, values):
-		self.__label_value = values['Label']
-		self.__label = values['Label']
-		self.__epsg_value = values['EPSG']
-		self.__epsg = values['EPSG']
-		self.__path_value = values['Path']
-		self.__path = values['Path']
-		self.__demgsd_value = values['DemGSD']
-		self.__demgsd = values['DemGSD']
-		self.__orthogsd_value = values['OrthoGSD']
-		self.__orthogsd = values['OrthoGSD']
+		for value in values:
+			propierty_widget = self.__widget_by_propierty[value]
+			if isinstance(propierty_widget, QComboBox):
+				json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+				if values[value] in json_values:
+					for language in json_values[values[value]]:
+						value_language = json_values[values[value]][language]
+						pos = propierty_widget.findText(value_language)
+						if pos != -1:
+							propierty_widget.setCurrentIndex(pos)
+							break
+				#pos = propierty_widget.findText(values[value])
+				#if pos != -1:
+					#propierty_widget.setCurrentIndex(pos)
+				#else:
+					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+					#for json_value in json_values:
+						#find_value = False
+						#for language in json_values[json_value]:
+							#value_language = json_values[json_value][language]
+							#if pos == -1:
+								#pos = propierty_widget.findText(value_language)
+							#if value_language == values[value]:
+								#find_value = True
+						#if find_value and pos != -1:
+							#propierty_widget.setCurrentIndex(pos)
+							#break
+		self.__Label_value = values['Label']
+		self.__Label = values['Label']
+		self.__EPSG_value = values['EPSG']
+		self.__EPSG = values['EPSG']
+		self.__Path_value = values['Path']
+		self.__Path = values['Path']
+		self.__DemGSD_value = values['DemGSD']
+		self.__DemGSD = values['DemGSD']
+		self.__OrthoGSD_value = values['OrthoGSD']
+		self.__OrthoGSD = values['OrthoGSD']
 		return
 
 	def set_widget(self, widget):
 		self.__widget = widget
-		propierty_label_widget = self.__widget.get_widget('label')
-		if isinstance(propierty_label_widget, QSpinBox):
-			propierty_label_widget.valueChanged.connect(self.set_label_value)
-		elif isinstance(propierty_label_widget, QDoubleSpinBox):
-			propierty_label_widget.valueChanged.connect(self.set_label_value)
-		elif isinstance(propierty_label_widget, QComboBox):
-			propierty_label_widget.currentIndexChanged.connect(self.set_label_value)
-		elif isinstance(propierty_label_widget, QLineEdit):
-			propierty_label_widget.editingFinished.connect(self.set_label_value)
-			propierty_label_widget.textChanged.connect(self.set_label_value)
-		elif isinstance(propierty_label_widget, QCheckBox):
-			propierty_label_widget.stateChanged.connect(self.set_label_value)
-		self.__widget_by_propierty['label'] = propierty_label_widget
-		propierty_epsg_widget = self.__widget.get_widget('epsg')
-		if isinstance(propierty_epsg_widget, QSpinBox):
-			propierty_epsg_widget.valueChanged.connect(self.set_epsg_value)
-		elif isinstance(propierty_epsg_widget, QDoubleSpinBox):
-			propierty_epsg_widget.valueChanged.connect(self.set_epsg_value)
-		elif isinstance(propierty_epsg_widget, QComboBox):
-			propierty_epsg_widget.currentIndexChanged.connect(self.set_epsg_value)
-		elif isinstance(propierty_epsg_widget, QLineEdit):
-			propierty_epsg_widget.editingFinished.connect(self.set_epsg_value)
-			propierty_epsg_widget.textChanged.connect(self.set_epsg_value)
-		elif isinstance(propierty_epsg_widget, QCheckBox):
-			propierty_epsg_widget.stateChanged.connect(self.set_epsg_value)
-		self.__widget_by_propierty['epsg'] = propierty_epsg_widget
-		propierty_path_widget = self.__widget.get_widget('path')
-		if isinstance(propierty_path_widget, QSpinBox):
-			propierty_path_widget.valueChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QDoubleSpinBox):
-			propierty_path_widget.valueChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QComboBox):
-			propierty_path_widget.currentIndexChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QLineEdit):
-			propierty_path_widget.editingFinished.connect(self.set_path_value)
-			propierty_path_widget.textChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QCheckBox):
-			propierty_path_widget.stateChanged.connect(self.set_path_value)
-		self.__widget_by_propierty['path'] = propierty_path_widget
-		propierty_demgsd_widget = self.__widget.get_widget('demgsd')
-		if isinstance(propierty_demgsd_widget, QSpinBox):
-			propierty_demgsd_widget.valueChanged.connect(self.set_demgsd_value)
-		elif isinstance(propierty_demgsd_widget, QDoubleSpinBox):
-			propierty_demgsd_widget.valueChanged.connect(self.set_demgsd_value)
-		elif isinstance(propierty_demgsd_widget, QComboBox):
-			propierty_demgsd_widget.currentIndexChanged.connect(self.set_demgsd_value)
-		elif isinstance(propierty_demgsd_widget, QLineEdit):
-			propierty_demgsd_widget.editingFinished.connect(self.set_demgsd_value)
-			propierty_demgsd_widget.textChanged.connect(self.set_demgsd_value)
-		elif isinstance(propierty_demgsd_widget, QCheckBox):
-			propierty_demgsd_widget.stateChanged.connect(self.set_demgsd_value)
-		self.__widget_by_propierty['demgsd'] = propierty_demgsd_widget
-		propierty_orthogsd_widget = self.__widget.get_widget('orthogsd')
-		if isinstance(propierty_orthogsd_widget, QSpinBox):
-			propierty_orthogsd_widget.valueChanged.connect(self.set_orthogsd_value)
-		elif isinstance(propierty_orthogsd_widget, QDoubleSpinBox):
-			propierty_orthogsd_widget.valueChanged.connect(self.set_orthogsd_value)
-		elif isinstance(propierty_orthogsd_widget, QComboBox):
-			propierty_orthogsd_widget.currentIndexChanged.connect(self.set_orthogsd_value)
-		elif isinstance(propierty_orthogsd_widget, QLineEdit):
-			propierty_orthogsd_widget.editingFinished.connect(self.set_orthogsd_value)
-			propierty_orthogsd_widget.textChanged.connect(self.set_orthogsd_value)
-		elif isinstance(propierty_orthogsd_widget, QCheckBox):
-			propierty_orthogsd_widget.stateChanged.connect(self.set_orthogsd_value)
-		self.__widget_by_propierty['orthogsd'] = propierty_orthogsd_widget
+		propierty_Label_widget = self.__widget.get_widget('Label')
+		if isinstance(propierty_Label_widget, QSpinBox):
+			propierty_Label_widget.valueChanged.connect(self.set_Label_value)
+		elif isinstance(propierty_Label_widget, QDoubleSpinBox):
+			propierty_Label_widget.valueChanged.connect(self.set_Label_value)
+		elif isinstance(propierty_Label_widget, QComboBox):
+			propierty_Label_widget.currentIndexChanged.connect(self.set_Label_value)
+		elif isinstance(propierty_Label_widget, QLineEdit):
+			propierty_Label_widget.editingFinished.connect(self.set_Label_value)
+			propierty_Label_widget.textChanged.connect(self.set_Label_value)
+		elif isinstance(propierty_Label_widget, QCheckBox):
+			propierty_Label_widget.stateChanged.connect(self.set_Label_value)
+		self.__widget_by_propierty['Label'] = propierty_Label_widget
+		propierty_EPSG_widget = self.__widget.get_widget('EPSG')
+		if isinstance(propierty_EPSG_widget, QSpinBox):
+			propierty_EPSG_widget.valueChanged.connect(self.set_EPSG_value)
+		elif isinstance(propierty_EPSG_widget, QDoubleSpinBox):
+			propierty_EPSG_widget.valueChanged.connect(self.set_EPSG_value)
+		elif isinstance(propierty_EPSG_widget, QComboBox):
+			propierty_EPSG_widget.currentIndexChanged.connect(self.set_EPSG_value)
+		elif isinstance(propierty_EPSG_widget, QLineEdit):
+			propierty_EPSG_widget.editingFinished.connect(self.set_EPSG_value)
+			propierty_EPSG_widget.textChanged.connect(self.set_EPSG_value)
+		elif isinstance(propierty_EPSG_widget, QCheckBox):
+			propierty_EPSG_widget.stateChanged.connect(self.set_EPSG_value)
+		self.__widget_by_propierty['EPSG'] = propierty_EPSG_widget
+		propierty_Path_widget = self.__widget.get_widget('Path')
+		if isinstance(propierty_Path_widget, QSpinBox):
+			propierty_Path_widget.valueChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QDoubleSpinBox):
+			propierty_Path_widget.valueChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QComboBox):
+			propierty_Path_widget.currentIndexChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QLineEdit):
+			propierty_Path_widget.editingFinished.connect(self.set_Path_value)
+			propierty_Path_widget.textChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QCheckBox):
+			propierty_Path_widget.stateChanged.connect(self.set_Path_value)
+		self.__widget_by_propierty['Path'] = propierty_Path_widget
+		propierty_DemGSD_widget = self.__widget.get_widget('DemGSD')
+		if isinstance(propierty_DemGSD_widget, QSpinBox):
+			propierty_DemGSD_widget.valueChanged.connect(self.set_DemGSD_value)
+		elif isinstance(propierty_DemGSD_widget, QDoubleSpinBox):
+			propierty_DemGSD_widget.valueChanged.connect(self.set_DemGSD_value)
+		elif isinstance(propierty_DemGSD_widget, QComboBox):
+			propierty_DemGSD_widget.currentIndexChanged.connect(self.set_DemGSD_value)
+		elif isinstance(propierty_DemGSD_widget, QLineEdit):
+			propierty_DemGSD_widget.editingFinished.connect(self.set_DemGSD_value)
+			propierty_DemGSD_widget.textChanged.connect(self.set_DemGSD_value)
+		elif isinstance(propierty_DemGSD_widget, QCheckBox):
+			propierty_DemGSD_widget.stateChanged.connect(self.set_DemGSD_value)
+		self.__widget_by_propierty['DemGSD'] = propierty_DemGSD_widget
+		propierty_OrthoGSD_widget = self.__widget.get_widget('OrthoGSD')
+		if isinstance(propierty_OrthoGSD_widget, QSpinBox):
+			propierty_OrthoGSD_widget.valueChanged.connect(self.set_OrthoGSD_value)
+		elif isinstance(propierty_OrthoGSD_widget, QDoubleSpinBox):
+			propierty_OrthoGSD_widget.valueChanged.connect(self.set_OrthoGSD_value)
+		elif isinstance(propierty_OrthoGSD_widget, QComboBox):
+			propierty_OrthoGSD_widget.currentIndexChanged.connect(self.set_OrthoGSD_value)
+		elif isinstance(propierty_OrthoGSD_widget, QLineEdit):
+			propierty_OrthoGSD_widget.editingFinished.connect(self.set_OrthoGSD_value)
+			propierty_OrthoGSD_widget.textChanged.connect(self.set_OrthoGSD_value)
+		elif isinstance(propierty_OrthoGSD_widget, QCheckBox):
+			propierty_OrthoGSD_widget.stateChanged.connect(self.set_OrthoGSD_value)
+		self.__widget_by_propierty['OrthoGSD'] = propierty_OrthoGSD_widget

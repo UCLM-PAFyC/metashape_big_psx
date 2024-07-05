@@ -17,7 +17,7 @@
    <item>
       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
-     <widget class="QLabel" name="label_env">
+     <widget class="QLabel" name="label_Env">
           <property name="text">
           <string>Env:</string>
           </property>
@@ -26,9 +26,9 @@
 <item row="0" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="env">
+     <widget class="QLineEdit" name="Env">
           <property name="field_name" stdset="0">
-               <string>env</string>
+               <string>Env</string>
           </property>
           <property name="key" stdset="0">
                <string>file</string>
@@ -53,7 +53,7 @@
      </widget>
      </item>
 <item>
-    <widget class="QPushButton" name="fileWidgetButton_env">
+    <widget class="QPushButton" name="fileWidgetButton_Env">
     <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
@@ -73,14 +73,14 @@
     </font>
     </property>
     <property name="for_file_widget" stdset="0">
-        <string>env</string>
+        <string>Env</string>
     </property>  
     </widget>
 </item>
 </layout>
 </item>
   <item row="1" column="0">
-     <widget class="QLabel" name="label_geoid">
+     <widget class="QLabel" name="label_Geoid">
           <property name="text">
           <string>Geoid:</string>
           </property>
@@ -89,9 +89,9 @@
 <item row="1" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="geoid">
+     <widget class="QLineEdit" name="Geoid">
           <property name="field_name" stdset="0">
-               <string>geoid</string>
+               <string>Geoid</string>
           </property>
           <property name="key" stdset="0">
                <string>file</string>
@@ -116,7 +116,7 @@
      </widget>
      </item>
 <item>
-    <widget class="QPushButton" name="fileWidgetButton_geoid">
+    <widget class="QPushButton" name="fileWidgetButton_Geoid">
     <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
@@ -136,7 +136,7 @@
     </font>
     </property>
     <property name="for_file_widget" stdset="0">
-        <string>geoid</string>
+        <string>Geoid</string>
     </property>  
     </widget>
 </item>

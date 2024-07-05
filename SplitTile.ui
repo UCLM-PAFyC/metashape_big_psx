@@ -17,7 +17,7 @@
    <item>
       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
-     <widget class="QLabel" name="label_tilesize">
+     <widget class="QLabel" name="label_TileSize">
           <property name="text">
           <string>Tilesize:</string>
           </property>
@@ -25,9 +25,9 @@
      </item>
 <item row="0" column="1">
      
-     <widget class="QSpinBox" name="tilesize">
+     <widget class="QSpinBox" name="TileSize">
           <property name="field_name" stdset="0">
-               <string>tilesize</string>
+               <string>TileSize</string>
           </property>
           <property name="key" stdset="0">
                <string>int</string>
@@ -61,7 +61,7 @@
      
 </item>
   <item row="1" column="0">
-     <widget class="QLabel" name="label_tilesizebuffer">
+     <widget class="QLabel" name="label_TileSizeBuffer">
           <property name="text">
           <string>Tilesizebuffer:</string>
           </property>
@@ -69,9 +69,9 @@
      </item>
 <item row="1" column="1">
      
-     <widget class="QSpinBox" name="tilesizebuffer">
+     <widget class="QSpinBox" name="TileSizeBuffer">
           <property name="field_name" stdset="0">
-               <string>tilesizebuffer</string>
+               <string>TileSizeBuffer</string>
           </property>
           <property name="key" stdset="0">
                <string>int</string>
@@ -105,7 +105,7 @@
      
 </item>
   <item row="2" column="0">
-     <widget class="QLabel" name="label_method">
+     <widget class="QLabel" name="label_Method">
           <property name="text">
           <string>Method:</string>
           </property>
@@ -113,9 +113,9 @@
      </item>
 <item row="2" column="1">
      
-     <widget class="QComboBox" name="method">
+     <widget class="QComboBox" name="Method">
           <property name="field_name" stdset="0">
-               <string>method</string>
+               <string>Method</string>
           </property>
           <property name="key" stdset="0">
                <string>combo</string>
@@ -140,7 +140,7 @@
             
             <item>
                 <property name="text">
-                <string> Automático para toda la ROI o zona estereoscópica</string>
+                <string>Automático para toda la ROI o zona estereoscópica</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -151,7 +151,7 @@
      
 </item>
   <item row="3" column="0">
-     <widget class="QLabel" name="label_path">
+     <widget class="QLabel" name="label_Path">
           <property name="text">
           <string>Path:</string>
           </property>
@@ -160,9 +160,9 @@
 <item row="3" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="path">
+     <widget class="QLineEdit" name="Path">
           <property name="field_name" stdset="0">
-               <string>path</string>
+               <string>Path</string>
           </property>
           <property name="key" stdset="0">
                <string>file</string>
@@ -187,7 +187,7 @@
      </widget>
      </item>
 <item>
-    <widget class="QPushButton" name="fileWidgetButton_path">
+    <widget class="QPushButton" name="fileWidgetButton_Path">
     <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
@@ -207,14 +207,14 @@
     </font>
     </property>
     <property name="for_file_widget" stdset="0">
-        <string>path</string>
+        <string>Path</string>
     </property>  
     </widget>
 </item>
 </layout>
 </item>
   <item row="4" column="0">
-     <widget class="QLabel" name="label_mergemethod">
+     <widget class="QLabel" name="label_MergeMethod">
           <property name="text">
           <string>Mergemethod:</string>
           </property>
@@ -222,9 +222,9 @@
      </item>
 <item row="4" column="1">
      
-     <widget class="QComboBox" name="mergemethod">
+     <widget class="QComboBox" name="MergeMethod">
           <property name="field_name" stdset="0">
-               <string>mergemethod</string>
+               <string>MergeMethod</string>
           </property>
           <property name="key" stdset="0">
                <string>combo</string>
@@ -249,7 +249,7 @@
             
             <item>
                 <property name="text">
-                <string> Metashape</string>
+                <string>Metashape</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -260,7 +260,7 @@
      
 </item>
   <item row="5" column="0">
-     <widget class="QLabel" name="label_mergepointclouds">
+     <widget class="QLabel" name="label_MergePointClouds">
           <property name="text">
           <string>Mergepointclouds:</string>
           </property>
@@ -268,9 +268,9 @@
      </item>
 <item row="5" column="1">
      
-     <widget class="QCheckBox" name="mergepointclouds">
+     <widget class="QCheckBox" name="MergePointClouds">
           <property name="field_name" stdset="0">
-               <string>mergepointclouds</string>
+               <string>MergePointClouds</string>
           </property>
           <property name="key" stdset="0">
                <string>bool</string>
@@ -292,7 +292,7 @@
      
 </item>
   <item row="6" column="0">
-     <widget class="QLabel" name="label_mergeelevations">
+     <widget class="QLabel" name="label_MergeElevations">
           <property name="text">
           <string>Mergeelevations:</string>
           </property>
@@ -300,9 +300,9 @@
      </item>
 <item row="6" column="1">
      
-     <widget class="QCheckBox" name="mergeelevations">
+     <widget class="QCheckBox" name="MergeElevations">
           <property name="field_name" stdset="0">
-               <string>mergeelevations</string>
+               <string>MergeElevations</string>
           </property>
           <property name="key" stdset="0">
                <string>bool</string>
@@ -324,7 +324,7 @@
      
 </item>
   <item row="7" column="0">
-     <widget class="QLabel" name="label_mergeorthomosaics">
+     <widget class="QLabel" name="label_MergeOrthomosaics">
           <property name="text">
           <string>Mergeorthomosaics:</string>
           </property>
@@ -332,9 +332,9 @@
      </item>
 <item row="7" column="1">
      
-     <widget class="QCheckBox" name="mergeorthomosaics">
+     <widget class="QCheckBox" name="MergeOrthomosaics">
           <property name="field_name" stdset="0">
-               <string>mergeorthomosaics</string>
+               <string>MergeOrthomosaics</string>
           </property>
           <property name="key" stdset="0">
                <string>bool</string>
@@ -356,7 +356,7 @@
      
 </item>
   <item row="8" column="0">
-     <widget class="QLabel" name="label_mergeddem">
+     <widget class="QLabel" name="label_MergedDEM">
           <property name="text">
           <string>Mergeddem:</string>
           </property>
@@ -364,9 +364,9 @@
      </item>
 <item row="8" column="1">
      
-     <widget class="QComboBox" name="mergeddem">
+     <widget class="QComboBox" name="MergedDEM">
           <property name="field_name" stdset="0">
-               <string>mergeddem</string>
+               <string>MergedDEM</string>
           </property>
           <property name="key" stdset="0">
                <string>combo</string>
@@ -391,7 +391,7 @@
             
             <item>
                 <property name="text">
-                <string> Modelo Digital del Terreno (MDT)</string>
+                <string>Modelo Digital del Terreno (MDT)</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>

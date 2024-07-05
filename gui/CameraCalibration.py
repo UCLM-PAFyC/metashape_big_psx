@@ -5,47 +5,60 @@ class CameraCalibration:
 	def __init__(self):
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
+		self.__json_content_by_propierty = {}
+		self.__json_content_by_propierty['text'] = {'spanish': 'Calibración de cámara', 'english': 'Camera calibration'}
 		self.__text = 'Calibración de cámara'
+		self.__json_content_by_propierty['f'] = {'text': {'spanish': 'Focal', 'english': 'Focal'}, 'definition': {'spanish': 'Seleccionar si se calibra la focal', 'english': 'Select calibrate focal'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['f'] = 'Focal'
 		self.__widget_by_propierty['f'] = None
 		self.__f = True
 		self.__f_value = True
+		self.__json_content_by_propierty['cx'] = {'text': {'spanish': 'X PPA', 'english': 'X PPA'}, 'definition': {'spanish': 'Seleccionar si se calibra la coordenada X del PPA', 'english': 'Select calibrate PPA X coordinate'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['cx'] = 'X PPA'
 		self.__widget_by_propierty['cx'] = None
 		self.__cx = True
 		self.__cx_value = True
+		self.__json_content_by_propierty['cy'] = {'text': {'spanish': 'Y PPA', 'english': 'Y PPA'}, 'definition': {'spanish': 'Seleccionar si se calibra la coordenada Y del PPA', 'english': 'Select calibrate PPA Y coordinate'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['cy'] = 'Y PPA'
 		self.__widget_by_propierty['cy'] = None
 		self.__cy = True
 		self.__cy_value = True
+		self.__json_content_by_propierty['k1'] = {'text': {'spanish': 'k1', 'english': 'k1'}, 'definition': {'spanish': 'Seleccionar si se calibra k1 de distorsión radial', 'english': 'Select calibrate k1 radial distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['k1'] = 'k1'
 		self.__widget_by_propierty['k1'] = None
 		self.__k1 = True
 		self.__k1_value = True
+		self.__json_content_by_propierty['k2'] = {'text': {'spanish': 'k2', 'english': 'k2'}, 'definition': {'spanish': 'Seleccionar si se calibra k2 de distorsión radial', 'english': 'Select calibrate k2 radial distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['k2'] = 'k2'
 		self.__widget_by_propierty['k2'] = None
 		self.__k2 = True
 		self.__k2_value = True
+		self.__json_content_by_propierty['k3'] = {'text': {'spanish': 'k3', 'english': 'k3'}, 'definition': {'spanish': 'Seleccionar si se calibra k3 de distorsión radial', 'english': 'Select calibrate k3 radial distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['k3'] = 'k3'
 		self.__widget_by_propierty['k3'] = None
 		self.__k3 = True
 		self.__k3_value = True
+		self.__json_content_by_propierty['k4'] = {'text': {'spanish': 'k4', 'english': 'k4'}, 'definition': {'spanish': 'Seleccionar si se calibra k4 de distorsión radial', 'english': 'Select calibrate k4 radial distortion'}, 'type': 'boolean', 'default': 'False'}
 		self.__text_by_propierty['k4'] = 'k4'
 		self.__widget_by_propierty['k4'] = None
 		self.__k4 = False
 		self.__k4_value = False
+		self.__json_content_by_propierty['b1'] = {'text': {'spanish': 'Afinidad', 'english': 'Affinity'}, 'definition': {'spanish': 'Seleccionar si se calibra la relación de aspecto', 'english': 'Select calibrate aspect ratio'}, 'type': 'boolean', 'default': 'False'}
 		self.__text_by_propierty['b1'] = 'Afinidad'
 		self.__widget_by_propierty['b1'] = None
 		self.__b1 = False
 		self.__b1_value = False
+		self.__json_content_by_propierty['b2'] = {'text': {'spanish': 'Asimetría', 'english': 'Skew'}, 'definition': {'spanish': 'Seleccionar si se calibra la asimetría', 'english': 'Select calibrate skew'}, 'type': 'boolean', 'default': 'False'}
 		self.__text_by_propierty['b2'] = 'Asimetría'
 		self.__widget_by_propierty['b2'] = None
 		self.__b2 = False
 		self.__b2_value = False
+		self.__json_content_by_propierty['p1'] = {'text': {'spanish': 'p1', 'english': 'p1'}, 'definition': {'spanish': 'Seleccionar si se calibra p1 de distorsión tangencial', 'english': 'Select calibrate p1 tangential distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['p1'] = 'p1'
 		self.__widget_by_propierty['p1'] = None
 		self.__p1 = True
 		self.__p1_value = True
+		self.__json_content_by_propierty['p2'] = {'text': {'spanish': 'p2', 'english': 'p2'}, 'definition': {'spanish': 'Seleccionar si se calibra p2 de distorsión tangencial', 'english': 'Select calibrate p2 tangential distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['p2'] = 'p2'
 		self.__widget_by_propierty['p2'] = None
 		self.__p2 = True
@@ -305,6 +318,33 @@ class CameraCalibration:
 			self.__p2_value = propierty_p2_widget.isChecked()
 
 	def set_values_from_dictionary(self, values):
+		for value in values:
+			propierty_widget = self.__widget_by_propierty[value]
+			if isinstance(propierty_widget, QComboBox):
+				json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+				if values[value] in json_values:
+					for language in json_values[values[value]]:
+						value_language = json_values[values[value]][language]
+						pos = propierty_widget.findText(value_language)
+						if pos != -1:
+							propierty_widget.setCurrentIndex(pos)
+							break
+				#pos = propierty_widget.findText(values[value])
+				#if pos != -1:
+					#propierty_widget.setCurrentIndex(pos)
+				#else:
+					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+					#for json_value in json_values:
+						#find_value = False
+						#for language in json_values[json_value]:
+							#value_language = json_values[json_value][language]
+							#if pos == -1:
+								#pos = propierty_widget.findText(value_language)
+							#if value_language == values[value]:
+								#find_value = True
+						#if find_value and pos != -1:
+							#propierty_widget.setCurrentIndex(pos)
+							#break
 		self.__f_value = values['f']
 		self.__f = values['f']
 		self.__cx_value = values['cx']

@@ -17,7 +17,7 @@
    <item>
       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
-     <widget class="QLabel" name="label_quality">
+     <widget class="QLabel" name="label_Quality">
           <property name="text">
           <string>Quality:</string>
           </property>
@@ -25,9 +25,9 @@
      </item>
 <item row="0" column="1">
      
-     <widget class="QComboBox" name="quality">
+     <widget class="QComboBox" name="Quality">
           <property name="field_name" stdset="0">
-               <string>quality</string>
+               <string>Quality</string>
           </property>
           <property name="key" stdset="0">
                <string>combo</string>
@@ -52,7 +52,7 @@
             
             <item>
                 <property name="text">
-                <string> Alto</string>
+                <string>Alto</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -61,7 +61,7 @@
             
             <item>
                 <property name="text">
-                <string> Medio</string>
+                <string>Medio</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -70,7 +70,7 @@
             
             <item>
                 <property name="text">
-                <string> Bajo</string>
+                <string>Bajo</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -79,7 +79,7 @@
             
             <item>
                 <property name="text">
-                <string> Menor posible</string>
+                <string>Menor posible</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -90,7 +90,7 @@
      
 </item>
   <item row="1" column="0">
-     <widget class="QLabel" name="label_filtermode">
+     <widget class="QLabel" name="label_FilterMode">
           <property name="text">
           <string>Filtermode:</string>
           </property>
@@ -98,9 +98,9 @@
      </item>
 <item row="1" column="1">
      
-     <widget class="QComboBox" name="filtermode">
+     <widget class="QComboBox" name="FilterMode">
           <property name="field_name" stdset="0">
-               <string>filtermode</string>
+               <string>FilterMode</string>
           </property>
           <property name="key" stdset="0">
                <string>combo</string>
@@ -125,7 +125,7 @@
             
             <item>
                 <property name="text">
-                <string> Falso</string>
+                <string>Falso</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -134,7 +134,7 @@
             
             <item>
                 <property name="text">
-                <string> Medio</string>
+                <string>Medio</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -143,7 +143,7 @@
             
             <item>
                 <property name="text">
-                <string> Moderado</string>
+                <string>Moderado</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>

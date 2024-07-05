@@ -5,56 +5,67 @@ class SplitTile:
 	def __init__(self):
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
+		self.__json_content_by_propierty = {}
+		self.__json_content_by_propierty['text'] = {'spanish': 'División en celdas', 'english': 'Split tiles'}
 		self.__text = 'División en celdas'
-		self.__text_by_propierty['tilesize'] = 'Tamaño de la celda'
-		self.__widget_by_propierty['tilesize'] = None
-		self.__tilesize = 50
-		self.__tilesize_value = 50
-		self.__text_by_propierty['tilesizebuffer'] = 'Ampliación'
-		self.__widget_by_propierty['tilesizebuffer'] = None
-		self.__tilesizebuffer = 5
-		self.__tilesizebuffer_value = 5
-		self.__text_by_propierty['method'] = 'Definición de la malla de celdas a procesar'
-		self.__widget_by_propierty['method'] = None
-		self.__method = ['Malla editada por el usuario' ,' Automático para toda la ROI o zona estereoscópica']
-		self.__method_value = 'Malla editada por el usuario'
-		self.__text_by_propierty['path'] = 'Fichero de la malla'
-		self.__widget_by_propierty['path'] = None
-		self.__path = ""
-		self.__path_value = ""
-		self.__text_by_propierty['mergemethod'] = 'Método de unión'
-		self.__widget_by_propierty['mergemethod'] = None
-		self.__mergemethod = ['OSGeo (ráster) y laspy (nubes de puntos)' ,' Metashape']
-		self.__mergemethod_value = 'OSGeo (ráster) y laspy (nubes de puntos)'
-		self.__text_by_propierty['mergepointclouds'] = 'Unir nubes de puntos'
-		self.__widget_by_propierty['mergepointclouds'] = None
-		self.__mergepointclouds = True
-		self.__mergepointclouds_value = True
-		self.__text_by_propierty['mergeelevations'] = 'Unir MDEs'
-		self.__widget_by_propierty['mergeelevations'] = None
-		self.__mergeelevations = True
-		self.__mergeelevations_value = True
-		self.__text_by_propierty['mergeorthomosaics'] = 'Unir ortomosaicos'
-		self.__widget_by_propierty['mergeorthomosaics'] = None
-		self.__mergeorthomosaics = True
-		self.__mergeorthomosaics_value = True
-		self.__text_by_propierty['mergeddem'] = 'Tipo de MDE a unir'
-		self.__widget_by_propierty['mergeddem'] = None
-		self.__mergeddem = ['Modelo Digital de Superficies (MDS)' ,' Modelo Digital del Terreno (MDT)']
-		self.__mergeddem_value = 'Modelo Digital de Superficies (MDS)'
+		self.__json_content_by_propierty['TileSize'] = {'text': {'spanish': 'Tamaño de la celda', 'english': 'Tile Size'}, 'definition': {'spanish': 'Tamaño de las celdas en metros (ej. 50)', 'english': 'Tile size in meters (ex. 50)'}, 'type': 'integer', 'minimum': 10, 'maximum': 1000, 'singleStep': 10, 'default': 50}
+		self.__text_by_propierty['TileSize'] = 'Tamaño de la celda'
+		self.__widget_by_propierty['TileSize'] = None
+		self.__TileSize = 50
+		self.__TileSize_value = 50
+		self.__json_content_by_propierty['TileSizeBuffer'] = {'text': {'spanish': 'Ampliación', 'english': 'Buffer'}, 'definition': {'spanish': 'Porcentaje de solape entre celdas (ej. 5)', 'english': 'Tiles percentage overlaps (ex. 5)'}, 'type': 'integer', 'minimum': 1, 'maximum': 100, 'singleStep': 1, 'default': 5}
+		self.__text_by_propierty['TileSizeBuffer'] = 'Ampliación'
+		self.__widget_by_propierty['TileSizeBuffer'] = None
+		self.__TileSizeBuffer = 5
+		self.__TileSizeBuffer_value = 5
+		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Definición de la malla de celdas a procesar', 'english': 'Grid tiles to process definition'}, 'definition': {'spanish': 'Definición de la malla de celdas a procesar', 'english': 'Grid tiles to process definition'}, 'type': 'values', 'values': {'AUTO': {'spanish': 'Automático para toda la ROI o zona estereoscópica', 'english': 'Automatic to ROI or stereoscopi area'}, 'MANUAL': {'spanish': 'Malla editada por el usuario', 'english': 'User edited Grid'}}, 'default': 'Malla editada por el usuario'}
+		self.__text_by_propierty['Method'] = 'Definición de la malla de celdas a procesar'
+		self.__widget_by_propierty['Method'] = None
+		self.__Method = ['Malla editada por el usuario' ,'Automático para toda la ROI o zona estereoscópica']
+		self.__Method_value = 'Malla editada por el usuario'
+		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Fichero de la malla', 'english': 'Grid file'}, 'definition': {'spanish': 'Fichero de la malla editado por el usario', 'english': 'Grid file edited by user'}, 'type': 'file open', 'formats': '*.gpkg', 'default': ''}
+		self.__text_by_propierty['Path'] = 'Fichero de la malla'
+		self.__widget_by_propierty['Path'] = None
+		self.__Path = ""
+		self.__Path_value = ""
+		self.__json_content_by_propierty['MergeMethod'] = {'text': {'spanish': 'Método de unión', 'english': 'Merge method'}, 'definition': {'spanish': 'Estrategia de unión de los productos resultantes', 'english': 'Merged method'}, 'type': 'values', 'values': {'Metashape': {'spanish': 'Metashape', 'english': 'Metashape'}, 'OsgeoLaspy': {'spanish': 'OSGeo (ráster) y laspy (nubes de puntos)', 'english': 'OSGeo (raster) and laspy (points clouds)'}}, 'default': 'OSGeo (ráster) y laspy (nubes de puntos)'}
+		self.__text_by_propierty['MergeMethod'] = 'Método de unión'
+		self.__widget_by_propierty['MergeMethod'] = None
+		self.__MergeMethod = ['OSGeo (ráster) y laspy (nubes de puntos)' ,'Metashape']
+		self.__MergeMethod_value = 'OSGeo (ráster) y laspy (nubes de puntos)'
+		self.__json_content_by_propierty['MergePointClouds'] = {'text': {'spanish': 'Unir nubes de puntos', 'english': 'Merge points clouds'}, 'definition': {'spanish': 'Unir nubes de puntos', 'english': 'Merge points clouds'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['MergePointClouds'] = 'Unir nubes de puntos'
+		self.__widget_by_propierty['MergePointClouds'] = None
+		self.__MergePointClouds = True
+		self.__MergePointClouds_value = True
+		self.__json_content_by_propierty['MergeElevations'] = {'text': {'spanish': 'Unir MDEs', 'english': 'Merge DEMs'}, 'definition': {'spanish': 'Unir MDEs', 'english': 'Merge DEMs'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['MergeElevations'] = 'Unir MDEs'
+		self.__widget_by_propierty['MergeElevations'] = None
+		self.__MergeElevations = True
+		self.__MergeElevations_value = True
+		self.__json_content_by_propierty['MergeOrthomosaics'] = {'text': {'spanish': 'Unir ortomosaicos', 'english': 'Merge orthomosaics'}, 'definition': {'spanish': 'Unir ortomosaicos', 'english': 'Merge orthomosaics'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['MergeOrthomosaics'] = 'Unir ortomosaicos'
+		self.__widget_by_propierty['MergeOrthomosaics'] = None
+		self.__MergeOrthomosaics = True
+		self.__MergeOrthomosaics_value = True
+		self.__json_content_by_propierty['MergedDEM'] = {'text': {'spanish': 'Tipo de MDE a unir', 'english': 'Type of DEM to merge'}, 'definition': {'spanish': 'Tipo de MDE a unir', 'english': 'Type of DEM to merge'}, 'type': 'values', 'values': {'DSM': {'spanish': 'Modelo Digital de Superficies (MDS)', 'english': 'Digital Surface Model (DSM)'}, 'DTM': {'spanish': 'Modelo Digital del Terreno (MDT)', 'english': 'Digital Terrain Model (DTM)'}}, 'default': 'Modelo Digital de Superficies (MDS)'}
+		self.__text_by_propierty['MergedDEM'] = 'Tipo de MDE a unir'
+		self.__widget_by_propierty['MergedDEM'] = None
+		self.__MergedDEM = ['Modelo Digital de Superficies (MDS)' ,'Modelo Digital del Terreno (MDT)']
+		self.__MergedDEM_value = 'Modelo Digital de Superficies (MDS)'
 		self.__widget = None
 
 	def get_values_as_dictionary(self):
 		values = {}
-		values['TileSize'] = self.__tilesize_value
-		values['TileSizeBuffer'] = self.__tilesizebuffer_value
-		values['Method'] = self.__method_value
-		values['Path'] = self.__path_value
-		values['MergeMethod'] = self.__mergemethod_value
-		values['MergePointClouds'] = self.__mergepointclouds_value
-		values['MergeElevations'] = self.__mergeelevations_value
-		values['MergeOrthomosaics'] = self.__mergeorthomosaics_value
-		values['MergedDEM'] = self.__mergeddem_value
+		values['TileSize'] = self.__TileSize_value
+		values['TileSizeBuffer'] = self.__TileSizeBuffer_value
+		values['Method'] = self.__Method_value
+		values['Path'] = self.__Path_value
+		values['MergeMethod'] = self.__MergeMethod_value
+		values['MergePointClouds'] = self.__MergePointClouds_value
+		values['MergeElevations'] = self.__MergeElevations_value
+		values['MergeOrthomosaics'] = self.__MergeOrthomosaics_value
+		values['MergedDEM'] = self.__MergedDEM_value
 		return values
 
 	def get_text(self):
@@ -64,331 +75,355 @@ class SplitTile:
 		return self.__text_by_propierty
 
 	@property
-	def tilesize(self):
-		return self.__tilesize
+	def TileSize(self):
+		return self.__TileSize
 
-	@tilesize.setter
-	def tilesize(self, value: 'widget:QSpinBox, minimum:10, maximum:1000, singleStep:10, toolTip:Tamaño de las celdas en metros (ej. 50)'):
-		self.__tilesize = value
+	@TileSize.setter
+	def TileSize(self, value: 'widget:QSpinBox, minimum:10, maximum:1000, singleStep:10, toolTip:Tamaño de las celdas en metros (ej. 50)'):
+		self.__TileSize = value
 
-	def set_tilesize_value(self):
-		propierty_tilesize_widget = self.__widget_by_propierty['tilesize'] 
-		if isinstance(propierty_tilesize_widget, QSpinBox):
-			self.__tilesize_value = propierty_tilesize_widget.value()
-		elif isinstance(propierty_tilesize_widget, QDoubleSpinBox):
-			self.__tilesize_value = propierty_tilesize_widget.value()
-		elif isinstance(propierty_tilesize_widget, QComboBox):
-			self.__tilesize_value = propierty_tilesize_widget.currentText()
-		elif isinstance(propierty_tilesize_widget, QLineEdit):
-			self.__tilesize_value = propierty_tilesize_widget.text()
-		elif isinstance(propierty_tilesize_widget, QCheckBox):
-			self.__tilesize_value = propierty_tilesize_widget.isChecked()
-
-	@property
-	def tilesizebuffer(self):
-		return self.__tilesizebuffer
-
-	@tilesizebuffer.setter
-	def tilesizebuffer(self, value: 'widget:QSpinBox, minimum:1, maximum:100, singleStep:1, toolTip:Porcentaje de solape entre celdas (ej. 5)'):
-		self.__tilesizebuffer = value
-
-	def set_tilesizebuffer_value(self):
-		propierty_tilesizebuffer_widget = self.__widget_by_propierty['tilesizebuffer'] 
-		if isinstance(propierty_tilesizebuffer_widget, QSpinBox):
-			self.__tilesizebuffer_value = propierty_tilesizebuffer_widget.value()
-		elif isinstance(propierty_tilesizebuffer_widget, QDoubleSpinBox):
-			self.__tilesizebuffer_value = propierty_tilesizebuffer_widget.value()
-		elif isinstance(propierty_tilesizebuffer_widget, QComboBox):
-			self.__tilesizebuffer_value = propierty_tilesizebuffer_widget.currentText()
-		elif isinstance(propierty_tilesizebuffer_widget, QLineEdit):
-			self.__tilesizebuffer_value = propierty_tilesizebuffer_widget.text()
-		elif isinstance(propierty_tilesizebuffer_widget, QCheckBox):
-			self.__tilesizebuffer_value = propierty_tilesizebuffer_widget.isChecked()
+	def set_TileSize_value(self):
+		propierty_TileSize_widget = self.__widget_by_propierty['TileSize'] 
+		if isinstance(propierty_TileSize_widget, QSpinBox):
+			self.__TileSize_value = propierty_TileSize_widget.value()
+		elif isinstance(propierty_TileSize_widget, QDoubleSpinBox):
+			self.__TileSize_value = propierty_TileSize_widget.value()
+		elif isinstance(propierty_TileSize_widget, QComboBox):
+			self.__TileSize_value = propierty_TileSize_widget.currentText()
+		elif isinstance(propierty_TileSize_widget, QLineEdit):
+			self.__TileSize_value = propierty_TileSize_widget.text()
+		elif isinstance(propierty_TileSize_widget, QCheckBox):
+			self.__TileSize_value = propierty_TileSize_widget.isChecked()
 
 	@property
-	def method(self):
-		return self.__method
+	def TileSizeBuffer(self):
+		return self.__TileSizeBuffer
 
-	@method.setter
-	def method(self, value: 'widget:QComboBox, toolTip:Definición de la malla de celdas a procesar'):
-		self.__method = value
+	@TileSizeBuffer.setter
+	def TileSizeBuffer(self, value: 'widget:QSpinBox, minimum:1, maximum:100, singleStep:1, toolTip:Porcentaje de solape entre celdas (ej. 5)'):
+		self.__TileSizeBuffer = value
 
-	def set_method_value(self):
-		propierty_method_widget = self.__widget_by_propierty['method'] 
-		if isinstance(propierty_method_widget, QSpinBox):
-			self.__method_value = propierty_method_widget.value()
-		elif isinstance(propierty_method_widget, QDoubleSpinBox):
-			self.__method_value = propierty_method_widget.value()
-		elif isinstance(propierty_method_widget, QComboBox):
-			self.__method_value = propierty_method_widget.currentText()
-		elif isinstance(propierty_method_widget, QLineEdit):
-			self.__method_value = propierty_method_widget.text()
-		elif isinstance(propierty_method_widget, QCheckBox):
-			self.__method_value = propierty_method_widget.isChecked()
-
-	@property
-	def path(self):
-		return self.__path
-
-	@path.setter
-	def path(self, value: 'widget:file, toolTip:Fichero de la malla editado por el usario, filters: *.gpkg'):
-		self.__path = value
-
-	def set_path_value(self):
-		propierty_path_widget = self.__widget_by_propierty['path'] 
-		if isinstance(propierty_path_widget, QSpinBox):
-			self.__path_value = propierty_path_widget.value()
-		elif isinstance(propierty_path_widget, QDoubleSpinBox):
-			self.__path_value = propierty_path_widget.value()
-		elif isinstance(propierty_path_widget, QComboBox):
-			self.__path_value = propierty_path_widget.currentText()
-		elif isinstance(propierty_path_widget, QLineEdit):
-			self.__path_value = propierty_path_widget.text()
-		elif isinstance(propierty_path_widget, QCheckBox):
-			self.__path_value = propierty_path_widget.isChecked()
+	def set_TileSizeBuffer_value(self):
+		propierty_TileSizeBuffer_widget = self.__widget_by_propierty['TileSizeBuffer'] 
+		if isinstance(propierty_TileSizeBuffer_widget, QSpinBox):
+			self.__TileSizeBuffer_value = propierty_TileSizeBuffer_widget.value()
+		elif isinstance(propierty_TileSizeBuffer_widget, QDoubleSpinBox):
+			self.__TileSizeBuffer_value = propierty_TileSizeBuffer_widget.value()
+		elif isinstance(propierty_TileSizeBuffer_widget, QComboBox):
+			self.__TileSizeBuffer_value = propierty_TileSizeBuffer_widget.currentText()
+		elif isinstance(propierty_TileSizeBuffer_widget, QLineEdit):
+			self.__TileSizeBuffer_value = propierty_TileSizeBuffer_widget.text()
+		elif isinstance(propierty_TileSizeBuffer_widget, QCheckBox):
+			self.__TileSizeBuffer_value = propierty_TileSizeBuffer_widget.isChecked()
 
 	@property
-	def mergemethod(self):
-		return self.__mergemethod
+	def Method(self):
+		return self.__Method
 
-	@mergemethod.setter
-	def mergemethod(self, value: 'widget:QComboBox, toolTip:Estrategia de unión de los productos resultantes'):
-		self.__mergemethod = value
+	@Method.setter
+	def Method(self, value: 'widget:QComboBox, toolTip:Definición de la malla de celdas a procesar'):
+		self.__Method = value
 
-	def set_mergemethod_value(self):
-		propierty_mergemethod_widget = self.__widget_by_propierty['mergemethod'] 
-		if isinstance(propierty_mergemethod_widget, QSpinBox):
-			self.__mergemethod_value = propierty_mergemethod_widget.value()
-		elif isinstance(propierty_mergemethod_widget, QDoubleSpinBox):
-			self.__mergemethod_value = propierty_mergemethod_widget.value()
-		elif isinstance(propierty_mergemethod_widget, QComboBox):
-			self.__mergemethod_value = propierty_mergemethod_widget.currentText()
-		elif isinstance(propierty_mergemethod_widget, QLineEdit):
-			self.__mergemethod_value = propierty_mergemethod_widget.text()
-		elif isinstance(propierty_mergemethod_widget, QCheckBox):
-			self.__mergemethod_value = propierty_mergemethod_widget.isChecked()
-
-	@property
-	def mergepointclouds(self):
-		return self.__mergepointclouds
-
-	@mergepointclouds.setter
-	def mergepointclouds(self, value: 'widget:QCheckBox, toolTip:Unir nubes de puntos'):
-		self.__mergepointclouds = value
-
-	def set_mergepointclouds_value(self):
-		propierty_mergepointclouds_widget = self.__widget_by_propierty['mergepointclouds'] 
-		if isinstance(propierty_mergepointclouds_widget, QSpinBox):
-			self.__mergepointclouds_value = propierty_mergepointclouds_widget.value()
-		elif isinstance(propierty_mergepointclouds_widget, QDoubleSpinBox):
-			self.__mergepointclouds_value = propierty_mergepointclouds_widget.value()
-		elif isinstance(propierty_mergepointclouds_widget, QComboBox):
-			self.__mergepointclouds_value = propierty_mergepointclouds_widget.currentText()
-		elif isinstance(propierty_mergepointclouds_widget, QLineEdit):
-			self.__mergepointclouds_value = propierty_mergepointclouds_widget.text()
-		elif isinstance(propierty_mergepointclouds_widget, QCheckBox):
-			self.__mergepointclouds_value = propierty_mergepointclouds_widget.isChecked()
+	def set_Method_value(self):
+		propierty_Method_widget = self.__widget_by_propierty['Method'] 
+		if isinstance(propierty_Method_widget, QSpinBox):
+			self.__Method_value = propierty_Method_widget.value()
+		elif isinstance(propierty_Method_widget, QDoubleSpinBox):
+			self.__Method_value = propierty_Method_widget.value()
+		elif isinstance(propierty_Method_widget, QComboBox):
+			self.__Method_value = propierty_Method_widget.currentText()
+		elif isinstance(propierty_Method_widget, QLineEdit):
+			self.__Method_value = propierty_Method_widget.text()
+		elif isinstance(propierty_Method_widget, QCheckBox):
+			self.__Method_value = propierty_Method_widget.isChecked()
 
 	@property
-	def mergeelevations(self):
-		return self.__mergeelevations
+	def Path(self):
+		return self.__Path
 
-	@mergeelevations.setter
-	def mergeelevations(self, value: 'widget:QCheckBox, toolTip:Unir MDEs'):
-		self.__mergeelevations = value
+	@Path.setter
+	def Path(self, value: 'widget:file, toolTip:Fichero de la malla editado por el usario, filters: *.gpkg'):
+		self.__Path = value
 
-	def set_mergeelevations_value(self):
-		propierty_mergeelevations_widget = self.__widget_by_propierty['mergeelevations'] 
-		if isinstance(propierty_mergeelevations_widget, QSpinBox):
-			self.__mergeelevations_value = propierty_mergeelevations_widget.value()
-		elif isinstance(propierty_mergeelevations_widget, QDoubleSpinBox):
-			self.__mergeelevations_value = propierty_mergeelevations_widget.value()
-		elif isinstance(propierty_mergeelevations_widget, QComboBox):
-			self.__mergeelevations_value = propierty_mergeelevations_widget.currentText()
-		elif isinstance(propierty_mergeelevations_widget, QLineEdit):
-			self.__mergeelevations_value = propierty_mergeelevations_widget.text()
-		elif isinstance(propierty_mergeelevations_widget, QCheckBox):
-			self.__mergeelevations_value = propierty_mergeelevations_widget.isChecked()
-
-	@property
-	def mergeorthomosaics(self):
-		return self.__mergeorthomosaics
-
-	@mergeorthomosaics.setter
-	def mergeorthomosaics(self, value: 'widget:QCheckBox, toolTip:Unir ortomosaicos'):
-		self.__mergeorthomosaics = value
-
-	def set_mergeorthomosaics_value(self):
-		propierty_mergeorthomosaics_widget = self.__widget_by_propierty['mergeorthomosaics'] 
-		if isinstance(propierty_mergeorthomosaics_widget, QSpinBox):
-			self.__mergeorthomosaics_value = propierty_mergeorthomosaics_widget.value()
-		elif isinstance(propierty_mergeorthomosaics_widget, QDoubleSpinBox):
-			self.__mergeorthomosaics_value = propierty_mergeorthomosaics_widget.value()
-		elif isinstance(propierty_mergeorthomosaics_widget, QComboBox):
-			self.__mergeorthomosaics_value = propierty_mergeorthomosaics_widget.currentText()
-		elif isinstance(propierty_mergeorthomosaics_widget, QLineEdit):
-			self.__mergeorthomosaics_value = propierty_mergeorthomosaics_widget.text()
-		elif isinstance(propierty_mergeorthomosaics_widget, QCheckBox):
-			self.__mergeorthomosaics_value = propierty_mergeorthomosaics_widget.isChecked()
+	def set_Path_value(self):
+		propierty_Path_widget = self.__widget_by_propierty['Path'] 
+		if isinstance(propierty_Path_widget, QSpinBox):
+			self.__Path_value = propierty_Path_widget.value()
+		elif isinstance(propierty_Path_widget, QDoubleSpinBox):
+			self.__Path_value = propierty_Path_widget.value()
+		elif isinstance(propierty_Path_widget, QComboBox):
+			self.__Path_value = propierty_Path_widget.currentText()
+		elif isinstance(propierty_Path_widget, QLineEdit):
+			self.__Path_value = propierty_Path_widget.text()
+		elif isinstance(propierty_Path_widget, QCheckBox):
+			self.__Path_value = propierty_Path_widget.isChecked()
 
 	@property
-	def mergeddem(self):
-		return self.__mergeddem
+	def MergeMethod(self):
+		return self.__MergeMethod
 
-	@mergeddem.setter
-	def mergeddem(self, value: 'widget:QComboBox, toolTip:Tipo de MDE a unir'):
-		self.__mergeddem = value
+	@MergeMethod.setter
+	def MergeMethod(self, value: 'widget:QComboBox, toolTip:Estrategia de unión de los productos resultantes'):
+		self.__MergeMethod = value
 
-	def set_mergeddem_value(self):
-		propierty_mergeddem_widget = self.__widget_by_propierty['mergeddem'] 
-		if isinstance(propierty_mergeddem_widget, QSpinBox):
-			self.__mergeddem_value = propierty_mergeddem_widget.value()
-		elif isinstance(propierty_mergeddem_widget, QDoubleSpinBox):
-			self.__mergeddem_value = propierty_mergeddem_widget.value()
-		elif isinstance(propierty_mergeddem_widget, QComboBox):
-			self.__mergeddem_value = propierty_mergeddem_widget.currentText()
-		elif isinstance(propierty_mergeddem_widget, QLineEdit):
-			self.__mergeddem_value = propierty_mergeddem_widget.text()
-		elif isinstance(propierty_mergeddem_widget, QCheckBox):
-			self.__mergeddem_value = propierty_mergeddem_widget.isChecked()
+	def set_MergeMethod_value(self):
+		propierty_MergeMethod_widget = self.__widget_by_propierty['MergeMethod'] 
+		if isinstance(propierty_MergeMethod_widget, QSpinBox):
+			self.__MergeMethod_value = propierty_MergeMethod_widget.value()
+		elif isinstance(propierty_MergeMethod_widget, QDoubleSpinBox):
+			self.__MergeMethod_value = propierty_MergeMethod_widget.value()
+		elif isinstance(propierty_MergeMethod_widget, QComboBox):
+			self.__MergeMethod_value = propierty_MergeMethod_widget.currentText()
+		elif isinstance(propierty_MergeMethod_widget, QLineEdit):
+			self.__MergeMethod_value = propierty_MergeMethod_widget.text()
+		elif isinstance(propierty_MergeMethod_widget, QCheckBox):
+			self.__MergeMethod_value = propierty_MergeMethod_widget.isChecked()
+
+	@property
+	def MergePointClouds(self):
+		return self.__MergePointClouds
+
+	@MergePointClouds.setter
+	def MergePointClouds(self, value: 'widget:QCheckBox, toolTip:Unir nubes de puntos'):
+		self.__MergePointClouds = value
+
+	def set_MergePointClouds_value(self):
+		propierty_MergePointClouds_widget = self.__widget_by_propierty['MergePointClouds'] 
+		if isinstance(propierty_MergePointClouds_widget, QSpinBox):
+			self.__MergePointClouds_value = propierty_MergePointClouds_widget.value()
+		elif isinstance(propierty_MergePointClouds_widget, QDoubleSpinBox):
+			self.__MergePointClouds_value = propierty_MergePointClouds_widget.value()
+		elif isinstance(propierty_MergePointClouds_widget, QComboBox):
+			self.__MergePointClouds_value = propierty_MergePointClouds_widget.currentText()
+		elif isinstance(propierty_MergePointClouds_widget, QLineEdit):
+			self.__MergePointClouds_value = propierty_MergePointClouds_widget.text()
+		elif isinstance(propierty_MergePointClouds_widget, QCheckBox):
+			self.__MergePointClouds_value = propierty_MergePointClouds_widget.isChecked()
+
+	@property
+	def MergeElevations(self):
+		return self.__MergeElevations
+
+	@MergeElevations.setter
+	def MergeElevations(self, value: 'widget:QCheckBox, toolTip:Unir MDEs'):
+		self.__MergeElevations = value
+
+	def set_MergeElevations_value(self):
+		propierty_MergeElevations_widget = self.__widget_by_propierty['MergeElevations'] 
+		if isinstance(propierty_MergeElevations_widget, QSpinBox):
+			self.__MergeElevations_value = propierty_MergeElevations_widget.value()
+		elif isinstance(propierty_MergeElevations_widget, QDoubleSpinBox):
+			self.__MergeElevations_value = propierty_MergeElevations_widget.value()
+		elif isinstance(propierty_MergeElevations_widget, QComboBox):
+			self.__MergeElevations_value = propierty_MergeElevations_widget.currentText()
+		elif isinstance(propierty_MergeElevations_widget, QLineEdit):
+			self.__MergeElevations_value = propierty_MergeElevations_widget.text()
+		elif isinstance(propierty_MergeElevations_widget, QCheckBox):
+			self.__MergeElevations_value = propierty_MergeElevations_widget.isChecked()
+
+	@property
+	def MergeOrthomosaics(self):
+		return self.__MergeOrthomosaics
+
+	@MergeOrthomosaics.setter
+	def MergeOrthomosaics(self, value: 'widget:QCheckBox, toolTip:Unir ortomosaicos'):
+		self.__MergeOrthomosaics = value
+
+	def set_MergeOrthomosaics_value(self):
+		propierty_MergeOrthomosaics_widget = self.__widget_by_propierty['MergeOrthomosaics'] 
+		if isinstance(propierty_MergeOrthomosaics_widget, QSpinBox):
+			self.__MergeOrthomosaics_value = propierty_MergeOrthomosaics_widget.value()
+		elif isinstance(propierty_MergeOrthomosaics_widget, QDoubleSpinBox):
+			self.__MergeOrthomosaics_value = propierty_MergeOrthomosaics_widget.value()
+		elif isinstance(propierty_MergeOrthomosaics_widget, QComboBox):
+			self.__MergeOrthomosaics_value = propierty_MergeOrthomosaics_widget.currentText()
+		elif isinstance(propierty_MergeOrthomosaics_widget, QLineEdit):
+			self.__MergeOrthomosaics_value = propierty_MergeOrthomosaics_widget.text()
+		elif isinstance(propierty_MergeOrthomosaics_widget, QCheckBox):
+			self.__MergeOrthomosaics_value = propierty_MergeOrthomosaics_widget.isChecked()
+
+	@property
+	def MergedDEM(self):
+		return self.__MergedDEM
+
+	@MergedDEM.setter
+	def MergedDEM(self, value: 'widget:QComboBox, toolTip:Tipo de MDE a unir'):
+		self.__MergedDEM = value
+
+	def set_MergedDEM_value(self):
+		propierty_MergedDEM_widget = self.__widget_by_propierty['MergedDEM'] 
+		if isinstance(propierty_MergedDEM_widget, QSpinBox):
+			self.__MergedDEM_value = propierty_MergedDEM_widget.value()
+		elif isinstance(propierty_MergedDEM_widget, QDoubleSpinBox):
+			self.__MergedDEM_value = propierty_MergedDEM_widget.value()
+		elif isinstance(propierty_MergedDEM_widget, QComboBox):
+			self.__MergedDEM_value = propierty_MergedDEM_widget.currentText()
+		elif isinstance(propierty_MergedDEM_widget, QLineEdit):
+			self.__MergedDEM_value = propierty_MergedDEM_widget.text()
+		elif isinstance(propierty_MergedDEM_widget, QCheckBox):
+			self.__MergedDEM_value = propierty_MergedDEM_widget.isChecked()
 
 	def set_values_from_dictionary(self, values):
-		self.__tilesize_value = values['TileSize']
-		self.__tilesize = values['TileSize']
-		self.__tilesizebuffer_value = values['TileSizeBuffer']
-		self.__tilesizebuffer = values['TileSizeBuffer']
-		self.__method_value = values['Method']
-		self.__method = values['Method']
-		self.__path_value = values['Path']
-		self.__path = values['Path']
-		self.__mergemethod_value = values['MergeMethod']
-		self.__mergemethod = values['MergeMethod']
-		self.__mergepointclouds_value = values['MergePointClouds']
-		self.__mergepointclouds = values['MergePointClouds']
-		self.__mergeelevations_value = values['MergeElevations']
-		self.__mergeelevations = values['MergeElevations']
-		self.__mergeorthomosaics_value = values['MergeOrthomosaics']
-		self.__mergeorthomosaics = values['MergeOrthomosaics']
-		self.__mergeddem_value = values['MergedDEM']
-		self.__mergeddem = values['MergedDEM']
+		for value in values:
+			propierty_widget = self.__widget_by_propierty[value]
+			if isinstance(propierty_widget, QComboBox):
+				json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+				if values[value] in json_values:
+					for language in json_values[values[value]]:
+						value_language = json_values[values[value]][language]
+						pos = propierty_widget.findText(value_language)
+						if pos != -1:
+							propierty_widget.setCurrentIndex(pos)
+							break
+				#pos = propierty_widget.findText(values[value])
+				#if pos != -1:
+					#propierty_widget.setCurrentIndex(pos)
+				#else:
+					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+					#for json_value in json_values:
+						#find_value = False
+						#for language in json_values[json_value]:
+							#value_language = json_values[json_value][language]
+							#if pos == -1:
+								#pos = propierty_widget.findText(value_language)
+							#if value_language == values[value]:
+								#find_value = True
+						#if find_value and pos != -1:
+							#propierty_widget.setCurrentIndex(pos)
+							#break
+		self.__TileSize_value = values['TileSize']
+		self.__TileSize = values['TileSize']
+		self.__TileSizeBuffer_value = values['TileSizeBuffer']
+		self.__TileSizeBuffer = values['TileSizeBuffer']
+		self.__Method_value = values['Method']
+		self.__Path_value = values['Path']
+		self.__Path = values['Path']
+		self.__MergeMethod_value = values['MergeMethod']
+		self.__MergePointClouds_value = values['MergePointClouds']
+		self.__MergePointClouds = values['MergePointClouds']
+		self.__MergeElevations_value = values['MergeElevations']
+		self.__MergeElevations = values['MergeElevations']
+		self.__MergeOrthomosaics_value = values['MergeOrthomosaics']
+		self.__MergeOrthomosaics = values['MergeOrthomosaics']
+		self.__MergedDEM_value = values['MergedDEM']
 		return
 
 	def set_widget(self, widget):
 		self.__widget = widget
-		propierty_tilesize_widget = self.__widget.get_widget('tilesize')
-		if isinstance(propierty_tilesize_widget, QSpinBox):
-			propierty_tilesize_widget.valueChanged.connect(self.set_tilesize_value)
-		elif isinstance(propierty_tilesize_widget, QDoubleSpinBox):
-			propierty_tilesize_widget.valueChanged.connect(self.set_tilesize_value)
-		elif isinstance(propierty_tilesize_widget, QComboBox):
-			propierty_tilesize_widget.currentIndexChanged.connect(self.set_tilesize_value)
-		elif isinstance(propierty_tilesize_widget, QLineEdit):
-			propierty_tilesize_widget.editingFinished.connect(self.set_tilesize_value)
-			propierty_tilesize_widget.textChanged.connect(self.set_tilesize_value)
-		elif isinstance(propierty_tilesize_widget, QCheckBox):
-			propierty_tilesize_widget.stateChanged.connect(self.set_tilesize_value)
-		self.__widget_by_propierty['tilesize'] = propierty_tilesize_widget
-		propierty_tilesizebuffer_widget = self.__widget.get_widget('tilesizebuffer')
-		if isinstance(propierty_tilesizebuffer_widget, QSpinBox):
-			propierty_tilesizebuffer_widget.valueChanged.connect(self.set_tilesizebuffer_value)
-		elif isinstance(propierty_tilesizebuffer_widget, QDoubleSpinBox):
-			propierty_tilesizebuffer_widget.valueChanged.connect(self.set_tilesizebuffer_value)
-		elif isinstance(propierty_tilesizebuffer_widget, QComboBox):
-			propierty_tilesizebuffer_widget.currentIndexChanged.connect(self.set_tilesizebuffer_value)
-		elif isinstance(propierty_tilesizebuffer_widget, QLineEdit):
-			propierty_tilesizebuffer_widget.editingFinished.connect(self.set_tilesizebuffer_value)
-			propierty_tilesizebuffer_widget.textChanged.connect(self.set_tilesizebuffer_value)
-		elif isinstance(propierty_tilesizebuffer_widget, QCheckBox):
-			propierty_tilesizebuffer_widget.stateChanged.connect(self.set_tilesizebuffer_value)
-		self.__widget_by_propierty['tilesizebuffer'] = propierty_tilesizebuffer_widget
-		propierty_method_widget = self.__widget.get_widget('method')
-		if isinstance(propierty_method_widget, QSpinBox):
-			propierty_method_widget.valueChanged.connect(self.set_method_value)
-		elif isinstance(propierty_method_widget, QDoubleSpinBox):
-			propierty_method_widget.valueChanged.connect(self.set_method_value)
-		elif isinstance(propierty_method_widget, QComboBox):
-			propierty_method_widget.currentIndexChanged.connect(self.set_method_value)
-		elif isinstance(propierty_method_widget, QLineEdit):
-			propierty_method_widget.editingFinished.connect(self.set_method_value)
-			propierty_method_widget.textChanged.connect(self.set_method_value)
-		elif isinstance(propierty_method_widget, QCheckBox):
-			propierty_method_widget.stateChanged.connect(self.set_method_value)
-		self.__widget_by_propierty['method'] = propierty_method_widget
-		propierty_path_widget = self.__widget.get_widget('path')
-		if isinstance(propierty_path_widget, QSpinBox):
-			propierty_path_widget.valueChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QDoubleSpinBox):
-			propierty_path_widget.valueChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QComboBox):
-			propierty_path_widget.currentIndexChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QLineEdit):
-			propierty_path_widget.editingFinished.connect(self.set_path_value)
-			propierty_path_widget.textChanged.connect(self.set_path_value)
-		elif isinstance(propierty_path_widget, QCheckBox):
-			propierty_path_widget.stateChanged.connect(self.set_path_value)
-		self.__widget_by_propierty['path'] = propierty_path_widget
-		propierty_mergemethod_widget = self.__widget.get_widget('mergemethod')
-		if isinstance(propierty_mergemethod_widget, QSpinBox):
-			propierty_mergemethod_widget.valueChanged.connect(self.set_mergemethod_value)
-		elif isinstance(propierty_mergemethod_widget, QDoubleSpinBox):
-			propierty_mergemethod_widget.valueChanged.connect(self.set_mergemethod_value)
-		elif isinstance(propierty_mergemethod_widget, QComboBox):
-			propierty_mergemethod_widget.currentIndexChanged.connect(self.set_mergemethod_value)
-		elif isinstance(propierty_mergemethod_widget, QLineEdit):
-			propierty_mergemethod_widget.editingFinished.connect(self.set_mergemethod_value)
-			propierty_mergemethod_widget.textChanged.connect(self.set_mergemethod_value)
-		elif isinstance(propierty_mergemethod_widget, QCheckBox):
-			propierty_mergemethod_widget.stateChanged.connect(self.set_mergemethod_value)
-		self.__widget_by_propierty['mergemethod'] = propierty_mergemethod_widget
-		propierty_mergepointclouds_widget = self.__widget.get_widget('mergepointclouds')
-		if isinstance(propierty_mergepointclouds_widget, QSpinBox):
-			propierty_mergepointclouds_widget.valueChanged.connect(self.set_mergepointclouds_value)
-		elif isinstance(propierty_mergepointclouds_widget, QDoubleSpinBox):
-			propierty_mergepointclouds_widget.valueChanged.connect(self.set_mergepointclouds_value)
-		elif isinstance(propierty_mergepointclouds_widget, QComboBox):
-			propierty_mergepointclouds_widget.currentIndexChanged.connect(self.set_mergepointclouds_value)
-		elif isinstance(propierty_mergepointclouds_widget, QLineEdit):
-			propierty_mergepointclouds_widget.editingFinished.connect(self.set_mergepointclouds_value)
-			propierty_mergepointclouds_widget.textChanged.connect(self.set_mergepointclouds_value)
-		elif isinstance(propierty_mergepointclouds_widget, QCheckBox):
-			propierty_mergepointclouds_widget.stateChanged.connect(self.set_mergepointclouds_value)
-		self.__widget_by_propierty['mergepointclouds'] = propierty_mergepointclouds_widget
-		propierty_mergeelevations_widget = self.__widget.get_widget('mergeelevations')
-		if isinstance(propierty_mergeelevations_widget, QSpinBox):
-			propierty_mergeelevations_widget.valueChanged.connect(self.set_mergeelevations_value)
-		elif isinstance(propierty_mergeelevations_widget, QDoubleSpinBox):
-			propierty_mergeelevations_widget.valueChanged.connect(self.set_mergeelevations_value)
-		elif isinstance(propierty_mergeelevations_widget, QComboBox):
-			propierty_mergeelevations_widget.currentIndexChanged.connect(self.set_mergeelevations_value)
-		elif isinstance(propierty_mergeelevations_widget, QLineEdit):
-			propierty_mergeelevations_widget.editingFinished.connect(self.set_mergeelevations_value)
-			propierty_mergeelevations_widget.textChanged.connect(self.set_mergeelevations_value)
-		elif isinstance(propierty_mergeelevations_widget, QCheckBox):
-			propierty_mergeelevations_widget.stateChanged.connect(self.set_mergeelevations_value)
-		self.__widget_by_propierty['mergeelevations'] = propierty_mergeelevations_widget
-		propierty_mergeorthomosaics_widget = self.__widget.get_widget('mergeorthomosaics')
-		if isinstance(propierty_mergeorthomosaics_widget, QSpinBox):
-			propierty_mergeorthomosaics_widget.valueChanged.connect(self.set_mergeorthomosaics_value)
-		elif isinstance(propierty_mergeorthomosaics_widget, QDoubleSpinBox):
-			propierty_mergeorthomosaics_widget.valueChanged.connect(self.set_mergeorthomosaics_value)
-		elif isinstance(propierty_mergeorthomosaics_widget, QComboBox):
-			propierty_mergeorthomosaics_widget.currentIndexChanged.connect(self.set_mergeorthomosaics_value)
-		elif isinstance(propierty_mergeorthomosaics_widget, QLineEdit):
-			propierty_mergeorthomosaics_widget.editingFinished.connect(self.set_mergeorthomosaics_value)
-			propierty_mergeorthomosaics_widget.textChanged.connect(self.set_mergeorthomosaics_value)
-		elif isinstance(propierty_mergeorthomosaics_widget, QCheckBox):
-			propierty_mergeorthomosaics_widget.stateChanged.connect(self.set_mergeorthomosaics_value)
-		self.__widget_by_propierty['mergeorthomosaics'] = propierty_mergeorthomosaics_widget
-		propierty_mergeddem_widget = self.__widget.get_widget('mergeddem')
-		if isinstance(propierty_mergeddem_widget, QSpinBox):
-			propierty_mergeddem_widget.valueChanged.connect(self.set_mergeddem_value)
-		elif isinstance(propierty_mergeddem_widget, QDoubleSpinBox):
-			propierty_mergeddem_widget.valueChanged.connect(self.set_mergeddem_value)
-		elif isinstance(propierty_mergeddem_widget, QComboBox):
-			propierty_mergeddem_widget.currentIndexChanged.connect(self.set_mergeddem_value)
-		elif isinstance(propierty_mergeddem_widget, QLineEdit):
-			propierty_mergeddem_widget.editingFinished.connect(self.set_mergeddem_value)
-			propierty_mergeddem_widget.textChanged.connect(self.set_mergeddem_value)
-		elif isinstance(propierty_mergeddem_widget, QCheckBox):
-			propierty_mergeddem_widget.stateChanged.connect(self.set_mergeddem_value)
-		self.__widget_by_propierty['mergeddem'] = propierty_mergeddem_widget
+		propierty_TileSize_widget = self.__widget.get_widget('TileSize')
+		if isinstance(propierty_TileSize_widget, QSpinBox):
+			propierty_TileSize_widget.valueChanged.connect(self.set_TileSize_value)
+		elif isinstance(propierty_TileSize_widget, QDoubleSpinBox):
+			propierty_TileSize_widget.valueChanged.connect(self.set_TileSize_value)
+		elif isinstance(propierty_TileSize_widget, QComboBox):
+			propierty_TileSize_widget.currentIndexChanged.connect(self.set_TileSize_value)
+		elif isinstance(propierty_TileSize_widget, QLineEdit):
+			propierty_TileSize_widget.editingFinished.connect(self.set_TileSize_value)
+			propierty_TileSize_widget.textChanged.connect(self.set_TileSize_value)
+		elif isinstance(propierty_TileSize_widget, QCheckBox):
+			propierty_TileSize_widget.stateChanged.connect(self.set_TileSize_value)
+		self.__widget_by_propierty['TileSize'] = propierty_TileSize_widget
+		propierty_TileSizeBuffer_widget = self.__widget.get_widget('TileSizeBuffer')
+		if isinstance(propierty_TileSizeBuffer_widget, QSpinBox):
+			propierty_TileSizeBuffer_widget.valueChanged.connect(self.set_TileSizeBuffer_value)
+		elif isinstance(propierty_TileSizeBuffer_widget, QDoubleSpinBox):
+			propierty_TileSizeBuffer_widget.valueChanged.connect(self.set_TileSizeBuffer_value)
+		elif isinstance(propierty_TileSizeBuffer_widget, QComboBox):
+			propierty_TileSizeBuffer_widget.currentIndexChanged.connect(self.set_TileSizeBuffer_value)
+		elif isinstance(propierty_TileSizeBuffer_widget, QLineEdit):
+			propierty_TileSizeBuffer_widget.editingFinished.connect(self.set_TileSizeBuffer_value)
+			propierty_TileSizeBuffer_widget.textChanged.connect(self.set_TileSizeBuffer_value)
+		elif isinstance(propierty_TileSizeBuffer_widget, QCheckBox):
+			propierty_TileSizeBuffer_widget.stateChanged.connect(self.set_TileSizeBuffer_value)
+		self.__widget_by_propierty['TileSizeBuffer'] = propierty_TileSizeBuffer_widget
+		propierty_Method_widget = self.__widget.get_widget('Method')
+		if isinstance(propierty_Method_widget, QSpinBox):
+			propierty_Method_widget.valueChanged.connect(self.set_Method_value)
+		elif isinstance(propierty_Method_widget, QDoubleSpinBox):
+			propierty_Method_widget.valueChanged.connect(self.set_Method_value)
+		elif isinstance(propierty_Method_widget, QComboBox):
+			propierty_Method_widget.currentIndexChanged.connect(self.set_Method_value)
+		elif isinstance(propierty_Method_widget, QLineEdit):
+			propierty_Method_widget.editingFinished.connect(self.set_Method_value)
+			propierty_Method_widget.textChanged.connect(self.set_Method_value)
+		elif isinstance(propierty_Method_widget, QCheckBox):
+			propierty_Method_widget.stateChanged.connect(self.set_Method_value)
+		self.__widget_by_propierty['Method'] = propierty_Method_widget
+		propierty_Path_widget = self.__widget.get_widget('Path')
+		if isinstance(propierty_Path_widget, QSpinBox):
+			propierty_Path_widget.valueChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QDoubleSpinBox):
+			propierty_Path_widget.valueChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QComboBox):
+			propierty_Path_widget.currentIndexChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QLineEdit):
+			propierty_Path_widget.editingFinished.connect(self.set_Path_value)
+			propierty_Path_widget.textChanged.connect(self.set_Path_value)
+		elif isinstance(propierty_Path_widget, QCheckBox):
+			propierty_Path_widget.stateChanged.connect(self.set_Path_value)
+		self.__widget_by_propierty['Path'] = propierty_Path_widget
+		propierty_MergeMethod_widget = self.__widget.get_widget('MergeMethod')
+		if isinstance(propierty_MergeMethod_widget, QSpinBox):
+			propierty_MergeMethod_widget.valueChanged.connect(self.set_MergeMethod_value)
+		elif isinstance(propierty_MergeMethod_widget, QDoubleSpinBox):
+			propierty_MergeMethod_widget.valueChanged.connect(self.set_MergeMethod_value)
+		elif isinstance(propierty_MergeMethod_widget, QComboBox):
+			propierty_MergeMethod_widget.currentIndexChanged.connect(self.set_MergeMethod_value)
+		elif isinstance(propierty_MergeMethod_widget, QLineEdit):
+			propierty_MergeMethod_widget.editingFinished.connect(self.set_MergeMethod_value)
+			propierty_MergeMethod_widget.textChanged.connect(self.set_MergeMethod_value)
+		elif isinstance(propierty_MergeMethod_widget, QCheckBox):
+			propierty_MergeMethod_widget.stateChanged.connect(self.set_MergeMethod_value)
+		self.__widget_by_propierty['MergeMethod'] = propierty_MergeMethod_widget
+		propierty_MergePointClouds_widget = self.__widget.get_widget('MergePointClouds')
+		if isinstance(propierty_MergePointClouds_widget, QSpinBox):
+			propierty_MergePointClouds_widget.valueChanged.connect(self.set_MergePointClouds_value)
+		elif isinstance(propierty_MergePointClouds_widget, QDoubleSpinBox):
+			propierty_MergePointClouds_widget.valueChanged.connect(self.set_MergePointClouds_value)
+		elif isinstance(propierty_MergePointClouds_widget, QComboBox):
+			propierty_MergePointClouds_widget.currentIndexChanged.connect(self.set_MergePointClouds_value)
+		elif isinstance(propierty_MergePointClouds_widget, QLineEdit):
+			propierty_MergePointClouds_widget.editingFinished.connect(self.set_MergePointClouds_value)
+			propierty_MergePointClouds_widget.textChanged.connect(self.set_MergePointClouds_value)
+		elif isinstance(propierty_MergePointClouds_widget, QCheckBox):
+			propierty_MergePointClouds_widget.stateChanged.connect(self.set_MergePointClouds_value)
+		self.__widget_by_propierty['MergePointClouds'] = propierty_MergePointClouds_widget
+		propierty_MergeElevations_widget = self.__widget.get_widget('MergeElevations')
+		if isinstance(propierty_MergeElevations_widget, QSpinBox):
+			propierty_MergeElevations_widget.valueChanged.connect(self.set_MergeElevations_value)
+		elif isinstance(propierty_MergeElevations_widget, QDoubleSpinBox):
+			propierty_MergeElevations_widget.valueChanged.connect(self.set_MergeElevations_value)
+		elif isinstance(propierty_MergeElevations_widget, QComboBox):
+			propierty_MergeElevations_widget.currentIndexChanged.connect(self.set_MergeElevations_value)
+		elif isinstance(propierty_MergeElevations_widget, QLineEdit):
+			propierty_MergeElevations_widget.editingFinished.connect(self.set_MergeElevations_value)
+			propierty_MergeElevations_widget.textChanged.connect(self.set_MergeElevations_value)
+		elif isinstance(propierty_MergeElevations_widget, QCheckBox):
+			propierty_MergeElevations_widget.stateChanged.connect(self.set_MergeElevations_value)
+		self.__widget_by_propierty['MergeElevations'] = propierty_MergeElevations_widget
+		propierty_MergeOrthomosaics_widget = self.__widget.get_widget('MergeOrthomosaics')
+		if isinstance(propierty_MergeOrthomosaics_widget, QSpinBox):
+			propierty_MergeOrthomosaics_widget.valueChanged.connect(self.set_MergeOrthomosaics_value)
+		elif isinstance(propierty_MergeOrthomosaics_widget, QDoubleSpinBox):
+			propierty_MergeOrthomosaics_widget.valueChanged.connect(self.set_MergeOrthomosaics_value)
+		elif isinstance(propierty_MergeOrthomosaics_widget, QComboBox):
+			propierty_MergeOrthomosaics_widget.currentIndexChanged.connect(self.set_MergeOrthomosaics_value)
+		elif isinstance(propierty_MergeOrthomosaics_widget, QLineEdit):
+			propierty_MergeOrthomosaics_widget.editingFinished.connect(self.set_MergeOrthomosaics_value)
+			propierty_MergeOrthomosaics_widget.textChanged.connect(self.set_MergeOrthomosaics_value)
+		elif isinstance(propierty_MergeOrthomosaics_widget, QCheckBox):
+			propierty_MergeOrthomosaics_widget.stateChanged.connect(self.set_MergeOrthomosaics_value)
+		self.__widget_by_propierty['MergeOrthomosaics'] = propierty_MergeOrthomosaics_widget
+		propierty_MergedDEM_widget = self.__widget.get_widget('MergedDEM')
+		if isinstance(propierty_MergedDEM_widget, QSpinBox):
+			propierty_MergedDEM_widget.valueChanged.connect(self.set_MergedDEM_value)
+		elif isinstance(propierty_MergedDEM_widget, QDoubleSpinBox):
+			propierty_MergedDEM_widget.valueChanged.connect(self.set_MergedDEM_value)
+		elif isinstance(propierty_MergedDEM_widget, QComboBox):
+			propierty_MergedDEM_widget.currentIndexChanged.connect(self.set_MergedDEM_value)
+		elif isinstance(propierty_MergedDEM_widget, QLineEdit):
+			propierty_MergedDEM_widget.editingFinished.connect(self.set_MergedDEM_value)
+			propierty_MergedDEM_widget.textChanged.connect(self.set_MergedDEM_value)
+		elif isinstance(propierty_MergedDEM_widget, QCheckBox):
+			propierty_MergedDEM_widget.stateChanged.connect(self.set_MergedDEM_value)
+		self.__widget_by_propierty['MergedDEM'] = propierty_MergedDEM_widget

@@ -31,8 +31,10 @@ class ParametersManager:
         f.write('from . import gui_defines\n')
         f.write('\nclass {}:\n'.format(class_name))
         f.write('\tdef __init__(self):\n')
+        # f.write('\t\tself.__value_var_by_propierty = {}\n')
         f.write('\t\tself.__text_by_propierty = {}\n')
         f.write('\t\tself.__widget_by_propierty = {}\n')
+        f.write('\t\tself.__json_content_by_propierty = {}\n')
         propierty_field_definition = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_DEFINITION_TAG
         propierty_field_type = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_TYPE_TAG
         propierty_field_default = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_DEFAULT_TAG
@@ -43,13 +45,16 @@ class ParametersManager:
         propierty_field_formats = gui_defines.GUI_CLASSES_PROPIERTY_FIELD_FORMATS_TAG
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
+            f.write('\t\tself.__json_content_by_propierty[\'{}\'] = {}\n'
+                    .format(propierty_name, json_propierty_content))
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 if not language in json_propierty_content:
                     str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                     str_error += ("\nFor class: {}, in attribute: {}, not exists language: {}"
                                   .format(class_name, gui_defines.GUI_CLASSES_TEXT_TAG, language))
                     return str_error
-                text = '\t\tself.__' + propierty_name.lower() + " = \'" + json_propierty_content[language] + "\'"
+                # text = '\t\tself.__' + propierty_name.lower() + " = \'" + json_propierty_content[language] + "\'"
+                text = '\t\tself.__' + propierty_name + " = \'" + json_propierty_content[language] + "\'"
                 text += "\n"
                 f.write(text)
                 continue
@@ -58,7 +63,7 @@ class ParametersManager:
                 str_error += ("\nFor class: {}, in attribute: {}, not exists field: {}"
                               .format(class_name, propierty_name, gui_defines.GUI_CLASSES_TEXT_TAG))
                 return str_error
-            propierty_name = propierty_name.lower()
+            # propierty_name = propierty_name.lower()
             if not language in json_propierty_content[gui_defines.GUI_CLASSES_TEXT_TAG]:
                 str_error = ParametersManager.__name__ + "." + self.build_parameter_file.__name__
                 str_error += ("\nFor class: {}, in attribute: {}, in field: {}, not exists language: {}"
@@ -89,8 +94,10 @@ class ParametersManager:
                                           gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TRUE,
                                           gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_FALSE))
                     return str_error
-            text = '\t\tself.__' + propierty_name.lower() + " = "
-            text_value = '\t\tself.__' + propierty_name.lower() + gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX + " = "
+            # text = '\t\tself.__' + propierty_name.lower() + " = "
+            text = '\t\tself.__' + propierty_name + " = "
+            # text_value = '\t\tself.__' + propierty_name.lower() + gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX + " = "
+            text_value = '\t\tself.__' + propierty_name + gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX + " = "
             if propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG:
                 values_content = json_propierty_content[propierty_type]
                 text += "["
@@ -108,6 +115,7 @@ class ParametersManager:
                     for value_language in value_content:
                         value = value_content[value_language]
                         if value == propierty_default_value:
+                            value = value_content[language]
                             text += ('\'{}\''.format(value))
                             text_value += ('\'{}\''.format(value))
                             pos_default_in_values_content = cont
@@ -135,13 +143,15 @@ class ParametersManager:
                                               propierty_field_definition, value_tag, language))
                         return str_error
                     value = value_content[language]
-                    text += (' ,\' {}\''.format(value))
+                    text += (' ,\'{}\''.format(value))
                     cont = cont + 1
                 text += "]"
                 text += "\n"
                 f.write(text)
                 text_value += "\n"
                 f.write(text_value)
+                # f.write('\t\tself.__value_var_by_propierty[\'{}\'] = self.__{}{}\n'
+                #         .format(propierty_name, propierty_name, gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX))
                 continue
             if propierty_type != gui_defines.GUI_CLASSES_PROPIERTY_TYPE_REAL_TAG \
                     and propierty_type != gui_defines.GUI_CLASSES_PROPIERTY_TYPE_INTEGER_TAG \
@@ -159,15 +169,30 @@ class ParametersManager:
             text_value += "\n"
             f.write(text)
             f.write(text_value)
+            # f.write('\t\tself.__value_var_by_propierty[\'{}\'] = self.__{}{}\n'
+            #         .format(propierty_name, propierty_name, gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX))
         f.write('\t\tself.__widget = None\n')
         f.write('\n\tdef get_values_as_dictionary(self):\n')
         f.write('\t\tvalues = {}\n')
+        # f.write('\t\tfor propierty_tag in self.__value_var_by_propierty:\n')
+        # f.write('\t\t\tpropierty_widget = self.__widget_by_propierty[propierty_tag]\n')
+        # f.write('\t\t\tif not isinstance(propierty_widget, QComboBox):\n')
+        # f.write('\t\t\t\tvalues[propierty_tag] = self.__value_var_by_propierty[propierty_tag]\n')
+        # f.write('\t\t\t\tcontinue\n')
+        # f.write('\t\t\tvalue_in_gui = self.__value_var_by_propierty[propierty_tag]\n')
+        # f.write('\t\t\tjson_values = self.__json_content_by_propierty[propierty_tag][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]\n')
+        # f.write('\t\t\tfor json_value in json_values:\n')
+        # f.write('\t\t\t\tfor language in json_values[json_value]:\n')
+        # f.write('\t\t\t\t\tvalue_language = json_values[json_value][language]\n')
+        # f.write('\t\t\t\t\tif value_in_gui == value_language:\n')
+        # f.write('\t\t\t\t\t\tvalues[propierty_tag] = json_value\n')
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 continue
             f.write('\t\tvalues[\'{}\'] = self.__{}{}\n'
-                    .format(propierty_name, propierty_name.lower(),
+                    # .format(propierty_name, propierty_name.lower(),
+                    .format(propierty_name, propierty_name,
                             gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX))
         f.write('\t\treturn values\n')
         f.write('\n\tdef get_text(self):\n')
@@ -178,7 +203,8 @@ class ParametersManager:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 continue
-            propierty_name = propierty_name.lower()
+            # propierty_name = propierty_name.lower()
+            propierty_name = propierty_name
             propiertyIsString = False
             propiertyIsReal = False
             propiertyIsFolder = False
@@ -289,8 +315,10 @@ class ParametersManager:
             f.write('\tdef {}(self):\n'.format(propierty_name))
             f.write('\t\treturn self.__{}\n'.format(propierty_name))
             f.write('\n\t@{}.setter\n'.format(propierty_name))
-            f.write('\tdef {}(self, value: \'{}\'):\n'.format(propierty_name.lower(), propierty_text))
-            f.write('\t\tself.__{} = value\n'.format(propierty_name.lower()))
+            # f.write('\tdef {}(self, value: \'{}\'):\n'.format(propierty_name.lower(), propierty_text))
+            f.write('\tdef {}(self, value: \'{}\'):\n'.format(propierty_name, propierty_text))
+            # f.write('\t\tself.__{} = value\n'.format(propierty_name.lower()))
+            f.write('\t\tself.__{} = value\n'.format(propierty_name))
             # if propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_BOOLEAN_TAG:
             #     f.write('\n\tdef set_{}_value(self,int):\n'.format(propierty_name))
             # else:
@@ -315,15 +343,50 @@ class ParametersManager:
                     .format(propierty_name, propierty_name))
 
         f.write('\n\tdef set_values_from_dictionary(self, values):\n')
+        f.write('\t\tfor value in values:\n')
+        # f.write('\t\t\tvalue_lower = value.lower()\n')
+        # f.write('\t\t\tpropierty_widget = self.__widget_by_propierty[value_lower]\n')
+        f.write('\t\t\tpropierty_widget = self.__widget_by_propierty[value]\n')
+        f.write('\t\t\tif isinstance(propierty_widget, QComboBox):\n')
+        f.write('\t\t\t\tjson_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]\n')
+        f.write('\t\t\t\tif values[value] in json_values:\n')
+        f.write('\t\t\t\t\tfor language in json_values[values[value]]:\n')
+        f.write('\t\t\t\t\t\tvalue_language = json_values[values[value]][language]\n')
+        f.write('\t\t\t\t\t\tpos = propierty_widget.findText(value_language)\n')
+        f.write('\t\t\t\t\t\tif pos != -1:\n')
+        f.write('\t\t\t\t\t\t\tpropierty_widget.setCurrentIndex(pos)\n')
+        f.write('\t\t\t\t\t\t\tbreak\n')
+
+        f.write('\t\t\t\t#pos = propierty_widget.findText(values[value])\n')
+        f.write('\t\t\t\t#if pos != -1:\n')
+        f.write('\t\t\t\t\t#propierty_widget.setCurrentIndex(pos)\n')
+        f.write('\t\t\t\t#else:\n')
+        f.write('\t\t\t\t\t#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]\n')
+        f.write('\t\t\t\t\t#for json_value in json_values:\n')
+        f.write('\t\t\t\t\t\t#find_value = False\n')
+        f.write('\t\t\t\t\t\t#for language in json_values[json_value]:\n')
+        f.write('\t\t\t\t\t\t\t#value_language = json_values[json_value][language]\n')
+        f.write('\t\t\t\t\t\t\t#if pos == -1:\n')
+        f.write('\t\t\t\t\t\t\t\t#pos = propierty_widget.findText(value_language)\n')
+        f.write('\t\t\t\t\t\t\t#if value_language == values[value]:\n')
+        f.write('\t\t\t\t\t\t\t\t#find_value = True\n')
+        f.write('\t\t\t\t\t\t#if find_value and pos != -1:\n')
+        f.write('\t\t\t\t\t\t\t#propierty_widget.setCurrentIndex(pos)\n')
+        f.write('\t\t\t\t\t\t\t#break\n')
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 continue
             f.write('\t\tself.__{}{} = values[\'{}\']\n'
-                    .format(propierty_name.lower(),
+                    # .format(propierty_name.lower(),
+                    .format(propierty_name,
                             gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX, propierty_name))
-            f.write('\t\tself.__{} = values[\'{}\']\n'
-                    .format(propierty_name.lower(), propierty_name))
+            propierty_type = json_propierty_content[propierty_field_type]
+            if propierty_type == gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG:
+                continue
+            else:
+                # f.write('\t\tself.__{} = values[\'{}\']\n'.format(propierty_name.lower(), propierty_name))
+                f.write('\t\tself.__{} = values[\'{}\']\n'.format(propierty_name, propierty_name))
         f.write('\t\treturn\n')
 
         f.write('\n\tdef set_widget(self, widget):\n')
@@ -332,27 +395,40 @@ class ParametersManager:
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 continue
             f.write('\t\tpropierty_{}_widget = self.__widget.get_widget(\'{}\')\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
-            f.write('\t\tif isinstance(propierty_{}_widget, QSpinBox):\n'.format(propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
+            # f.write('\t\tif isinstance(propierty_{}_widget, QSpinBox):\n'.format(propierty_name.lower()))
+            f.write('\t\tif isinstance(propierty_{}_widget, QSpinBox):\n'.format(propierty_name))
             f.write('\t\t\tpropierty_{}_widget.valueChanged.connect(self.set_{}_value)\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
-            f.write('\t\telif isinstance(propierty_{}_widget, QDoubleSpinBox):\n'.format(propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
+            # f.write('\t\telif isinstance(propierty_{}_widget, QDoubleSpinBox):\n'.format(propierty_name.lower()))
+            f.write('\t\telif isinstance(propierty_{}_widget, QDoubleSpinBox):\n'.format(propierty_name))
             f.write('\t\t\tpropierty_{}_widget.valueChanged.connect(self.set_{}_value)\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
-            f.write('\t\telif isinstance(propierty_{}_widget, QComboBox):\n'.format(propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
+            # f.write('\t\telif isinstance(propierty_{}_widget, QComboBox):\n'.format(propierty_name.lower()))
+            f.write('\t\telif isinstance(propierty_{}_widget, QComboBox):\n'.format(propierty_name))
             f.write('\t\t\tpropierty_{}_widget.currentIndexChanged.connect(self.set_{}_value)\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
-            f.write('\t\telif isinstance(propierty_{}_widget, QLineEdit):\n'.format(propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
+            # f.write('\t\telif isinstance(propierty_{}_widget, QLineEdit):\n'.format(propierty_name.lower()))
+            f.write('\t\telif isinstance(propierty_{}_widget, QLineEdit):\n'.format(propierty_name))
             f.write('\t\t\tpropierty_{}_widget.editingFinished.connect(self.set_{}_value)\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
             f.write('\t\t\tpropierty_{}_widget.textChanged.connect(self.set_{}_value)\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
-            f.write('\t\telif isinstance(propierty_{}_widget, QCheckBox):\n'.format(propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
+            # f.write('\t\telif isinstance(propierty_{}_widget, QCheckBox):\n'.format(propierty_name.lower()))
+            f.write('\t\telif isinstance(propierty_{}_widget, QCheckBox):\n'.format(propierty_name))
             f.write('\t\t\tpropierty_{}_widget.stateChanged.connect(self.set_{}_value)\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
 
             f.write('\t\tself.__widget_by_propierty[\'{}\'] = propierty_{}_widget\n'
-                    .format(propierty_name.lower(), propierty_name.lower()))
+                    # .format(propierty_name.lower(), propierty_name.lower()))
+                    .format(propierty_name, propierty_name))
 
         f.close()
         return str_error

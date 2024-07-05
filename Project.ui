@@ -17,7 +17,7 @@
    <item>
       <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
-     <widget class="QLabel" name="label_label">
+     <widget class="QLabel" name="label_Label">
           <property name="text">
           <string>Label:</string>
           </property>
@@ -25,9 +25,9 @@
      </item>
 <item row="0" column="1">
      
-     <widget class="QLineEdit" name="label">
+     <widget class="QLineEdit" name="Label">
           <property name="field_name" stdset="0">
-               <string>label</string>
+               <string>Label</string>
           </property>
           <property name="key" stdset="0">
                <string>lineedit</string>
@@ -49,7 +49,7 @@
      
 </item>
   <item row="1" column="0">
-     <widget class="QLabel" name="label_epsg">
+     <widget class="QLabel" name="label_EPSG">
           <property name="text">
           <string>Epsg:</string>
           </property>
@@ -57,9 +57,9 @@
      </item>
 <item row="1" column="1">
      
-     <widget class="QLineEdit" name="epsg">
+     <widget class="QLineEdit" name="EPSG">
           <property name="field_name" stdset="0">
-               <string>epsg</string>
+               <string>EPSG</string>
           </property>
           <property name="key" stdset="0">
                <string>lineedit</string>
@@ -81,7 +81,7 @@
      
 </item>
   <item row="2" column="0">
-     <widget class="QLabel" name="label_path">
+     <widget class="QLabel" name="label_Path">
           <property name="text">
           <string>Path:</string>
           </property>
@@ -90,9 +90,9 @@
 <item row="2" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QLineEdit" name="path">
+     <widget class="QLineEdit" name="Path">
           <property name="field_name" stdset="0">
-               <string>path</string>
+               <string>Path</string>
           </property>
           <property name="key" stdset="0">
                <string>file</string>
@@ -117,7 +117,7 @@
      </widget>
      </item>
 <item>
-    <widget class="QPushButton" name="fileWidgetButton_path">
+    <widget class="QPushButton" name="fileWidgetButton_Path">
     <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
     <horstretch>0</horstretch>
@@ -137,14 +137,14 @@
     </font>
     </property>
     <property name="for_file_widget" stdset="0">
-        <string>path</string>
+        <string>Path</string>
     </property>  
     </widget>
 </item>
 </layout>
 </item>
   <item row="3" column="0">
-     <widget class="QLabel" name="label_demgsd">
+     <widget class="QLabel" name="label_DemGSD">
           <property name="text">
           <string>Demgsd:</string>
           </property>
@@ -152,9 +152,9 @@
      </item>
 <item row="3" column="1">
      
-     <widget class="QDoubleSpinBox" name="demgsd">
+     <widget class="QDoubleSpinBox" name="DemGSD">
           <property name="field_name" stdset="0">
-               <string>demgsd</string>
+               <string>DemGSD</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
@@ -192,7 +192,7 @@
      
 </item>
   <item row="4" column="0">
-     <widget class="QLabel" name="label_orthogsd">
+     <widget class="QLabel" name="label_OrthoGSD">
           <property name="text">
           <string>Orthogsd:</string>
           </property>
@@ -200,9 +200,9 @@
      </item>
 <item row="4" column="1">
      
-     <widget class="QDoubleSpinBox" name="orthogsd">
+     <widget class="QDoubleSpinBox" name="OrthoGSD">
           <property name="field_name" stdset="0">
-               <string>orthogsd</string>
+               <string>OrthoGSD</string>
           </property>
           <property name="key" stdset="0">
                <string>double</string>
