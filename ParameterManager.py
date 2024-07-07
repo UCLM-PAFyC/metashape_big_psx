@@ -172,6 +172,11 @@ class ParametersManager:
             # f.write('\t\tself.__value_var_by_propierty[\'{}\'] = self.__{}{}\n'
             #         .format(propierty_name, propierty_name, gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX))
         f.write('\t\tself.__widget = None\n')
+        f.write('\n\tdef get_propierty_json_content(self, value):\n')
+        f.write('\t\tjson_content = None\n')
+        f.write('\t\tif value in self.__json_content_by_propierty:\n')
+        f.write('\t\t\tjson_content = self.__json_content_by_propierty[value]\n')
+        f.write('\t\treturn json_content\n')
         f.write('\n\tdef get_values_as_dictionary(self):\n')
         f.write('\t\tvalues = {}\n')
         # f.write('\t\tfor propierty_tag in self.__value_var_by_propierty:\n')
@@ -199,6 +204,11 @@ class ParametersManager:
         f.write('\t\treturn self.__text\n')
         f.write('\n\tdef get_text_by_propierty(self):\n')
         f.write('\t\treturn self.__text_by_propierty\n')
+        f.write('\n\tdef get_widget_propierty(self, value):\n')
+        f.write('\t\twidget_propierty = None\n')
+        f.write('\t\tif value in self.__widget_by_propierty:\n')
+        f.write('\t\t\twidget_propierty = self.__widget_by_propierty[value]\n')
+        f.write('\t\treturn widget_propierty\n')
         for propierty_name in json_class_content:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
@@ -355,8 +365,22 @@ class ParametersManager:
         f.write('\t\t\t\t\t\tpos = propierty_widget.findText(value_language)\n')
         f.write('\t\t\t\t\t\tif pos != -1:\n')
         f.write('\t\t\t\t\t\t\tpropierty_widget.setCurrentIndex(pos)\n')
+        # f.write('\t\t\t\t\t\t\tvalues[value] = value_language\n')
         f.write('\t\t\t\t\t\t\tbreak\n')
-
+        f.write('\t\t\telif isinstance(propierty_widget, QSpinBox):\n')
+        f.write('\t\t\t\tint_value = int(values[value])\n')
+        f.write('\t\t\t\tpropierty_widget.setValue(int_value)\n')
+        f.write('\t\t\telif isinstance(propierty_widget, QDoubleSpinBox):\n')
+        f.write('\t\t\t\tfloat_value = float(values[value])\n')
+        f.write('\t\t\t\tpropierty_widget.setValue(float_value)\n')
+        f.write('\t\t\telif isinstance(propierty_widget, QLineEdit):\n')
+        f.write('\t\t\t\tpropierty_widget.setText(values[value])\n')
+        f.write('\t\t\telif isinstance(propierty_widget, QCheckBox):\n')
+        f.write('\t\t\t\tpropierty_widget.setChecked(values[value])\n')
+        # f.write('\t\t\t\tif values[value] == \'True\':\n')
+        # f.write('\t\t\t\t\tpropierty_widget.setChecked(True)\n')
+        # f.write('\t\t\t\telse:\n')
+        # f.write('\t\t\t\t\tpropierty_widget.setChecked(False)\n')
         f.write('\t\t\t\t#pos = propierty_widget.findText(values[value])\n')
         f.write('\t\t\t\t#if pos != -1:\n')
         f.write('\t\t\t\t\t#propierty_widget.setCurrentIndex(pos)\n')
@@ -377,7 +401,7 @@ class ParametersManager:
             json_propierty_content = json_class_content[propierty_name]
             if propierty_name == gui_defines.GUI_CLASSES_TEXT_TAG:
                 continue
-            f.write('\t\tself.__{}{} = values[\'{}\']\n'
+            f.write('\t\t#self.__{}{} = values[\'{}\']\n'
                     # .format(propierty_name.lower(),
                     .format(propierty_name,
                             gui_defines.GUI_CLASSES_PROPIERTY_VALUE_SUFFIX, propierty_name))
@@ -386,7 +410,7 @@ class ParametersManager:
                 continue
             else:
                 # f.write('\t\tself.__{} = values[\'{}\']\n'.format(propierty_name.lower(), propierty_name))
-                f.write('\t\tself.__{} = values[\'{}\']\n'.format(propierty_name, propierty_name))
+                f.write('\t\t#self.__{} = values[\'{}\']\n'.format(propierty_name, propierty_name))
         f.write('\t\treturn\n')
 
         f.write('\n\tdef set_widget(self, widget):\n')

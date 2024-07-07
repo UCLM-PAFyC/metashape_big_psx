@@ -20,6 +20,12 @@ class InstallRequirement:
 		self.__Geoid_value = ""
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['Env'] = self.__Env_value
@@ -31,6 +37,12 @@ class InstallRequirement:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def Env(self):
@@ -86,6 +98,16 @@ class InstallRequirement:
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
 							break
+			elif isinstance(propierty_widget, QSpinBox):
+				int_value = int(values[value])
+				propierty_widget.setValue(int_value)
+			elif isinstance(propierty_widget, QDoubleSpinBox):
+				float_value = float(values[value])
+				propierty_widget.setValue(float_value)
+			elif isinstance(propierty_widget, QLineEdit):
+				propierty_widget.setText(values[value])
+			elif isinstance(propierty_widget, QCheckBox):
+				propierty_widget.setChecked(values[value])
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
 					#propierty_widget.setCurrentIndex(pos)
@@ -102,10 +124,10 @@ class InstallRequirement:
 						#if find_value and pos != -1:
 							#propierty_widget.setCurrentIndex(pos)
 							#break
-		self.__Env_value = values['Env']
-		self.__Env = values['Env']
-		self.__Geoid_value = values['Geoid']
-		self.__Geoid = values['Geoid']
+		#self.__Env_value = values['Env']
+		#self.__Env = values['Env']
+		#self.__Geoid_value = values['Geoid']
+		#self.__Geoid = values['Geoid']
 		return
 
 	def set_widget(self, widget):

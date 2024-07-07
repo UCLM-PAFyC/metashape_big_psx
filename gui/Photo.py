@@ -40,6 +40,12 @@ class Photo:
 		self.__EoPath_value = ""
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['Path'] = self.__Path_value
@@ -55,6 +61,12 @@ class Photo:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def Path(self):
@@ -194,6 +206,16 @@ class Photo:
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
 							break
+			elif isinstance(propierty_widget, QSpinBox):
+				int_value = int(values[value])
+				propierty_widget.setValue(int_value)
+			elif isinstance(propierty_widget, QDoubleSpinBox):
+				float_value = float(values[value])
+				propierty_widget.setValue(float_value)
+			elif isinstance(propierty_widget, QLineEdit):
+				propierty_widget.setText(values[value])
+			elif isinstance(propierty_widget, QCheckBox):
+				propierty_widget.setChecked(values[value])
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
 					#propierty_widget.setCurrentIndex(pos)
@@ -210,17 +232,17 @@ class Photo:
 						#if find_value and pos != -1:
 							#propierty_widget.setCurrentIndex(pos)
 							#break
-		self.__Path_value = values['Path']
-		self.__Path = values['Path']
-		self.__LocationAccuracy2D_value = values['LocationAccuracy2D']
-		self.__LocationAccuracy2D = values['LocationAccuracy2D']
-		self.__LocationAccuracyHeight_value = values['LocationAccuracyHeight']
-		self.__LocationAccuracyHeight = values['LocationAccuracyHeight']
-		self.__Method_value = values['Method']
-		self.__EPSG_value = values['EPSG']
-		self.__EPSG = values['EPSG']
-		self.__EoPath_value = values['EoPath']
-		self.__EoPath = values['EoPath']
+		#self.__Path_value = values['Path']
+		#self.__Path = values['Path']
+		#self.__LocationAccuracy2D_value = values['LocationAccuracy2D']
+		#self.__LocationAccuracy2D = values['LocationAccuracy2D']
+		#self.__LocationAccuracyHeight_value = values['LocationAccuracyHeight']
+		#self.__LocationAccuracyHeight = values['LocationAccuracyHeight']
+		#self.__Method_value = values['Method']
+		#self.__EPSG_value = values['EPSG']
+		#self.__EPSG = values['EPSG']
+		#self.__EoPath_value = values['EoPath']
+		#self.__EoPath = values['EoPath']
 		return
 
 	def set_widget(self, widget):

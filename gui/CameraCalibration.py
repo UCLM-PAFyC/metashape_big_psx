@@ -65,6 +65,12 @@ class CameraCalibration:
 		self.__p2_value = True
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['f'] = self.__f_value
@@ -85,6 +91,12 @@ class CameraCalibration:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def f(self):
@@ -329,6 +341,16 @@ class CameraCalibration:
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
 							break
+			elif isinstance(propierty_widget, QSpinBox):
+				int_value = int(values[value])
+				propierty_widget.setValue(int_value)
+			elif isinstance(propierty_widget, QDoubleSpinBox):
+				float_value = float(values[value])
+				propierty_widget.setValue(float_value)
+			elif isinstance(propierty_widget, QLineEdit):
+				propierty_widget.setText(values[value])
+			elif isinstance(propierty_widget, QCheckBox):
+				propierty_widget.setChecked(values[value])
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
 					#propierty_widget.setCurrentIndex(pos)
@@ -345,28 +367,28 @@ class CameraCalibration:
 						#if find_value and pos != -1:
 							#propierty_widget.setCurrentIndex(pos)
 							#break
-		self.__f_value = values['f']
-		self.__f = values['f']
-		self.__cx_value = values['cx']
-		self.__cx = values['cx']
-		self.__cy_value = values['cy']
-		self.__cy = values['cy']
-		self.__k1_value = values['k1']
-		self.__k1 = values['k1']
-		self.__k2_value = values['k2']
-		self.__k2 = values['k2']
-		self.__k3_value = values['k3']
-		self.__k3 = values['k3']
-		self.__k4_value = values['k4']
-		self.__k4 = values['k4']
-		self.__b1_value = values['b1']
-		self.__b1 = values['b1']
-		self.__b2_value = values['b2']
-		self.__b2 = values['b2']
-		self.__p1_value = values['p1']
-		self.__p1 = values['p1']
-		self.__p2_value = values['p2']
-		self.__p2 = values['p2']
+		#self.__f_value = values['f']
+		#self.__f = values['f']
+		#self.__cx_value = values['cx']
+		#self.__cx = values['cx']
+		#self.__cy_value = values['cy']
+		#self.__cy = values['cy']
+		#self.__k1_value = values['k1']
+		#self.__k1 = values['k1']
+		#self.__k2_value = values['k2']
+		#self.__k2 = values['k2']
+		#self.__k3_value = values['k3']
+		#self.__k3 = values['k3']
+		#self.__k4_value = values['k4']
+		#self.__k4 = values['k4']
+		#self.__b1_value = values['b1']
+		#self.__b1 = values['b1']
+		#self.__b2_value = values['b2']
+		#self.__b2 = values['b2']
+		#self.__p1_value = values['p1']
+		#self.__p1 = values['p1']
+		#self.__p2_value = values['p2']
+		#self.__p2 = values['p2']
 		return
 
 	def set_widget(self, widget):

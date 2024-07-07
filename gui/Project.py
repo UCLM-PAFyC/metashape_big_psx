@@ -35,6 +35,12 @@ class Project:
 		self.__OrthoGSD_value = 0.05
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['Label'] = self.__Label_value
@@ -49,6 +55,12 @@ class Project:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def Label(self):
@@ -167,6 +179,16 @@ class Project:
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
 							break
+			elif isinstance(propierty_widget, QSpinBox):
+				int_value = int(values[value])
+				propierty_widget.setValue(int_value)
+			elif isinstance(propierty_widget, QDoubleSpinBox):
+				float_value = float(values[value])
+				propierty_widget.setValue(float_value)
+			elif isinstance(propierty_widget, QLineEdit):
+				propierty_widget.setText(values[value])
+			elif isinstance(propierty_widget, QCheckBox):
+				propierty_widget.setChecked(values[value])
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
 					#propierty_widget.setCurrentIndex(pos)
@@ -183,16 +205,16 @@ class Project:
 						#if find_value and pos != -1:
 							#propierty_widget.setCurrentIndex(pos)
 							#break
-		self.__Label_value = values['Label']
-		self.__Label = values['Label']
-		self.__EPSG_value = values['EPSG']
-		self.__EPSG = values['EPSG']
-		self.__Path_value = values['Path']
-		self.__Path = values['Path']
-		self.__DemGSD_value = values['DemGSD']
-		self.__DemGSD = values['DemGSD']
-		self.__OrthoGSD_value = values['OrthoGSD']
-		self.__OrthoGSD = values['OrthoGSD']
+		#self.__Label_value = values['Label']
+		#self.__Label = values['Label']
+		#self.__EPSG_value = values['EPSG']
+		#self.__EPSG = values['EPSG']
+		#self.__Path_value = values['Path']
+		#self.__Path = values['Path']
+		#self.__DemGSD_value = values['DemGSD']
+		#self.__DemGSD = values['DemGSD']
+		#self.__OrthoGSD_value = values['OrthoGSD']
+		#self.__OrthoGSD = values['OrthoGSD']
 		return
 
 	def set_widget(self, widget):

@@ -9,7 +9,7 @@ from PyQt5 import QtGui, QtWidgets, uic
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import pyqtSignal
 import sys
-from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog, QPushButton
+from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog, QPushButton, QComboBox
 from PyQt5.QtCore import QDir, QFileInfo
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
@@ -80,24 +80,32 @@ class MshBigPsxDialog(QDialog):
             self.settings.sync()
         self.geoids_path = self.settings.value("geoids_path")
         if self.geoids_path:
+            self.geoids_path = os.path.normpath(self.geoids_path)
             if not current_dir.exists(self.geoids_path):
-                self.geoids_path = None
-        if not current_dir.exists(self.geoids_path):
-            program_files_path = os.environ["ProgramFiles"]
-            geoids_path = program_files_path + "/" + gui_defines.DEFAULT_GEOIDS_PATH
-            geoids_path = os.path.normpath(geoids_path)
-            if current_dir.exists(geoids_path):
-                self.geoids_path = geoids_path
+                self.geoids_path = ''
+        else:
+            self.geoids_path = ''
+        if self.geoids_path:
+            if not current_dir.exists(self.geoids_path):
+                program_files_path = os.environ["ProgramFiles"]
+                geoids_path = program_files_path + "/" + gui_defines.DEFAULT_GEOIDS_PATH
+                geoids_path = os.path.normpath(geoids_path)
+                if current_dir.exists(geoids_path):
+                    self.geoids_path = geoids_path
+                else:
+                    self.geoids_path = ''
         self.settings.setValue("geoids_path", self.geoids_path)
         self.settings.sync()
         self.conda_env_path = self.settings.value("conda_env_path")
         if self.conda_env_path:
+            self.conda_env_path = os.path.normpath(self.conda_env_path)
             if not current_dir.exists(self.conda_env_path):
                 self.conda_env_path = None
+        else:
+            self.conda_env_path = ''
         self.settings.setValue("conda_env_path", self.conda_env_path)
         self.settings.sync()
         strProjects = self.settings.value("project")
-        self.addProjectPushButton.clicked.connect(self.addProject)
         self.openProjectPushButton.setEnabled(False)
         self.closeProjectPushButton.setEnabled(False)
         self.removeProjectPushButton.setEnabled(False)
@@ -148,6 +156,7 @@ class MshBigPsxDialog(QDialog):
         self.projectsComboBox.currentIndexChanged.connect(self.selectProject)
         self.openProjectPushButton.clicked.connect(self.openProject)
         self.closeProjectPushButton.clicked.connect(self.closeProject)
+        self.removeProjectPushButton.clicked.connect(self.removeProject)
         self.saveProjectPushButton.clicked.connect(self.saveProject)
         self.processPushButton.clicked.connect(self.process)
         self.openProjectPushButton.setEnabled(False)
@@ -173,6 +182,8 @@ class MshBigPsxDialog(QDialog):
         for class_name in gui_defines.GUI_CLASSES:
             self.object_by_name[class_name] = None
             self.object_dlg_by_name[class_name] = None
+        for i in range(self.objectsGridLayout.count()):
+            self.objectsGridLayout.itemAt(i).widget().close()
         return
 
     # def closeProject(self):
@@ -299,6 +310,7 @@ class MshBigPsxDialog(QDialog):
     def loadProjectFromJSonFile(self,
                                 project_file):
         str_error = ""
+        current_dir = QDir.current()
         if not os.path.isfile(project_file):
             str_error = MshBigPsxDialog.__name__ + "." + self.loadProjectFromJSonFile.__name__
             str_error += ("\nNot exists file: {}".format(project_file))
@@ -366,6 +378,32 @@ class MshBigPsxDialog(QDialog):
             #         or class_name == 'SplitTile' or class_name == 'PointCloud':
             #     yo = 1
             #     # continue
+            if class_name == gui_defines.OBJECT_CLASS_INSTALL_REQUIREMENT:
+                conda_env_path = values[gui_defines.REQUIREMENTS_CONDA_ENVIRONMENT_TAG]
+                if conda_env_path:
+                    conda_env_path = os.path.normpath(conda_env_path)
+                    if current_dir.exists(conda_env_path):
+                        if self.conda_env_path != conda_env_path:
+                            self.conda_env_path = conda_env_path
+                            self.settings.setValue("conda_env_path", self.conda_env_path)
+                            self.settings.sync()
+                    else:
+                        if self.conda_env_path:
+                            values[gui_defines.REQUIREMENTS_CONDA_ENVIRONMENT_TAG] = self.conda_env_path
+                else:
+                    if self.conda_env_path:
+                        values[gui_defines.REQUIREMENTS_CONDA_ENVIRONMENT_TAG] = self.conda_env_path
+                geoids_path = values[gui_defines.REQUIREMENTS_GEOIDS_PATH_TAG]
+                if geoids_path:
+                    geoids_path = os.path.normpath(geoids_path)
+                    if current_dir.exists(geoids_path):
+                        if self.geoids_path != geoids_path:
+                            self.geoids_path = geoids_path
+                            self.settings.setValue("geoids_path", self.geoids_path)
+                            self.settings.sync()
+                else:
+                    if self.geoids_path:
+                        values[gui_defines.REQUIREMENTS_GEOIDS_PATH_TAG] = self.geoids_path
             self.object_by_name[class_name].set_values_from_dictionary(values)
         return str_error
 
@@ -501,14 +539,11 @@ class MshBigPsxDialog(QDialog):
         if not output_file:
             msgBox = QMessageBox(self)
             msgBox.setIcon(QMessageBox.Information)
-            msgBox.setWindowTitle(self.windowTitle)
+            msgBox.setWindowTitle(self.windowTitle())
             msgBox.setText("Select output JSON file before")
             msgBox.exec_()
             return
-        example_output_json_file_path = 'params_example_output.json'
-        current_path = os.path.dirname(os.path.realpath(__file__))
-        example_output_json_file_path = current_path + "\\" + example_output_json_file_path
-        class_file_path = os.path.normpath(example_output_json_file_path)
+        output_file = os.path.normpath(output_file)
         json_content = {}
         values = {}
         for class_name in self.object_by_name:
@@ -519,27 +554,75 @@ class MshBigPsxDialog(QDialog):
                         object_values[object_value] = "True"
                     else:
                         object_values[object_value] = "False"
+                propierty_widget = self.object_by_name[class_name].get_widget_propierty(object_value)
+                if not propierty_widget:
+                    msgBox = QMessageBox(self)
+                    msgBox.setIcon(QMessageBox.Information)
+                    msgBox.setWindowTitle(self.windowTitle())
+                    msgBox.setText("Not exists widget for propierty: {} in class: {}".
+                                   format(object_value, class_name))
+                    msgBox.exec_()
+                    return
+                if isinstance(propierty_widget, QComboBox):
+                    json_content = self.object_by_name[class_name].get_propierty_json_content(object_value)
+                    if not json_content:
+                        msgBox = QMessageBox(self)
+                        msgBox.setIcon(QMessageBox.Information)
+                        msgBox.setWindowTitle(self.windowTitle())
+                        msgBox.setText("Not exists json content for propierty: {} in class: {}".
+                                       format(object_value, class_name))
+                        msgBox.exec_()
+                        return
+                    json_values = json_content[gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+                    new_value = None
+                    for json_value in json_values:
+                        values_language = json_values[json_value]
+                        for value_language in values_language:
+                            if values_language[value_language] == object_values[object_value]:
+                                new_value = json_value
+                                break
+                    if not new_value:
+                        msgBox = QMessageBox(self)
+                        msgBox.setIcon(QMessageBox.Information)
+                        msgBox.setWindowTitle(self.windowTitle())
+                        msgBox.setText("Not exists valid coincidence value for propierty: {} in class: {}".
+                                       format(object_value, class_name))
+                        msgBox.exec_()
+                        return
+                    object_values[object_value] = new_value
             values[class_name] = object_values
         json_content = values
-        # project
-        # if not self.project_dlg:
-        #     str_error = MshBigPsxDialog.__name__ + "." + self.process.__name__
-        #     str_error += ("\nSelect Project parameters before")
-        #     Tools.error_msg(str_error)
-        #     return
-        # project_values = self.project.get_values_as_dictionary()
-        # workflow_value = self.workflow.get_values_as_dictionary()
-        # photo_values = self.photo.get_values_as_dictionary()
-        # roi_values = self.roi.get_values_as_dictionary()
-        # cameraCalibration_values = self.cameraCalibration.get_values_as_dictionary()
-        # optimizeAlignment_values = self.optimizeAlignment.get_values_as_dictionary()
-        # splitTile_values = self.splitTile.get_values_as_dictionary()
-        # pointCloud_values = self.pointCloud.get_values_as_dictionary()
-        # installRequirement_values = self.installRequirement.get_values_as_dictionary()
         json_object = json.dumps(json_content, indent=4)
         with open(output_file, "w") as outfile:
             outfile.write(json_object)
         return
+
+    def removeProject(self):
+        projectPath=self.projectsComboBox.currentText()
+        if projectPath == gui_defines.CONST_NO_COMBO_SELECT:
+            msgBox = QMessageBox(self)
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setWindowTitle(self.windowTitle)
+            msgBox.setText("Select project to remove from list")
+            msgBox.exec_()
+            return
+        self.projects.remove(projectPath)
+        strProjects = ""
+        cont = 0
+        for project in self.projects:
+            if cont > 0:
+                strProjects = strProjects + gui_defines.CONST_PROJECTS_STRING_SEPARATOR
+            strProjects += project
+            cont = cont + 1
+        self.settings.setValue("projects", strProjects)
+        self.settings.sync()
+        self.projectsComboBox.currentIndexChanged.disconnect(self.selectProject)
+        self.projectsComboBox.clear()
+        self.projectsComboBox.addItem(gui_defines.CONST_NO_COMBO_SELECT)
+        for project in self.projects:
+            self.projectsComboBox.addItem(project)
+        self.projectsComboBox.currentIndexChanged.connect(self.selectProject)
+        self.projectsComboBox.setCurrentIndex(0)
 
     def saveProject(self):
         title = "Select Project File to Save"

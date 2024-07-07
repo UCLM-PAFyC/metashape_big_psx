@@ -55,6 +55,12 @@ class Workflow:
 		self.__Report_value = True
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['CleanPrevious'] = self.__CleanPrevious_value
@@ -73,6 +79,12 @@ class Workflow:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def CleanPrevious(self):
@@ -275,6 +287,16 @@ class Workflow:
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
 							break
+			elif isinstance(propierty_widget, QSpinBox):
+				int_value = int(values[value])
+				propierty_widget.setValue(int_value)
+			elif isinstance(propierty_widget, QDoubleSpinBox):
+				float_value = float(values[value])
+				propierty_widget.setValue(float_value)
+			elif isinstance(propierty_widget, QLineEdit):
+				propierty_widget.setText(values[value])
+			elif isinstance(propierty_widget, QCheckBox):
+				propierty_widget.setChecked(values[value])
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
 					#propierty_widget.setCurrentIndex(pos)
@@ -291,24 +313,24 @@ class Workflow:
 						#if find_value and pos != -1:
 							#propierty_widget.setCurrentIndex(pos)
 							#break
-		self.__CleanPrevious_value = values['CleanPrevious']
-		self.__CleanPrevious = values['CleanPrevious']
-		self.__Initialize_value = values['Initialize']
-		self.__Initialize = values['Initialize']
-		self.__Preprocess_value = values['Preprocess']
-		self.__Preprocess = values['Preprocess']
-		self.__Optimize_value = values['Optimize']
-		self.__Optimize = values['Optimize']
-		self.__Split_value = values['Split']
-		self.__Split = values['Split']
-		self.__PointCloud_value = values['PointCloud']
-		self.__PointCloud = values['PointCloud']
-		self.__DEMs_value = values['DEMs']
-		self.__DEMs = values['DEMs']
-		self.__Orthomosaic_value = values['Orthomosaic']
-		self.__Orthomosaic = values['Orthomosaic']
-		self.__Report_value = values['Report']
-		self.__Report = values['Report']
+		#self.__CleanPrevious_value = values['CleanPrevious']
+		#self.__CleanPrevious = values['CleanPrevious']
+		#self.__Initialize_value = values['Initialize']
+		#self.__Initialize = values['Initialize']
+		#self.__Preprocess_value = values['Preprocess']
+		#self.__Preprocess = values['Preprocess']
+		#self.__Optimize_value = values['Optimize']
+		#self.__Optimize = values['Optimize']
+		#self.__Split_value = values['Split']
+		#self.__Split = values['Split']
+		#self.__PointCloud_value = values['PointCloud']
+		#self.__PointCloud = values['PointCloud']
+		#self.__DEMs_value = values['DEMs']
+		#self.__DEMs = values['DEMs']
+		#self.__Orthomosaic_value = values['Orthomosaic']
+		#self.__Orthomosaic = values['Orthomosaic']
+		#self.__Report_value = values['Report']
+		#self.__Report = values['Report']
 		return
 
 	def set_widget(self, widget):

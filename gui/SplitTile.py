@@ -55,6 +55,12 @@ class SplitTile:
 		self.__MergedDEM_value = 'Modelo Digital de Superficies (MDS)'
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['TileSize'] = self.__TileSize_value
@@ -73,6 +79,12 @@ class SplitTile:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def TileSize(self):
@@ -275,6 +287,16 @@ class SplitTile:
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
 							break
+			elif isinstance(propierty_widget, QSpinBox):
+				int_value = int(values[value])
+				propierty_widget.setValue(int_value)
+			elif isinstance(propierty_widget, QDoubleSpinBox):
+				float_value = float(values[value])
+				propierty_widget.setValue(float_value)
+			elif isinstance(propierty_widget, QLineEdit):
+				propierty_widget.setText(values[value])
+			elif isinstance(propierty_widget, QCheckBox):
+				propierty_widget.setChecked(values[value])
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
 					#propierty_widget.setCurrentIndex(pos)
@@ -291,21 +313,21 @@ class SplitTile:
 						#if find_value and pos != -1:
 							#propierty_widget.setCurrentIndex(pos)
 							#break
-		self.__TileSize_value = values['TileSize']
-		self.__TileSize = values['TileSize']
-		self.__TileSizeBuffer_value = values['TileSizeBuffer']
-		self.__TileSizeBuffer = values['TileSizeBuffer']
-		self.__Method_value = values['Method']
-		self.__Path_value = values['Path']
-		self.__Path = values['Path']
-		self.__MergeMethod_value = values['MergeMethod']
-		self.__MergePointClouds_value = values['MergePointClouds']
-		self.__MergePointClouds = values['MergePointClouds']
-		self.__MergeElevations_value = values['MergeElevations']
-		self.__MergeElevations = values['MergeElevations']
-		self.__MergeOrthomosaics_value = values['MergeOrthomosaics']
-		self.__MergeOrthomosaics = values['MergeOrthomosaics']
-		self.__MergedDEM_value = values['MergedDEM']
+		#self.__TileSize_value = values['TileSize']
+		#self.__TileSize = values['TileSize']
+		#self.__TileSizeBuffer_value = values['TileSizeBuffer']
+		#self.__TileSizeBuffer = values['TileSizeBuffer']
+		#self.__Method_value = values['Method']
+		#self.__Path_value = values['Path']
+		#self.__Path = values['Path']
+		#self.__MergeMethod_value = values['MergeMethod']
+		#self.__MergePointClouds_value = values['MergePointClouds']
+		#self.__MergePointClouds = values['MergePointClouds']
+		#self.__MergeElevations_value = values['MergeElevations']
+		#self.__MergeElevations = values['MergeElevations']
+		#self.__MergeOrthomosaics_value = values['MergeOrthomosaics']
+		#self.__MergeOrthomosaics = values['MergeOrthomosaics']
+		#self.__MergedDEM_value = values['MergedDEM']
 		return
 
 	def set_widget(self, widget):
