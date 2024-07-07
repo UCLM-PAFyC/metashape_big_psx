@@ -59,7 +59,7 @@
         "MergePointClouds": "True",
         "MergeElevations": "True",
         "MergeOrthomosaics": "True",
-        "MergedDEM": ""
+        "MergedDEM": "DSM"
     },
     "PointCloud": {
         "Quality": "Low",

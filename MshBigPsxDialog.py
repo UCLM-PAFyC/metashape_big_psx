@@ -9,7 +9,7 @@ from PyQt5 import QtGui, QtWidgets, uic
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import pyqtSignal
 import sys
-from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog, QPushButton
+from PyQt5.QtWidgets import QApplication, QMessageBox, QDialog, QFileDialog, QPushButton, QComboBox
 from PyQt5.QtCore import QDir, QFileInfo
 from gui.VPyFormGenerator.VPyGUIGenerator import VPyGUIGenerator
 from datetime import datetime, date, time
@@ -501,7 +501,7 @@ class MshBigPsxDialog(QDialog):
         if not output_file:
             msgBox = QMessageBox(self)
             msgBox.setIcon(QMessageBox.Information)
-            msgBox.setWindowTitle(self.windowTitle)
+            msgBox.setWindowTitle(self.windowTitle())
             msgBox.setText("Select output JSON file before")
             msgBox.exec_()
             return
@@ -519,23 +519,44 @@ class MshBigPsxDialog(QDialog):
                         object_values[object_value] = "True"
                     else:
                         object_values[object_value] = "False"
+                propierty_widget = self.object_by_name[class_name].get_widget_propierty(object_value)
+                if not propierty_widget:
+                    msgBox = QMessageBox(self)
+                    msgBox.setIcon(QMessageBox.Information)
+                    msgBox.setWindowTitle(self.windowTitle())
+                    msgBox.setText("Not exists widget for propierty: {} in class: {}".
+                                   format(object_value, class_name))
+                    msgBox.exec_()
+                    return
+                if isinstance(propierty_widget, QComboBox):
+                    json_content = self.object_by_name[class_name].get_propierty_json_content(object_value)
+                    if not json_content:
+                        msgBox = QMessageBox(self)
+                        msgBox.setIcon(QMessageBox.Information)
+                        msgBox.setWindowTitle(self.windowTitle())
+                        msgBox.setText("Not exists json content for propierty: {} in class: {}".
+                                       format(object_value, class_name))
+                        msgBox.exec_()
+                        return
+                    json_values = json_content[gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
+                    new_value = None
+                    for json_value in json_values:
+                        values_language = json_values[json_value]
+                        for value_language in values_language:
+                            if values_language[value_language] == object_values[object_value]:
+                                new_value = json_value
+                                break
+                    if not new_value:
+                        msgBox = QMessageBox(self)
+                        msgBox.setIcon(QMessageBox.Information)
+                        msgBox.setWindowTitle(self.windowTitle())
+                        msgBox.setText("Not exists valid coincidence value for propierty: {} in class: {}".
+                                       format(object_value, class_name))
+                        msgBox.exec_()
+                        return
+                    object_values[object_value] = new_value
             values[class_name] = object_values
         json_content = values
-        # project
-        # if not self.project_dlg:
-        #     str_error = MshBigPsxDialog.__name__ + "." + self.process.__name__
-        #     str_error += ("\nSelect Project parameters before")
-        #     Tools.error_msg(str_error)
-        #     return
-        # project_values = self.project.get_values_as_dictionary()
-        # workflow_value = self.workflow.get_values_as_dictionary()
-        # photo_values = self.photo.get_values_as_dictionary()
-        # roi_values = self.roi.get_values_as_dictionary()
-        # cameraCalibration_values = self.cameraCalibration.get_values_as_dictionary()
-        # optimizeAlignment_values = self.optimizeAlignment.get_values_as_dictionary()
-        # splitTile_values = self.splitTile.get_values_as_dictionary()
-        # pointCloud_values = self.pointCloud.get_values_as_dictionary()
-        # installRequirement_values = self.installRequirement.get_values_as_dictionary()
         json_object = json.dumps(json_content, indent=4)
         with open(output_file, "w") as outfile:
             outfile.write(json_object)

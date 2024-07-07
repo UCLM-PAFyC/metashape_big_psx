@@ -65,6 +65,12 @@ class CameraCalibration:
 		self.__p2_value = True
 		self.__widget = None
 
+	def get_propierty_json_content(self, value):
+		json_content = None
+		if value in self.__json_content_by_propierty:
+			json_content = self.__json_content_by_propierty[value]
+		return json_content
+
 	def get_values_as_dictionary(self):
 		values = {}
 		values['f'] = self.__f_value
@@ -85,6 +91,12 @@ class CameraCalibration:
 
 	def get_text_by_propierty(self):
 		return self.__text_by_propierty
+
+	def get_widget_propierty(self, value):
+		widget_propierty = None
+		if value in self.__widget_by_propierty:
+			widget_propierty = self.__widget_by_propierty[value]
+		return widget_propierty
 
 	@property
 	def f(self):
@@ -328,6 +340,7 @@ class CameraCalibration:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
+							values[value] = value_language
 							break
 				#pos = propierty_widget.findText(values[value])
 				#if pos != -1:
