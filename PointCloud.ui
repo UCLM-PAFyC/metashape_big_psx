@@ -134,7 +134,7 @@
             
             <item>
                 <property name="text">
-                <string>Medio</string>
+                <string>Suave</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>

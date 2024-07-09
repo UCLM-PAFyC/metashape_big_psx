@@ -6,15 +6,15 @@ class InstallRequirement:
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
 		self.__json_content_by_propierty = {}
-		self.__json_content_by_propierty['text'] = {'spanish': 'Requisitos de instalación', 'english': 'Install requirements'}
-		self.__text = 'Requisitos de instalación'
+		self.__json_content_by_propierty['text'] = {'spanish': 'Requisitos de instalacion', 'english': 'Install requirements'}
+		self.__text = 'Requisitos de instalacion'
 		self.__json_content_by_propierty['Env'] = {'text': {'spanish': 'Carpeta del entorno conda', 'english': 'Conda environment folder'}, 'definition': {'spanish': 'Carpeta del entorno conda', 'english': 'Conda environment folder'}, 'type': 'folder', 'default': ''}
 		self.__text_by_propierty['Env'] = 'Carpeta del entorno conda'
 		self.__widget_by_propierty['Env'] = None
 		self.__Env = ""
 		self.__Env_value = ""
-		self.__json_content_by_propierty['Geoid'] = {'text': {'spanish': 'Carpeta con los modelos del Geoide', 'english': 'Geoids folder'}, 'definition': {'spanish': 'Carpeta con los modelos del Geoide', 'english': 'Geoids folder'}, 'type': 'folder', 'default': ''}
-		self.__text_by_propierty['Geoid'] = 'Carpeta con los modelos del Geoide'
+		self.__json_content_by_propierty['Geoid'] = {'text': {'spanish': 'Carpeta con los modelos del geoide', 'english': 'Geoids folder'}, 'definition': {'spanish': 'Carpeta con los modelos del geoide', 'english': 'Geoids folder'}, 'type': 'folder', 'default': ''}
+		self.__text_by_propierty['Geoid'] = 'Carpeta con los modelos del geoide'
 		self.__widget_by_propierty['Geoid'] = None
 		self.__Geoid = ""
 		self.__Geoid_value = ""
@@ -70,7 +70,7 @@ class InstallRequirement:
 		return self.__Geoid
 
 	@Geoid.setter
-	def Geoid(self, value: 'widget:file, type:folder, toolTip:Carpeta con los modelos del Geoide'):
+	def Geoid(self, value: 'widget:file, type:folder, toolTip:Carpeta con los modelos del geoide'):
 		self.__Geoid = value
 
 	def set_Geoid_value(self):
@@ -97,7 +97,6 @@ class InstallRequirement:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -109,26 +108,6 @@ class InstallRequirement:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__Env_value = values['Env']
-		#self.__Env = values['Env']
-		#self.__Geoid_value = values['Geoid']
-		#self.__Geoid = values['Geoid']
 		return
 
 	def set_widget(self, widget):

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
+    <width>571</width>
     <height>310</height>
    </rect>
   </property>
@@ -148,14 +148,35 @@
    <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="saveProjectPushButton">
+      <widget class="QPushButton" name="selectProjectFilePushButton">
        <property name="text">
-        <string>Save project</string>
+        <string>Project file</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="projectLineEdit"/>
+      <widget class="QLineEdit" name="projectLineEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveProjectPushButton">
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="addCheckBox">
+       <property name="text">
+        <string>Add</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="processPushButton">

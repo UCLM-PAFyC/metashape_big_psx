@@ -69,7 +69,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la creación del proyecto e importación de los datos de entrada</string>
+                        <string>Proceso que ejecuta la creacion del proyecto e importacion de los datos de entrada</string>
                     </property>
                    
           
@@ -133,7 +133,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo</string>
+                        <string>Proceso que ejecuta la optimizacion del alineamiento inicial con puntos de apoyo</string>
                     </property>
                    
           
@@ -165,7 +165,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la partición del trabajo en tiles</string>
+                        <string>Proceso que ejecuta la particion del trabajo en tiles</string>
                     </property>
                    
           
@@ -197,7 +197,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la creación y exportación de la nube de puntos densa</string>
+                        <string>Proceso que ejecuta la creacion y exportacion de la nube de puntos densa</string>
                     </property>
                    
           
@@ -229,7 +229,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones</string>
+                        <string>Proceso que ejecuta la creacion y exportacion de los modelos digitales de elevaciones</string>
                     </property>
                    
           
@@ -261,7 +261,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la creación y exportación del orthomosaico</string>
+                        <string>Proceso que ejecuta la creacion y exportacion del ortomosaico</string>
                     </property>
                    
           
@@ -293,7 +293,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Proceso que ejecuta la exportación del informe de resultados</string>
+                        <string>Proceso que ejecuta la exportacion del informe de resultados</string>
                     </property>
                    
           

@@ -133,7 +133,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra k1 de distorsión radial</string>
+                        <string>Seleccionar si se calibra k1 de distorsion radial</string>
                     </property>
                    
           
@@ -165,7 +165,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra k2 de distorsión radial</string>
+                        <string>Seleccionar si se calibra k2 de distorsion radial</string>
                     </property>
                    
           
@@ -197,7 +197,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra k3 de distorsión radial</string>
+                        <string>Seleccionar si se calibra k3 de distorsion radial</string>
                     </property>
                    
           
@@ -229,7 +229,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra k4 de distorsión radial</string>
+                        <string>Seleccionar si se calibra k4 de distorsion radial</string>
                     </property>
                    
           
@@ -261,7 +261,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra la relación de aspecto</string>
+                        <string>Seleccionar si se calibra la relacion de aspecto</string>
                     </property>
                    
           
@@ -293,7 +293,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra la asimetría</string>
+                        <string>Seleccionar si se calibra la asimetria</string>
                     </property>
                    
           
@@ -325,7 +325,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra p1 de distorsión tangencial</string>
+                        <string>Seleccionar si se calibra p1 de distorsion tangencial</string>
                     </property>
                    
           
@@ -357,7 +357,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Seleccionar si se calibra p2 de distorsión tangencial</string>
+                        <string>Seleccionar si se calibra p2 de distorsion tangencial</string>
                     </property>
                    
           

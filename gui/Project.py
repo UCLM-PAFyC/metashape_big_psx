@@ -8,13 +8,13 @@ class Project:
 		self.__json_content_by_propierty = {}
 		self.__json_content_by_propierty['text'] = {'spanish': 'Proyecto', 'english': 'Project'}
 		self.__text = 'Proyecto'
-		self.__json_content_by_propierty['Label'] = {'text': {'spanish': 'Etiqueta', 'english': 'Label'}, 'definition': {'spanish': 'Etiqueta con la que se nombrarán los productos resultantes', 'english': 'Label to be used to name the resulting products'}, 'type': 'string', 'len': 50, 'default': 'Example project'}
+		self.__json_content_by_propierty['Label'] = {'text': {'spanish': 'Etiqueta', 'english': 'Label'}, 'definition': {'spanish': 'Etiqueta con la que se nombraran los productos resultantes', 'english': 'Label to be used to name the resulting products'}, 'type': 'string', 'len': 50, 'default': 'Example project'}
 		self.__text_by_propierty['Label'] = 'Etiqueta'
 		self.__widget_by_propierty['Label'] = None
 		self.__Label = "Example project"
 		self.__Label_value = "Example project"
-		self.__json_content_by_propierty['EPSG'] = {'text': {'spanish': 'Código EPSG', 'english': 'EPSG code'}, 'definition': {'spanish': 'Código EPSG con el que se exportarán los productos resultantes', 'english': 'EPSG code under which the resulting products are to be exported'}, 'type': 'string', 'len': 11, 'default': '25830+5782'}
-		self.__text_by_propierty['EPSG'] = 'Código EPSG'
+		self.__json_content_by_propierty['EPSG'] = {'text': {'spanish': 'Codigo EPSG', 'english': 'EPSG code'}, 'definition': {'spanish': 'Codigo EPSG con el que se exportaran los productos resultantes', 'english': 'EPSG code under which the resulting products are to be exported'}, 'type': 'string', 'len': 11, 'default': '25830+5782'}
+		self.__text_by_propierty['EPSG'] = 'Codigo EPSG'
 		self.__widget_by_propierty['EPSG'] = None
 		self.__EPSG = "25830+5782"
 		self.__EPSG_value = "25830+5782"
@@ -23,13 +23,13 @@ class Project:
 		self.__widget_by_propierty['Path'] = None
 		self.__Path = ""
 		self.__Path_value = ""
-		self.__json_content_by_propierty['DemGSD'] = {'text': {'spanish': 'GSD para MDT y MDS', 'english': 'GSD for DTM and DSM'}, 'definition': {'spanish': 'Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)', 'english': 'Resolution in metres at which the digital surface and terrain model will be exported (0 for maximum possible).'}, 'type': 'real', 'decimals': 2, 'minimum': 0.0, 'maximum': 2.0, 'singleStep': 0.01, 'default': 0.05}
-		self.__text_by_propierty['DemGSD'] = 'GSD para MDT y MDS'
+		self.__json_content_by_propierty['DemGSD'] = {'text': {'spanish': 'GSD para MDT y MDS en metros', 'english': 'GSD for DTM and DSM in meters'}, 'definition': {'spanish': 'Resolucion en metros con la que se exportaran el modelo digital de superficies y del terreno (0 para maxima posible)', 'english': 'Resolution in metres at which the digital surface and terrain model will be exported (0 for maximum possible).'}, 'type': 'real', 'decimals': 2, 'minimum': 0.0, 'maximum': 2.0, 'singleStep': 0.01, 'default': 0.05}
+		self.__text_by_propierty['DemGSD'] = 'GSD para MDT y MDS en metros'
 		self.__widget_by_propierty['DemGSD'] = None
 		self.__DemGSD = 0.05
 		self.__DemGSD_value = 0.05
-		self.__json_content_by_propierty['OrthoGSD'] = {'text': {'spanish': 'GSD para ortomosaico', 'english': 'GSD for Orthomosaic'}, 'definition': {'spanish': 'Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)', 'english': 'Resolution in metres at which the orthomosaic will be exported (0 for maximum possible)'}, 'type': 'real', 'decimals': 2, 'minimum': 0.0, 'maximum': 2.0, 'singleStep': 0.01, 'default': 0.05}
-		self.__text_by_propierty['OrthoGSD'] = 'GSD para ortomosaico'
+		self.__json_content_by_propierty['OrthoGSD'] = {'text': {'spanish': 'GSD para ortomosaico en metros', 'english': 'GSD for Orthomosaic in meters'}, 'definition': {'spanish': 'Resolucion en metros con la que se exportara el ortomosaico (0 para maxima posible)', 'english': 'Resolution in metres at which the orthomosaic will be exported (0 for maximum possible)'}, 'type': 'real', 'decimals': 2, 'minimum': 0.0, 'maximum': 2.0, 'singleStep': 0.01, 'default': 0.05}
+		self.__text_by_propierty['OrthoGSD'] = 'GSD para ortomosaico en metros'
 		self.__widget_by_propierty['OrthoGSD'] = None
 		self.__OrthoGSD = 0.05
 		self.__OrthoGSD_value = 0.05
@@ -67,7 +67,7 @@ class Project:
 		return self.__Label
 
 	@Label.setter
-	def Label(self, value: 'widget:QLineEdit, toolTip:Etiqueta con la que se nombrarán los productos resultantes'):
+	def Label(self, value: 'widget:QLineEdit, toolTip:Etiqueta con la que se nombraran los productos resultantes'):
 		self.__Label = value
 
 	def set_Label_value(self):
@@ -88,7 +88,7 @@ class Project:
 		return self.__EPSG
 
 	@EPSG.setter
-	def EPSG(self, value: 'widget:QLineEdit, toolTip:Código EPSG con el que se exportarán los productos resultantes'):
+	def EPSG(self, value: 'widget:QLineEdit, toolTip:Codigo EPSG con el que se exportaran los productos resultantes'):
 		self.__EPSG = value
 
 	def set_EPSG_value(self):
@@ -130,7 +130,7 @@ class Project:
 		return self.__DemGSD
 
 	@DemGSD.setter
-	def DemGSD(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)'):
+	def DemGSD(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolucion en metros con la que se exportaran el modelo digital de superficies y del terreno (0 para maxima posible)'):
 		self.__DemGSD = value
 
 	def set_DemGSD_value(self):
@@ -151,7 +151,7 @@ class Project:
 		return self.__OrthoGSD
 
 	@OrthoGSD.setter
-	def OrthoGSD(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)'):
+	def OrthoGSD(self, value: 'widget:QDoubleSpinBox, decimals:2, minimum:0.0, maximum:2.0, singleStep:0.01, toolTip:Resolucion en metros con la que se exportara el ortomosaico (0 para maxima posible)'):
 		self.__OrthoGSD = value
 
 	def set_OrthoGSD_value(self):
@@ -178,7 +178,6 @@ class Project:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -190,32 +189,6 @@ class Project:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__Label_value = values['Label']
-		#self.__Label = values['Label']
-		#self.__EPSG_value = values['EPSG']
-		#self.__EPSG = values['EPSG']
-		#self.__Path_value = values['Path']
-		#self.__Path = values['Path']
-		#self.__DemGSD_value = values['DemGSD']
-		#self.__DemGSD = values['DemGSD']
-		#self.__OrthoGSD_value = values['OrthoGSD']
-		#self.__OrthoGSD = values['OrthoGSD']
 		return
 
 	def set_widget(self, widget):

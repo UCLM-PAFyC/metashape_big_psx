@@ -42,7 +42,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Ruta del directorio donde se localizan las imágenes</string>
+                        <string>Ruta del directorio donde se localizan las imagenes</string>
                     </property>
                    
           
@@ -116,7 +116,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Precisión horizontal de la orientación externa de las imágenes en metros</string>
+                        <string>Precision horizontal de la orientacion externa de las imagenes en metros</string>
                     </property>
                    
           
@@ -164,7 +164,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Precisión vertical de la orientación externa de las imágenes en metros</string>
+                        <string>Precision vertical de la orientacion externa de las imagenes en metros</string>
                     </property>
                    
           
@@ -196,13 +196,13 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Fuente de la que se importarán las orientaciones externas de las imágenes</string>
+                        <string>Fuente de la que se importaran las orientaciones externas de las imagenes</string>
                     </property>
                    
           
             <item>
                 <property name="text">
-                <string>Metadatos de las imágenes</string>
+                <string>Metadatos de las imagenes</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -242,7 +242,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Código EPSG con el que se importarán las imágenes</string>
+                        <string>Codigo EPSG con el que se importaran las orientaciones externas de las imagenes</string>
                     </property>
                    
           

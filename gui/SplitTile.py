@@ -6,33 +6,33 @@ class SplitTile:
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
 		self.__json_content_by_propierty = {}
-		self.__json_content_by_propierty['text'] = {'spanish': 'División en celdas', 'english': 'Split tiles'}
-		self.__text = 'División en celdas'
-		self.__json_content_by_propierty['TileSize'] = {'text': {'spanish': 'Tamaño de la celda', 'english': 'Tile Size'}, 'definition': {'spanish': 'Tamaño de las celdas en metros (ej. 50)', 'english': 'Tile size in meters (ex. 50)'}, 'type': 'integer', 'minimum': 10, 'maximum': 1000, 'singleStep': 10, 'default': 50}
-		self.__text_by_propierty['TileSize'] = 'Tamaño de la celda'
+		self.__json_content_by_propierty['text'] = {'spanish': 'Division en celdas', 'english': 'Split tiles'}
+		self.__text = 'Division en celdas'
+		self.__json_content_by_propierty['TileSize'] = {'text': {'spanish': 'Tamanio de la celda', 'english': 'Tile Size'}, 'definition': {'spanish': 'Tamanio de las celdas en metros (ej. 50)', 'english': 'Tile size in meters (i.e. 50)'}, 'type': 'integer', 'minimum': 10, 'maximum': 1000, 'singleStep': 10, 'default': 50}
+		self.__text_by_propierty['TileSize'] = 'Tamanio de la celda'
 		self.__widget_by_propierty['TileSize'] = None
 		self.__TileSize = 50
 		self.__TileSize_value = 50
-		self.__json_content_by_propierty['TileSizeBuffer'] = {'text': {'spanish': 'Ampliación', 'english': 'Buffer'}, 'definition': {'spanish': 'Porcentaje de solape entre celdas (ej. 5)', 'english': 'Tiles percentage overlaps (ex. 5)'}, 'type': 'integer', 'minimum': 1, 'maximum': 100, 'singleStep': 1, 'default': 5}
-		self.__text_by_propierty['TileSizeBuffer'] = 'Ampliación'
+		self.__json_content_by_propierty['TileSizeBuffer'] = {'text': {'spanish': 'Ampliacion de las celdas', 'english': 'Buffer tiles'}, 'definition': {'spanish': 'Porcentaje de solape entre celdas (ej. 5)', 'english': 'Tiles percentage overlaps (ex. 5)'}, 'type': 'integer', 'minimum': 1, 'maximum': 100, 'singleStep': 1, 'default': 5}
+		self.__text_by_propierty['TileSizeBuffer'] = 'Ampliacion de las celdas'
 		self.__widget_by_propierty['TileSizeBuffer'] = None
 		self.__TileSizeBuffer = 5
 		self.__TileSizeBuffer_value = 5
-		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Definición de la malla de celdas a procesar', 'english': 'Grid tiles to process definition'}, 'definition': {'spanish': 'Definición de la malla de celdas a procesar', 'english': 'Grid tiles to process definition'}, 'type': 'values', 'values': {'AUTO': {'spanish': 'Automático para toda la ROI o zona estereoscópica', 'english': 'Automatic to ROI or stereoscopi area'}, 'MANUAL': {'spanish': 'Malla editada por el usuario', 'english': 'User edited Grid'}}, 'default': 'Malla editada por el usuario'}
-		self.__text_by_propierty['Method'] = 'Definición de la malla de celdas a procesar'
+		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Definicion de la malla de celdas a procesar', 'english': 'Grid tiles to process definition'}, 'definition': {'spanish': 'Definicion de la malla de celdas a procesar', 'english': 'Grid tiles to process definition'}, 'type': 'values', 'values': {'AUTO': {'spanish': 'Automatico para toda la ROI o zona estereoscopica', 'english': 'Automatic to ROI or stereoscopi area'}, 'MANUAL': {'spanish': 'Malla editada por el usuario', 'english': 'User edited Grid'}}, 'default': 'Malla editada por el usuario'}
+		self.__text_by_propierty['Method'] = 'Definicion de la malla de celdas a procesar'
 		self.__widget_by_propierty['Method'] = None
-		self.__Method = ['Malla editada por el usuario' ,'Automático para toda la ROI o zona estereoscópica']
+		self.__Method = ['Malla editada por el usuario' ,'Automatico para toda la ROI o zona estereoscopica']
 		self.__Method_value = 'Malla editada por el usuario'
-		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Fichero de la malla', 'english': 'Grid file'}, 'definition': {'spanish': 'Fichero de la malla editado por el usario', 'english': 'Grid file edited by user'}, 'type': 'file open', 'formats': '*.gpkg', 'default': ''}
+		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Fichero de la malla', 'english': 'Grid file'}, 'definition': {'spanish': 'Fichero de la malla editado por el usario', 'english': 'Grid file edited by user'}, 'type': 'file save', 'formats': '*.gpkg', 'default': ''}
 		self.__text_by_propierty['Path'] = 'Fichero de la malla'
 		self.__widget_by_propierty['Path'] = None
 		self.__Path = ""
 		self.__Path_value = ""
-		self.__json_content_by_propierty['MergeMethod'] = {'text': {'spanish': 'Método de unión', 'english': 'Merge method'}, 'definition': {'spanish': 'Estrategia de unión de los productos resultantes', 'english': 'Merged method'}, 'type': 'values', 'values': {'Metashape': {'spanish': 'Metashape', 'english': 'Metashape'}, 'OsgeoLaspy': {'spanish': 'OSGeo (ráster) y laspy (nubes de puntos)', 'english': 'OSGeo (raster) and laspy (points clouds)'}}, 'default': 'OSGeo (ráster) y laspy (nubes de puntos)'}
-		self.__text_by_propierty['MergeMethod'] = 'Método de unión'
+		self.__json_content_by_propierty['MergeMethod'] = {'text': {'spanish': 'Metodo de union', 'english': 'Merge method'}, 'definition': {'spanish': 'Estrategia de union de los productos resultantes', 'english': 'Merged method'}, 'type': 'values', 'values': {'Metashape': {'spanish': 'Metashape', 'english': 'Metashape'}, 'OsgeoLaspy': {'spanish': 'OSGeo (raster) y laspy (nubes de puntos)', 'english': 'OSGeo (raster) and laspy (points clouds)'}}, 'default': 'OSGeo (raster) y laspy (nubes de puntos)'}
+		self.__text_by_propierty['MergeMethod'] = 'Metodo de union'
 		self.__widget_by_propierty['MergeMethod'] = None
-		self.__MergeMethod = ['OSGeo (ráster) y laspy (nubes de puntos)' ,'Metashape']
-		self.__MergeMethod_value = 'OSGeo (ráster) y laspy (nubes de puntos)'
+		self.__MergeMethod = ['OSGeo (raster) y laspy (nubes de puntos)' ,'Metashape']
+		self.__MergeMethod_value = 'OSGeo (raster) y laspy (nubes de puntos)'
 		self.__json_content_by_propierty['MergePointClouds'] = {'text': {'spanish': 'Unir nubes de puntos', 'english': 'Merge points clouds'}, 'definition': {'spanish': 'Unir nubes de puntos', 'english': 'Merge points clouds'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['MergePointClouds'] = 'Unir nubes de puntos'
 		self.__widget_by_propierty['MergePointClouds'] = None
@@ -91,7 +91,7 @@ class SplitTile:
 		return self.__TileSize
 
 	@TileSize.setter
-	def TileSize(self, value: 'widget:QSpinBox, minimum:10, maximum:1000, singleStep:10, toolTip:Tamaño de las celdas en metros (ej. 50)'):
+	def TileSize(self, value: 'widget:QSpinBox, minimum:10, maximum:1000, singleStep:10, toolTip:Tamanio de las celdas en metros (ej. 50)'):
 		self.__TileSize = value
 
 	def set_TileSize_value(self):
@@ -133,7 +133,7 @@ class SplitTile:
 		return self.__Method
 
 	@Method.setter
-	def Method(self, value: 'widget:QComboBox, toolTip:Definición de la malla de celdas a procesar'):
+	def Method(self, value: 'widget:QComboBox, toolTip:Definicion de la malla de celdas a procesar'):
 		self.__Method = value
 
 	def set_Method_value(self):
@@ -154,7 +154,7 @@ class SplitTile:
 		return self.__Path
 
 	@Path.setter
-	def Path(self, value: 'widget:file, toolTip:Fichero de la malla editado por el usario, filters: *.gpkg'):
+	def Path(self, value: 'widget:file, type:save, toolTip:Fichero de la malla editado por el usario, filters: *.gpkg'):
 		self.__Path = value
 
 	def set_Path_value(self):
@@ -175,7 +175,7 @@ class SplitTile:
 		return self.__MergeMethod
 
 	@MergeMethod.setter
-	def MergeMethod(self, value: 'widget:QComboBox, toolTip:Estrategia de unión de los productos resultantes'):
+	def MergeMethod(self, value: 'widget:QComboBox, toolTip:Estrategia de union de los productos resultantes'):
 		self.__MergeMethod = value
 
 	def set_MergeMethod_value(self):
@@ -286,7 +286,6 @@ class SplitTile:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -298,37 +297,6 @@ class SplitTile:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__TileSize_value = values['TileSize']
-		#self.__TileSize = values['TileSize']
-		#self.__TileSizeBuffer_value = values['TileSizeBuffer']
-		#self.__TileSizeBuffer = values['TileSizeBuffer']
-		#self.__Method_value = values['Method']
-		#self.__Path_value = values['Path']
-		#self.__Path = values['Path']
-		#self.__MergeMethod_value = values['MergeMethod']
-		#self.__MergePointClouds_value = values['MergePointClouds']
-		#self.__MergePointClouds = values['MergePointClouds']
-		#self.__MergeElevations_value = values['MergeElevations']
-		#self.__MergeElevations = values['MergeElevations']
-		#self.__MergeOrthomosaics_value = values['MergeOrthomosaics']
-		#self.__MergeOrthomosaics = values['MergeOrthomosaics']
-		#self.__MergedDEM_value = values['MergedDEM']
 		return
 
 	def set_widget(self, widget):

@@ -8,15 +8,15 @@ class PointCloud:
 		self.__json_content_by_propierty = {}
 		self.__json_content_by_propierty['text'] = {'spanish': 'Nube de puntos', 'english': 'Point cloud'}
 		self.__text = 'Nube de puntos'
-		self.__json_content_by_propierty['Quality'] = {'text': {'spanish': 'Densidad ', 'english': 'Density'}, 'definition': {'spanish': 'Calidad final de la nube de puntos densa', 'english': 'Dense point cloud quality'}, 'type': 'values', 'values': {'Highest': {'spanish': 'Mayor posible', 'english': 'Ultrahigh'}, 'High': {'spanish': 'Alto', 'english': 'High'}, 'Medium': {'spanish': 'Medio', 'english': 'Medium'}, 'Low': {'spanish': 'Bajo', 'english': 'Low'}, 'Lowest': {'spanish': 'Menor posible', 'english': 'Lowest'}}, 'default': 'Mayor posible'}
-		self.__text_by_propierty['Quality'] = 'Densidad '
+		self.__json_content_by_propierty['Quality'] = {'text': {'spanish': 'Densidad', 'english': 'Density'}, 'definition': {'spanish': 'Calidad final de la nube de puntos densa', 'english': 'Dense point cloud quality'}, 'type': 'values', 'values': {'Highest': {'spanish': 'Mayor posible', 'english': 'Ultrahigh'}, 'High': {'spanish': 'Alto', 'english': 'High'}, 'Medium': {'spanish': 'Medio', 'english': 'Medium'}, 'Low': {'spanish': 'Bajo', 'english': 'Low'}, 'Lowest': {'spanish': 'Menor posible', 'english': 'Lowest'}}, 'default': 'Mayor posible'}
+		self.__text_by_propierty['Quality'] = 'Densidad'
 		self.__widget_by_propierty['Quality'] = None
 		self.__Quality = ['Mayor posible' ,'Alto' ,'Medio' ,'Bajo' ,'Menor posible']
 		self.__Quality_value = 'Mayor posible'
-		self.__json_content_by_propierty['FilterMode'] = {'text': {'spanish': 'Tipo de filtrado', 'english': 'Filter type'}, 'definition': {'spanish': 'Tipo de filtrado', 'english': 'Filter type'}, 'type': 'values', 'values': {'False': {'spanish': 'Falso', 'english': 'False'}, 'Mild': {'spanish': 'Medio', 'english': 'Mild'}, 'Moderate': {'spanish': 'Moderado', 'english': 'Moderate'}, 'Aggressive': {'spanish': 'Agresivo', 'english': 'Aggressive'}}, 'default': 'Agresivo'}
+		self.__json_content_by_propierty['FilterMode'] = {'text': {'spanish': 'Tipo de filtrado', 'english': 'Filter type'}, 'definition': {'spanish': 'Tipo de filtrado', 'english': 'Filter type'}, 'type': 'values', 'values': {'False': {'spanish': 'Falso', 'english': 'False'}, 'Mild': {'spanish': 'Suave', 'english': 'Mild'}, 'Moderate': {'spanish': 'Moderado', 'english': 'Moderate'}, 'Aggressive': {'spanish': 'Agresivo', 'english': 'Aggressive'}}, 'default': 'Agresivo'}
 		self.__text_by_propierty['FilterMode'] = 'Tipo de filtrado'
 		self.__widget_by_propierty['FilterMode'] = None
-		self.__FilterMode = ['Agresivo' ,'Falso' ,'Medio' ,'Moderado']
+		self.__FilterMode = ['Agresivo' ,'Falso' ,'Suave' ,'Moderado']
 		self.__FilterMode_value = 'Agresivo'
 		self.__widget = None
 
@@ -97,7 +97,6 @@ class PointCloud:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -109,24 +108,6 @@ class PointCloud:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__Quality_value = values['Quality']
-		#self.__FilterMode_value = values['FilterMode']
 		return
 
 	def set_widget(self, widget):

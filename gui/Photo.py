@@ -6,30 +6,30 @@ class Photo:
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
 		self.__json_content_by_propierty = {}
-		self.__json_content_by_propierty['text'] = {'spanish': 'Imágenes', 'english': 'Photo'}
-		self.__text = 'Imágenes'
-		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Ruta imágenes', 'english': 'Images path'}, 'definition': {'spanish': 'Ruta del directorio donde se localizan las imágenes', 'english': 'Path of the directory where the images are located'}, 'type': 'folder', 'default': ''}
-		self.__text_by_propierty['Path'] = 'Ruta imágenes'
+		self.__json_content_by_propierty['text'] = {'spanish': 'Imagenes', 'english': 'Photo'}
+		self.__text = 'Imagenes'
+		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Ruta imagenes', 'english': 'Images path'}, 'definition': {'spanish': 'Ruta del directorio donde se localizan las imagenes', 'english': 'Path of the directory where the images are located'}, 'type': 'folder', 'default': ''}
+		self.__text_by_propierty['Path'] = 'Ruta imagenes'
 		self.__widget_by_propierty['Path'] = None
 		self.__Path = ""
 		self.__Path_value = ""
-		self.__json_content_by_propierty['LocationAccuracy2D'] = {'text': {'spanish': 'Precisión 2D de OE', 'english': '2D accuracy of EO'}, 'definition': {'spanish': 'Precisión horizontal de la orientación externa de las imágenes en metros', 'english': 'Horizontal accuracy of external orientation of images in meters'}, 'type': 'real', 'decimals': 3, 'minimum': 0.0, 'maximum': 5.0, 'singleStep': 0.01, 'default': 0.08}
-		self.__text_by_propierty['LocationAccuracy2D'] = 'Precisión 2D de OE'
+		self.__json_content_by_propierty['LocationAccuracy2D'] = {'text': {'spanish': 'Precision 2D de OE', 'english': '2D accuracy of EO'}, 'definition': {'spanish': 'Precision horizontal de la orientacion externa de las imagenes en metros', 'english': 'Horizontal accuracy of external orientation of images in meters'}, 'type': 'real', 'decimals': 3, 'minimum': 0.0, 'maximum': 5.0, 'singleStep': 0.01, 'default': 0.08}
+		self.__text_by_propierty['LocationAccuracy2D'] = 'Precision 2D de OE'
 		self.__widget_by_propierty['LocationAccuracy2D'] = None
 		self.__LocationAccuracy2D = 0.08
 		self.__LocationAccuracy2D_value = 0.08
-		self.__json_content_by_propierty['LocationAccuracyHeight'] = {'text': {'spanish': 'Precisión Z de OE', 'english': 'Z accuracy of EO'}, 'definition': {'spanish': 'Precisión vertical de la orientación externa de las imágenes en metros', 'english': 'Vertical accuracy of the external orientation of images in meters'}, 'type': 'real', 'decimals': 3, 'minimum': 0.0, 'maximum': 5.0, 'singleStep': 0.01, 'default': 0.12}
-		self.__text_by_propierty['LocationAccuracyHeight'] = 'Precisión Z de OE'
+		self.__json_content_by_propierty['LocationAccuracyHeight'] = {'text': {'spanish': 'Precision Z de OE', 'english': 'Z accuracy of EO'}, 'definition': {'spanish': 'Precision vertical de la orientacion externa de las imagenes en metros', 'english': 'Vertical accuracy of the external orientation of images in meters'}, 'type': 'real', 'decimals': 3, 'minimum': 0.0, 'maximum': 5.0, 'singleStep': 0.01, 'default': 0.12}
+		self.__text_by_propierty['LocationAccuracyHeight'] = 'Precision Z de OE'
 		self.__widget_by_propierty['LocationAccuracyHeight'] = None
 		self.__LocationAccuracyHeight = 0.12
 		self.__LocationAccuracyHeight_value = 0.12
-		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Fuente OE', 'english': 'Source EO'}, 'definition': {'spanish': 'Fuente de la que se importarán las orientaciones externas de las imágenes', 'english': 'Source from which the external orientations of the images will be imported'}, 'type': 'values', 'values': {'CSV': {'spanish': 'Fichero CSV', 'english': 'CSV file'}, 'EXIF': {'spanish': 'Metadatos de las imágenes', 'english': 'EXIF'}}, 'default': 'EXIF'}
+		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Fuente OE', 'english': 'Source EO'}, 'definition': {'spanish': 'Fuente de la que se importaran las orientaciones externas de las imagenes', 'english': 'Source from which the external orientations of the images will be imported'}, 'type': 'values', 'values': {'CSV': {'spanish': 'Fichero CSV', 'english': 'CSV file'}, 'EXIF': {'spanish': 'Metadatos de las imagenes', 'english': 'EXIF'}}, 'default': 'EXIF'}
 		self.__text_by_propierty['Method'] = 'Fuente OE'
 		self.__widget_by_propierty['Method'] = None
-		self.__Method = ['Metadatos de las imágenes' ,'Fichero CSV']
-		self.__Method_value = 'Metadatos de las imágenes'
-		self.__json_content_by_propierty['EPSG'] = {'text': {'spanish': 'Código EPSG', 'english': 'EPSG code'}, 'definition': {'spanish': 'Código EPSG con el que se importarán las imágenes', 'english': 'EPSG code with which images will be imported'}, 'type': 'string', 'len': 11, 'default': '4326'}
-		self.__text_by_propierty['EPSG'] = 'Código EPSG'
+		self.__Method = ['Metadatos de las imagenes' ,'Fichero CSV']
+		self.__Method_value = 'Metadatos de las imagenes'
+		self.__json_content_by_propierty['EPSG'] = {'text': {'spanish': 'Codigo EPSG', 'english': 'EPSG code'}, 'definition': {'spanish': 'Codigo EPSG con el que se importaran las orientaciones externas de las imagenes', 'english': 'EPSG code with which external orientation of the images will be imported'}, 'type': 'string', 'len': 11, 'default': '4326'}
+		self.__text_by_propierty['EPSG'] = 'Codigo EPSG'
 		self.__widget_by_propierty['EPSG'] = None
 		self.__EPSG = "4326"
 		self.__EPSG_value = "4326"
@@ -73,7 +73,7 @@ class Photo:
 		return self.__Path
 
 	@Path.setter
-	def Path(self, value: 'widget:file, type:folder, toolTip:Ruta del directorio donde se localizan las imágenes'):
+	def Path(self, value: 'widget:file, type:folder, toolTip:Ruta del directorio donde se localizan las imagenes'):
 		self.__Path = value
 
 	def set_Path_value(self):
@@ -94,7 +94,7 @@ class Photo:
 		return self.__LocationAccuracy2D
 
 	@LocationAccuracy2D.setter
-	def LocationAccuracy2D(self, value: 'widget:QDoubleSpinBox, decimals:3, minimum:0.0, maximum:5.0, singleStep:0.01, toolTip:Precisión horizontal de la orientación externa de las imágenes en metros'):
+	def LocationAccuracy2D(self, value: 'widget:QDoubleSpinBox, decimals:3, minimum:0.0, maximum:5.0, singleStep:0.01, toolTip:Precision horizontal de la orientacion externa de las imagenes en metros'):
 		self.__LocationAccuracy2D = value
 
 	def set_LocationAccuracy2D_value(self):
@@ -115,7 +115,7 @@ class Photo:
 		return self.__LocationAccuracyHeight
 
 	@LocationAccuracyHeight.setter
-	def LocationAccuracyHeight(self, value: 'widget:QDoubleSpinBox, decimals:3, minimum:0.0, maximum:5.0, singleStep:0.01, toolTip:Precisión vertical de la orientación externa de las imágenes en metros'):
+	def LocationAccuracyHeight(self, value: 'widget:QDoubleSpinBox, decimals:3, minimum:0.0, maximum:5.0, singleStep:0.01, toolTip:Precision vertical de la orientacion externa de las imagenes en metros'):
 		self.__LocationAccuracyHeight = value
 
 	def set_LocationAccuracyHeight_value(self):
@@ -136,7 +136,7 @@ class Photo:
 		return self.__Method
 
 	@Method.setter
-	def Method(self, value: 'widget:QComboBox, toolTip:Fuente de la que se importarán las orientaciones externas de las imágenes'):
+	def Method(self, value: 'widget:QComboBox, toolTip:Fuente de la que se importaran las orientaciones externas de las imagenes'):
 		self.__Method = value
 
 	def set_Method_value(self):
@@ -157,7 +157,7 @@ class Photo:
 		return self.__EPSG
 
 	@EPSG.setter
-	def EPSG(self, value: 'widget:QLineEdit, toolTip:Código EPSG con el que se importarán las imágenes'):
+	def EPSG(self, value: 'widget:QLineEdit, toolTip:Codigo EPSG con el que se importaran las orientaciones externas de las imagenes'):
 		self.__EPSG = value
 
 	def set_EPSG_value(self):
@@ -205,7 +205,6 @@ class Photo:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -217,33 +216,6 @@ class Photo:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__Path_value = values['Path']
-		#self.__Path = values['Path']
-		#self.__LocationAccuracy2D_value = values['LocationAccuracy2D']
-		#self.__LocationAccuracy2D = values['LocationAccuracy2D']
-		#self.__LocationAccuracyHeight_value = values['LocationAccuracyHeight']
-		#self.__LocationAccuracyHeight = values['LocationAccuracyHeight']
-		#self.__Method_value = values['Method']
-		#self.__EPSG_value = values['EPSG']
-		#self.__EPSG = values['EPSG']
-		#self.__EoPath_value = values['EoPath']
-		#self.__EoPath = values['EoPath']
 		return
 
 	def set_widget(self, widget):

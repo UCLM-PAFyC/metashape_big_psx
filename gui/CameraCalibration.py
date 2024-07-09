@@ -6,8 +6,8 @@ class CameraCalibration:
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
 		self.__json_content_by_propierty = {}
-		self.__json_content_by_propierty['text'] = {'spanish': 'Calibración de cámara', 'english': 'Camera calibration'}
-		self.__text = 'Calibración de cámara'
+		self.__json_content_by_propierty['text'] = {'spanish': 'Calibracion de camara', 'english': 'Camera calibration'}
+		self.__text = 'Calibracion de camara'
 		self.__json_content_by_propierty['f'] = {'text': {'spanish': 'Focal', 'english': 'Focal'}, 'definition': {'spanish': 'Seleccionar si se calibra la focal', 'english': 'Select calibrate focal'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['f'] = 'Focal'
 		self.__widget_by_propierty['f'] = None
@@ -23,42 +23,42 @@ class CameraCalibration:
 		self.__widget_by_propierty['cy'] = None
 		self.__cy = True
 		self.__cy_value = True
-		self.__json_content_by_propierty['k1'] = {'text': {'spanish': 'k1', 'english': 'k1'}, 'definition': {'spanish': 'Seleccionar si se calibra k1 de distorsión radial', 'english': 'Select calibrate k1 radial distortion'}, 'type': 'boolean', 'default': 'True'}
+		self.__json_content_by_propierty['k1'] = {'text': {'spanish': 'k1', 'english': 'k1'}, 'definition': {'spanish': 'Seleccionar si se calibra k1 de distorsion radial', 'english': 'Select calibrate k1 radial distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['k1'] = 'k1'
 		self.__widget_by_propierty['k1'] = None
 		self.__k1 = True
 		self.__k1_value = True
-		self.__json_content_by_propierty['k2'] = {'text': {'spanish': 'k2', 'english': 'k2'}, 'definition': {'spanish': 'Seleccionar si se calibra k2 de distorsión radial', 'english': 'Select calibrate k2 radial distortion'}, 'type': 'boolean', 'default': 'True'}
+		self.__json_content_by_propierty['k2'] = {'text': {'spanish': 'k2', 'english': 'k2'}, 'definition': {'spanish': 'Seleccionar si se calibra k2 de distorsion radial', 'english': 'Select calibrate k2 radial distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['k2'] = 'k2'
 		self.__widget_by_propierty['k2'] = None
 		self.__k2 = True
 		self.__k2_value = True
-		self.__json_content_by_propierty['k3'] = {'text': {'spanish': 'k3', 'english': 'k3'}, 'definition': {'spanish': 'Seleccionar si se calibra k3 de distorsión radial', 'english': 'Select calibrate k3 radial distortion'}, 'type': 'boolean', 'default': 'True'}
+		self.__json_content_by_propierty['k3'] = {'text': {'spanish': 'k3', 'english': 'k3'}, 'definition': {'spanish': 'Seleccionar si se calibra k3 de distorsion radial', 'english': 'Select calibrate k3 radial distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['k3'] = 'k3'
 		self.__widget_by_propierty['k3'] = None
 		self.__k3 = True
 		self.__k3_value = True
-		self.__json_content_by_propierty['k4'] = {'text': {'spanish': 'k4', 'english': 'k4'}, 'definition': {'spanish': 'Seleccionar si se calibra k4 de distorsión radial', 'english': 'Select calibrate k4 radial distortion'}, 'type': 'boolean', 'default': 'False'}
+		self.__json_content_by_propierty['k4'] = {'text': {'spanish': 'k4', 'english': 'k4'}, 'definition': {'spanish': 'Seleccionar si se calibra k4 de distorsion radial', 'english': 'Select calibrate k4 radial distortion'}, 'type': 'boolean', 'default': 'False'}
 		self.__text_by_propierty['k4'] = 'k4'
 		self.__widget_by_propierty['k4'] = None
 		self.__k4 = False
 		self.__k4_value = False
-		self.__json_content_by_propierty['b1'] = {'text': {'spanish': 'Afinidad', 'english': 'Affinity'}, 'definition': {'spanish': 'Seleccionar si se calibra la relación de aspecto', 'english': 'Select calibrate aspect ratio'}, 'type': 'boolean', 'default': 'False'}
+		self.__json_content_by_propierty['b1'] = {'text': {'spanish': 'Afinidad', 'english': 'Affinity'}, 'definition': {'spanish': 'Seleccionar si se calibra la relacion de aspecto', 'english': 'Select calibrate aspect ratio'}, 'type': 'boolean', 'default': 'False'}
 		self.__text_by_propierty['b1'] = 'Afinidad'
 		self.__widget_by_propierty['b1'] = None
 		self.__b1 = False
 		self.__b1_value = False
-		self.__json_content_by_propierty['b2'] = {'text': {'spanish': 'Asimetría', 'english': 'Skew'}, 'definition': {'spanish': 'Seleccionar si se calibra la asimetría', 'english': 'Select calibrate skew'}, 'type': 'boolean', 'default': 'False'}
-		self.__text_by_propierty['b2'] = 'Asimetría'
+		self.__json_content_by_propierty['b2'] = {'text': {'spanish': 'Asimetria', 'english': 'Skew'}, 'definition': {'spanish': 'Seleccionar si se calibra la asimetria', 'english': 'Select calibrate skew'}, 'type': 'boolean', 'default': 'False'}
+		self.__text_by_propierty['b2'] = 'Asimetria'
 		self.__widget_by_propierty['b2'] = None
 		self.__b2 = False
 		self.__b2_value = False
-		self.__json_content_by_propierty['p1'] = {'text': {'spanish': 'p1', 'english': 'p1'}, 'definition': {'spanish': 'Seleccionar si se calibra p1 de distorsión tangencial', 'english': 'Select calibrate p1 tangential distortion'}, 'type': 'boolean', 'default': 'True'}
+		self.__json_content_by_propierty['p1'] = {'text': {'spanish': 'p1', 'english': 'p1'}, 'definition': {'spanish': 'Seleccionar si se calibra p1 de distorsion tangencial', 'english': 'Select calibrate p1 tangential distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['p1'] = 'p1'
 		self.__widget_by_propierty['p1'] = None
 		self.__p1 = True
 		self.__p1_value = True
-		self.__json_content_by_propierty['p2'] = {'text': {'spanish': 'p2', 'english': 'p2'}, 'definition': {'spanish': 'Seleccionar si se calibra p2 de distorsión tangencial', 'english': 'Select calibrate p2 tangential distortion'}, 'type': 'boolean', 'default': 'True'}
+		self.__json_content_by_propierty['p2'] = {'text': {'spanish': 'p2', 'english': 'p2'}, 'definition': {'spanish': 'Seleccionar si se calibra p2 de distorsion tangencial', 'english': 'Select calibrate p2 tangential distortion'}, 'type': 'boolean', 'default': 'True'}
 		self.__text_by_propierty['p2'] = 'p2'
 		self.__widget_by_propierty['p2'] = None
 		self.__p2 = True
@@ -166,7 +166,7 @@ class CameraCalibration:
 		return self.__k1
 
 	@k1.setter
-	def k1(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k1 de distorsión radial'):
+	def k1(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k1 de distorsion radial'):
 		self.__k1 = value
 
 	def set_k1_value(self):
@@ -187,7 +187,7 @@ class CameraCalibration:
 		return self.__k2
 
 	@k2.setter
-	def k2(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k2 de distorsión radial'):
+	def k2(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k2 de distorsion radial'):
 		self.__k2 = value
 
 	def set_k2_value(self):
@@ -208,7 +208,7 @@ class CameraCalibration:
 		return self.__k3
 
 	@k3.setter
-	def k3(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k3 de distorsión radial'):
+	def k3(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k3 de distorsion radial'):
 		self.__k3 = value
 
 	def set_k3_value(self):
@@ -229,7 +229,7 @@ class CameraCalibration:
 		return self.__k4
 
 	@k4.setter
-	def k4(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k4 de distorsión radial'):
+	def k4(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra k4 de distorsion radial'):
 		self.__k4 = value
 
 	def set_k4_value(self):
@@ -250,7 +250,7 @@ class CameraCalibration:
 		return self.__b1
 
 	@b1.setter
-	def b1(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra la relación de aspecto'):
+	def b1(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra la relacion de aspecto'):
 		self.__b1 = value
 
 	def set_b1_value(self):
@@ -271,7 +271,7 @@ class CameraCalibration:
 		return self.__b2
 
 	@b2.setter
-	def b2(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra la asimetría'):
+	def b2(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra la asimetria'):
 		self.__b2 = value
 
 	def set_b2_value(self):
@@ -292,7 +292,7 @@ class CameraCalibration:
 		return self.__p1
 
 	@p1.setter
-	def p1(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra p1 de distorsión tangencial'):
+	def p1(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra p1 de distorsion tangencial'):
 		self.__p1 = value
 
 	def set_p1_value(self):
@@ -313,7 +313,7 @@ class CameraCalibration:
 		return self.__p2
 
 	@p2.setter
-	def p2(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra p2 de distorsión tangencial'):
+	def p2(self, value: 'widget:QCheckBox, toolTip:Seleccionar si se calibra p2 de distorsion tangencial'):
 		self.__p2 = value
 
 	def set_p2_value(self):
@@ -340,7 +340,6 @@ class CameraCalibration:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -352,44 +351,6 @@ class CameraCalibration:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__f_value = values['f']
-		#self.__f = values['f']
-		#self.__cx_value = values['cx']
-		#self.__cx = values['cx']
-		#self.__cy_value = values['cy']
-		#self.__cy = values['cy']
-		#self.__k1_value = values['k1']
-		#self.__k1 = values['k1']
-		#self.__k2_value = values['k2']
-		#self.__k2 = values['k2']
-		#self.__k3_value = values['k3']
-		#self.__k3 = values['k3']
-		#self.__k4_value = values['k4']
-		#self.__k4 = values['k4']
-		#self.__b1_value = values['b1']
-		#self.__b1 = values['b1']
-		#self.__b2_value = values['b2']
-		#self.__b2 = values['b2']
-		#self.__p1_value = values['p1']
-		#self.__p1 = values['p1']
-		#self.__p2_value = values['p2']
-		#self.__p2 = values['p2']
 		return
 
 	def set_widget(self, widget):

@@ -37,7 +37,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Etiqueta con la que se nombrarán los productos resultantes</string>
+                        <string>Etiqueta con la que se nombraran los productos resultantes</string>
                     </property>
                    
           
@@ -69,7 +69,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Código EPSG con el que se exportarán los productos resultantes</string>
+                        <string>Codigo EPSG con el que se exportaran los productos resultantes</string>
                     </property>
                    
           
@@ -180,7 +180,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Resolución en metros con la que se exportarán el modelo digital de superficies y del terreno (0 para máxima posible)</string>
+                        <string>Resolucion en metros con la que se exportaran el modelo digital de superficies y del terreno (0 para maxima posible)</string>
                     </property>
                    
           
@@ -228,7 +228,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Resolución en metros con la que se exportará el ortomosaico (0 para máxima posible)</string>
+                        <string>Resolucion en metros con la que se exportara el ortomosaico (0 para maxima posible)</string>
                     </property>
                    
           

@@ -105,7 +105,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Carpeta con los modelos del Geoide</string>
+                        <string>Carpeta con los modelos del geoide</string>
                     </property>
                    
           

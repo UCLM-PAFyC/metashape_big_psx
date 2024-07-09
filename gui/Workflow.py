@@ -13,43 +13,43 @@ class Workflow:
 		self.__widget_by_propierty['CleanPrevious'] = None
 		self.__CleanPrevious = True
 		self.__CleanPrevious_value = True
-		self.__json_content_by_propierty['Initialize'] = {'text': {'spanish': 'Project inicialización', 'english': 'Project initialization'}, 'definition': {'spanish': 'Proceso que ejecuta la creación del proyecto e importación de los datos de entrada', 'english': 'Process that executes project creation and import of input data'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['Initialize'] = 'Project inicialización'
+		self.__json_content_by_propierty['Initialize'] = {'text': {'spanish': 'Inicializacion del proyecto', 'english': 'Project initialization'}, 'definition': {'spanish': 'Proceso que ejecuta la creacion del proyecto e importacion de los datos de entrada', 'english': 'Process that executes project creation and import of input data'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['Initialize'] = 'Inicializacion del proyecto'
 		self.__widget_by_propierty['Initialize'] = None
 		self.__Initialize = True
 		self.__Initialize_value = True
-		self.__json_content_by_propierty['Preprocess'] = {'text': {'spanish': 'Project preproceso', 'english': 'Project preprocess'}, 'definition': {'spanish': 'Proceso que ejecuta el cosido y alineamiento inicial', 'english': 'Process performing initial matching and alignment'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['Preprocess'] = 'Project preproceso'
+		self.__json_content_by_propierty['Preprocess'] = {'text': {'spanish': 'Preproceso del proyecto', 'english': 'Project preprocess'}, 'definition': {'spanish': 'Proceso que ejecuta el cosido y alineamiento inicial', 'english': 'Process performing initial matching and alignment'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['Preprocess'] = 'Preproceso del proyecto'
 		self.__widget_by_propierty['Preprocess'] = None
 		self.__Preprocess = True
 		self.__Preprocess_value = True
-		self.__json_content_by_propierty['Optimize'] = {'text': {'spanish': 'Optimización de OI', 'english': 'Optimization of IO'}, 'definition': {'spanish': 'Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo', 'english': 'Process that performs the optimization of the initial alignment with reference points.'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['Optimize'] = 'Optimización de OI'
+		self.__json_content_by_propierty['Optimize'] = {'text': {'spanish': 'Optimizacion de OI', 'english': 'Optimization of IO'}, 'definition': {'spanish': 'Proceso que ejecuta la optimizacion del alineamiento inicial con puntos de apoyo', 'english': 'Process that performs the optimization of the initial alignment with reference points.'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['Optimize'] = 'Optimizacion de OI'
 		self.__widget_by_propierty['Optimize'] = None
 		self.__Optimize = True
 		self.__Optimize_value = True
-		self.__json_content_by_propierty['Split'] = {'text': {'spanish': 'Partición del proyecto', 'english': 'Project splitting'}, 'definition': {'spanish': 'Proceso que ejecuta la partición del trabajo en tiles', 'english': 'Process that executes the splitting of the job into tiles.'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['Split'] = 'Partición del proyecto'
+		self.__json_content_by_propierty['Split'] = {'text': {'spanish': 'Particion del proyecto', 'english': 'Project splitting'}, 'definition': {'spanish': 'Proceso que ejecuta la particion del trabajo en tiles', 'english': 'Process that executes the splitting of the job into tiles.'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['Split'] = 'Particion del proyecto'
 		self.__widget_by_propierty['Split'] = None
 		self.__Split = True
 		self.__Split_value = True
-		self.__json_content_by_propierty['PointCloud'] = {'text': {'spanish': 'Construcción de nube de puntos', 'english': 'Point cloud creation'}, 'definition': {'spanish': 'Proceso que ejecuta la creación y exportación de la nube de puntos densa', 'english': 'Process that executes the creation and export of the dense point cloud'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['PointCloud'] = 'Construcción de nube de puntos'
+		self.__json_content_by_propierty['PointCloud'] = {'text': {'spanish': 'Construccion de nube de puntos', 'english': 'Point cloud creation'}, 'definition': {'spanish': 'Proceso que ejecuta la creacion y exportacion de la nube de puntos densa', 'english': 'Process that executes the creation and export of the dense point cloud'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['PointCloud'] = 'Construccion de nube de puntos'
 		self.__widget_by_propierty['PointCloud'] = None
 		self.__PointCloud = True
 		self.__PointCloud_value = True
-		self.__json_content_by_propierty['DEMs'] = {'text': {'spanish': 'Construcción de los modelos digitales de elevaciones', 'english': 'Digital elevation models creation'}, 'definition': {'spanish': 'Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones', 'english': 'Process that executes the creation and export of digital elevation models'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['DEMs'] = 'Construcción de los modelos digitales de elevaciones'
+		self.__json_content_by_propierty['DEMs'] = {'text': {'spanish': 'Construccion de los modelos digitales de elevaciones', 'english': 'Digital elevation models creation'}, 'definition': {'spanish': 'Proceso que ejecuta la creacion y exportacion de los modelos digitales de elevaciones', 'english': 'Process that executes the creation and export of digital elevation models'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['DEMs'] = 'Construccion de los modelos digitales de elevaciones'
 		self.__widget_by_propierty['DEMs'] = None
 		self.__DEMs = True
 		self.__DEMs_value = True
-		self.__json_content_by_propierty['Orthomosaic'] = {'text': {'spanish': 'Construcción del ortomosaico', 'english': 'Orthomosaic creation'}, 'definition': {'spanish': 'Proceso que ejecuta la creación y exportación del orthomosaico', 'english': 'Process that executes the creation and export of the orthomosaic'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['Orthomosaic'] = 'Construcción del ortomosaico'
+		self.__json_content_by_propierty['Orthomosaic'] = {'text': {'spanish': 'Construccion del ortomosaico', 'english': 'Orthomosaic creation'}, 'definition': {'spanish': 'Proceso que ejecuta la creacion y exportacion del ortomosaico', 'english': 'Process that executes the creation and export of the orthomosaic'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['Orthomosaic'] = 'Construccion del ortomosaico'
 		self.__widget_by_propierty['Orthomosaic'] = None
 		self.__Orthomosaic = True
 		self.__Orthomosaic_value = True
-		self.__json_content_by_propierty['Report'] = {'text': {'spanish': 'Construcción del informe', 'english': 'Report creation'}, 'definition': {'spanish': 'Proceso que ejecuta la exportación del informe de resultados', 'english': 'Process that executes the export of the results report'}, 'type': 'boolean', 'default': 'True'}
-		self.__text_by_propierty['Report'] = 'Construcción del informe'
+		self.__json_content_by_propierty['Report'] = {'text': {'spanish': 'Construccion del informe', 'english': 'Report creation'}, 'definition': {'spanish': 'Proceso que ejecuta la exportacion del informe de resultados', 'english': 'Process that executes the export of the results report'}, 'type': 'boolean', 'default': 'True'}
+		self.__text_by_propierty['Report'] = 'Construccion del informe'
 		self.__widget_by_propierty['Report'] = None
 		self.__Report = True
 		self.__Report_value = True
@@ -112,7 +112,7 @@ class Workflow:
 		return self.__Initialize
 
 	@Initialize.setter
-	def Initialize(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creación del proyecto e importación de los datos de entrada'):
+	def Initialize(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creacion del proyecto e importacion de los datos de entrada'):
 		self.__Initialize = value
 
 	def set_Initialize_value(self):
@@ -154,7 +154,7 @@ class Workflow:
 		return self.__Optimize
 
 	@Optimize.setter
-	def Optimize(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la optimización del alineamiento inicial con puntos de apoyo'):
+	def Optimize(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la optimizacion del alineamiento inicial con puntos de apoyo'):
 		self.__Optimize = value
 
 	def set_Optimize_value(self):
@@ -175,7 +175,7 @@ class Workflow:
 		return self.__Split
 
 	@Split.setter
-	def Split(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la partición del trabajo en tiles'):
+	def Split(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la particion del trabajo en tiles'):
 		self.__Split = value
 
 	def set_Split_value(self):
@@ -196,7 +196,7 @@ class Workflow:
 		return self.__PointCloud
 
 	@PointCloud.setter
-	def PointCloud(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creación y exportación de la nube de puntos densa'):
+	def PointCloud(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creacion y exportacion de la nube de puntos densa'):
 		self.__PointCloud = value
 
 	def set_PointCloud_value(self):
@@ -217,7 +217,7 @@ class Workflow:
 		return self.__DEMs
 
 	@DEMs.setter
-	def DEMs(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creación y exportación de los modelos digitales de elevaciones'):
+	def DEMs(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creacion y exportacion de los modelos digitales de elevaciones'):
 		self.__DEMs = value
 
 	def set_DEMs_value(self):
@@ -238,7 +238,7 @@ class Workflow:
 		return self.__Orthomosaic
 
 	@Orthomosaic.setter
-	def Orthomosaic(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creación y exportación del orthomosaico'):
+	def Orthomosaic(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la creacion y exportacion del ortomosaico'):
 		self.__Orthomosaic = value
 
 	def set_Orthomosaic_value(self):
@@ -259,7 +259,7 @@ class Workflow:
 		return self.__Report
 
 	@Report.setter
-	def Report(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la exportación del informe de resultados'):
+	def Report(self, value: 'widget:QCheckBox, toolTip:Proceso que ejecuta la exportacion del informe de resultados'):
 		self.__Report = value
 
 	def set_Report_value(self):
@@ -286,7 +286,6 @@ class Workflow:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -298,40 +297,6 @@ class Workflow:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__CleanPrevious_value = values['CleanPrevious']
-		#self.__CleanPrevious = values['CleanPrevious']
-		#self.__Initialize_value = values['Initialize']
-		#self.__Initialize = values['Initialize']
-		#self.__Preprocess_value = values['Preprocess']
-		#self.__Preprocess = values['Preprocess']
-		#self.__Optimize_value = values['Optimize']
-		#self.__Optimize = values['Optimize']
-		#self.__Split_value = values['Split']
-		#self.__Split = values['Split']
-		#self.__PointCloud_value = values['PointCloud']
-		#self.__PointCloud = values['PointCloud']
-		#self.__DEMs_value = values['DEMs']
-		#self.__DEMs = values['DEMs']
-		#self.__Orthomosaic_value = values['Orthomosaic']
-		#self.__Orthomosaic = values['Orthomosaic']
-		#self.__Report_value = values['Report']
-		#self.__Report = values['Report']
 		return
 
 	def set_widget(self, widget):

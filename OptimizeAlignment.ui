@@ -37,13 +37,13 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Método de medida de los puntos de apoyo en las imágenes</string>
+                        <string>Metodo de medida de los puntos de apoyo en las imagenes</string>
                     </property>
                    
           
             <item>
                 <property name="text">
-                <string>Medidas en la interfaz gráfica de Metashape</string>
+                <string>Medidas en la interfaz grafica de Metashape</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -83,7 +83,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Código EPSG de las coordenadas terreno de los puntos de apoyo</string>
+                        <string>Codigo EPSG de las coordenadas terreno de los puntos de apoyo</string>
                     </property>
                    
           
@@ -120,7 +120,7 @@
                     </property>
                             
                     <property name="filters" stdset="0">
-                        <string>*.txt *.csv</string>
+                        <string>*.txt *.csv *.xml</string>
                     </property>
                    
           
@@ -178,7 +178,7 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Precisión establecida para el alineamiento</string>
+                        <string>Precision establecida para el alineamiento</string>
                     </property>
                    
           
@@ -251,13 +251,13 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Método de preselección de imágenes según su localización</string>
+                        <string>Metodo de preseleccion de imagenes segun su localizacion</string>
                     </property>
                    
           
             <item>
                 <property name="text">
-                <string>Con localización de origen (importada desde EXIF o CSV)</string>
+                <string>Con localizacion de origen (importada desde EXIF o CSV)</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -266,7 +266,7 @@
             
             <item>
                 <property name="text">
-                <string>Sin localización</string>
+                <string>Sin localizacion</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -275,7 +275,7 @@
             
             <item>
                 <property name="text">
-                <string>Con localización estimada</string>
+                <string>Con localizacion estimada</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -284,7 +284,7 @@
             
             <item>
                 <property name="text">
-                <string>Con imágenes consecutivas</string>
+                <string>Con imagenes consecutivas</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -327,7 +327,7 @@
                     </property>
                             
                     <property name="toolTip" stdset="0">
-                        <string>Límite de puntos de enlace</string>
+                        <string>Limite de puntos de enlace</string>
                     </property>
                    
           
