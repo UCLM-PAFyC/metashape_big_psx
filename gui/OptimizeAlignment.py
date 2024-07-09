@@ -205,7 +205,6 @@ class OptimizeAlignment:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -217,31 +216,6 @@ class OptimizeAlignment:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__Method_value = values['Method']
-		#self.__EPSG_value = values['EPSG']
-		#self.__EPSG = values['EPSG']
-		#self.__Path_value = values['Path']
-		#self.__Path = values['Path']
-		#self.__Accuracy_value = values['Accuracy']
-		#self.__ReferencePreselection_value = values['ReferencePreselection']
-		#self.__TiePointLimit_value = values['TiePointLimit']
-		#self.__TiePointLimit = values['TiePointLimit']
 		return
 
 	def set_widget(self, widget):

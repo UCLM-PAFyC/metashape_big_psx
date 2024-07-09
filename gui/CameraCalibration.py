@@ -340,7 +340,6 @@ class CameraCalibration:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -352,44 +351,6 @@ class CameraCalibration:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__f_value = values['f']
-		#self.__f = values['f']
-		#self.__cx_value = values['cx']
-		#self.__cx = values['cx']
-		#self.__cy_value = values['cy']
-		#self.__cy = values['cy']
-		#self.__k1_value = values['k1']
-		#self.__k1 = values['k1']
-		#self.__k2_value = values['k2']
-		#self.__k2 = values['k2']
-		#self.__k3_value = values['k3']
-		#self.__k3 = values['k3']
-		#self.__k4_value = values['k4']
-		#self.__k4 = values['k4']
-		#self.__b1_value = values['b1']
-		#self.__b1 = values['b1']
-		#self.__b2_value = values['b2']
-		#self.__b2 = values['b2']
-		#self.__p1_value = values['p1']
-		#self.__p1 = values['p1']
-		#self.__p2_value = values['p2']
-		#self.__p2 = values['p2']
 		return
 
 	def set_widget(self, widget):

@@ -5,7 +5,6 @@
 import sys, os
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
 from PyQt5.QtWidgets import QApplication
-# from MshBigPsxDialog import MshBigPsxDialog
 from gui import gui_defines
 from ParameterManager import ParametersManager
 import Tools

@@ -286,7 +286,6 @@ class SplitTile:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -298,37 +297,6 @@ class SplitTile:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__TileSize_value = values['TileSize']
-		#self.__TileSize = values['TileSize']
-		#self.__TileSizeBuffer_value = values['TileSizeBuffer']
-		#self.__TileSizeBuffer = values['TileSizeBuffer']
-		#self.__Method_value = values['Method']
-		#self.__Path_value = values['Path']
-		#self.__Path = values['Path']
-		#self.__MergeMethod_value = values['MergeMethod']
-		#self.__MergePointClouds_value = values['MergePointClouds']
-		#self.__MergePointClouds = values['MergePointClouds']
-		#self.__MergeElevations_value = values['MergeElevations']
-		#self.__MergeElevations = values['MergeElevations']
-		#self.__MergeOrthomosaics_value = values['MergeOrthomosaics']
-		#self.__MergeOrthomosaics = values['MergeOrthomosaics']
-		#self.__MergedDEM_value = values['MergedDEM']
 		return
 
 	def set_widget(self, widget):

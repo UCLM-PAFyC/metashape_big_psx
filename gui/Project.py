@@ -178,7 +178,6 @@ class Project:
 						pos = propierty_widget.findText(value_language)
 						if pos != -1:
 							propierty_widget.setCurrentIndex(pos)
-							values[value] = value_language
 							break
 			elif isinstance(propierty_widget, QSpinBox):
 				int_value = int(values[value])
@@ -190,32 +189,6 @@ class Project:
 				propierty_widget.setText(values[value])
 			elif isinstance(propierty_widget, QCheckBox):
 				propierty_widget.setChecked(values[value])
-				#pos = propierty_widget.findText(values[value])
-				#if pos != -1:
-					#propierty_widget.setCurrentIndex(pos)
-				#else:
-					#json_values = self.__json_content_by_propierty[value][gui_defines.GUI_CLASSES_PROPIERTY_TYPE_VALUES_LIST_TAG]
-					#for json_value in json_values:
-						#find_value = False
-						#for language in json_values[json_value]:
-							#value_language = json_values[json_value][language]
-							#if pos == -1:
-								#pos = propierty_widget.findText(value_language)
-							#if value_language == values[value]:
-								#find_value = True
-						#if find_value and pos != -1:
-							#propierty_widget.setCurrentIndex(pos)
-							#break
-		#self.__Label_value = values['Label']
-		#self.__Label = values['Label']
-		#self.__EPSG_value = values['EPSG']
-		#self.__EPSG = values['EPSG']
-		#self.__Path_value = values['Path']
-		#self.__Path = values['Path']
-		#self.__DemGSD_value = values['DemGSD']
-		#self.__DemGSD = values['DemGSD']
-		#self.__OrthoGSD_value = values['OrthoGSD']
-		#self.__OrthoGSD = values['OrthoGSD']
 		return
 
 	def set_widget(self, widget):
