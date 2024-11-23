@@ -411,6 +411,13 @@ class ParametersManager:
                     and class_name != "OptimizeAlignment" and class_name != "SplitTile"
                     and class_name != "PointCloud") and class_name != "InstallRequirement":
                 continue
+            # class_is_valid = False
+            # for gui_class in gui_defines.GUI_CLASSES:
+            #     if class_name == gui_class:
+            #         class_is_valid = True
+            #         break
+            # if not class_is_valid:
+            #     continue
             json_class_content = json_content[class_name]
             str_error = self.build_parameter_file(class_name,
                                                   language,

@@ -12,7 +12,7 @@ from gui.InstallRequirement import InstallRequirement
 from gui.Photo import Photo
 from gui.PointCloud import PointCloud
 from gui.Project import Project
-from gui.Roi import Roi
+from gui.Roi import ROI
 from gui.Workflow import Workflow
 from gui.OptimizeAlignment import OptimizeAlignment
 from gui.SplitTile import SplitTile
@@ -293,7 +293,7 @@ class MshBigPsxDialog(QDialog):
             elif class_name == gui_defines.OBJECT_CLASS_WORKFLOW:
                 self.object_by_name[class_name] = Workflow()
             elif class_name == gui_defines.OBJECT_CLASS_ROI:
-                self.object_by_name[class_name] = Roi()
+                self.object_by_name[class_name] = ROI()
             elif class_name == gui_defines.OBJECT_CLASS_OPTIMIZE_ALIGNMENT:
                 self.object_by_name[class_name] = OptimizeAlignment()
             elif class_name == gui_defines.OBJECT_CLASS_SPLIT_TILE:

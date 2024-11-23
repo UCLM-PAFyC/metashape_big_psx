@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Roi</string>
+   <string>ROI</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -96,13 +96,13 @@
           </property> 
                       
                     <property name="toolTip" stdset="0">
-                        <string>Método de definición de la ROI</string>
+                        <string>Metodo de definicion de la ROI</string>
                     </property>
                    
           
             <item>
                 <property name="text">
-                <string>Región total con recubrimiento</string>
+                <string>Region total con recubrimiento</string>
                 </property>
                 <property name="flags">
                     <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>

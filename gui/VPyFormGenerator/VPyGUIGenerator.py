@@ -72,6 +72,9 @@ class VPyGUIGenerator:
     def create_gui(cls, obj, overwrite = True):
         template_file_name = cls.create_new_template_file(obj)        
         form = FormLayoutDialogController(obj, template_file_name, overwrite)
+        propierties_to_connect_attribute_name = '_' + obj.__class__.__name__ + "__propierties_to_connect"
+        if hasattr(obj, propierties_to_connect_attribute_name):
+            obj.set_widget(form)
         return form
     
     @classmethod

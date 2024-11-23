@@ -1,23 +1,23 @@
 from PyQt5.QtWidgets import QDoubleSpinBox, QSpinBox, QComboBox, QLineEdit, QCheckBox
 from . import gui_defines
 
-class Roi:
+class ROI:
 	def __init__(self):
 		self.__text_by_propierty = {}
 		self.__widget_by_propierty = {}
 		self.__json_content_by_propierty = {}
-		self.__json_content_by_propierty['text'] = {'spanish': 'Región de interés', 'english': 'Region of interest'}
-		self.__text = 'Región de interés'
+		self.__json_content_by_propierty['text'] = {'spanish': 'Region de interes', 'english': 'Region of interest'}
+		self.__text = 'Region de interes'
 		self.__json_content_by_propierty['Path'] = {'text': {'spanish': 'Ruta ROI', 'english': 'ROI path'}, 'definition': {'spanish': 'Ruta del archivo de la ROI', 'english': 'ROI path file'}, 'type': 'file open', 'default': ''}
 		self.__text_by_propierty['Path'] = 'Ruta ROI'
 		self.__widget_by_propierty['Path'] = None
 		self.__Path = ""
 		self.__Path_value = ""
-		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Fuente ROI', 'english': 'ROI source'}, 'definition': {'spanish': 'Método de definición de la ROI', 'english': 'Method for ROI definition'}, 'type': 'values', 'values': {'0': {'spanish': 'Región total con recubrimiento', 'english': 'Full stereoscopic region'}, 'SHP': {'spanish': 'Importada de shapefile', 'english': 'From shapefile'}}, 'default': 'Región total con recubrimiento'}
+		self.__json_content_by_propierty['Method'] = {'text': {'spanish': 'Fuente ROI', 'english': 'ROI source'}, 'definition': {'spanish': 'Metodo de definicion de la ROI', 'english': 'Method for ROI definition'}, 'type': 'values', 'values': {'0': {'spanish': 'Region total con recubrimiento', 'english': 'Full stereoscopic region'}, 'SHP': {'spanish': 'Importada de shapefile', 'english': 'From shapefile'}}, 'default': 'Region total con recubrimiento'}
 		self.__text_by_propierty['Method'] = 'Fuente ROI'
 		self.__widget_by_propierty['Method'] = None
-		self.__Method = ['Región total con recubrimiento' ,'Importada de shapefile']
-		self.__Method_value = 'Región total con recubrimiento'
+		self.__Method = ['Region total con recubrimiento' ,'Importada de shapefile']
+		self.__Method_value = 'Region total con recubrimiento'
 		self.__widget = None
 
 	def get_propierty_json_content(self, value):
@@ -70,7 +70,7 @@ class Roi:
 		return self.__Method
 
 	@Method.setter
-	def Method(self, value: 'widget:QComboBox, toolTip:Método de definición de la ROI'):
+	def Method(self, value: 'widget:QComboBox, toolTip:Metodo de definicion de la ROI'):
 		self.__Method = value
 
 	def set_Method_value(self):

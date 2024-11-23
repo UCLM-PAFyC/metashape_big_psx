@@ -426,6 +426,9 @@ class FormLayoutDialogController(QtWidgets.QDialog):
         obj = getattr(self.obj, object_name)
         from .VPyGUIGenerator import VPyGUIGenerator
         dialog = VPyGUIGenerator.create_gui(obj, self.__overwrite)
+        propierties_to_connect_attribute_name = '_' + obj.__class__.__name__ + "__propierties_to_connect"
+        if hasattr(obj, propierties_to_connect_attribute_name):
+            obj.set_widget(dialog)
         result = dialog.exec()
         if result == 0:
             return
