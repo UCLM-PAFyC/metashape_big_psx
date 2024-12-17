@@ -1,7 +1,7 @@
 {
     "Project": {
         "Label": "test",
-        "EPSG": "25830+5782",
+        "EPSG": "4258",
         "Path": "C://dev//metashape_big_psx",
         "DemGSD": 0.1,
         "OrthoGSD": 0.1

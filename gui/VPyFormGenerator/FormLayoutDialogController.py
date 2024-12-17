@@ -634,8 +634,21 @@ class FormLayoutDialogController(QtWidgets.QDialog):
                     obj = self.__edited_grid_obj[grid_name][obj.v_id]
 
 
+            class_prefix = F"_{obj.__class__.__name__}__"
+            propierty_gui_label_by_propierty_name = class_prefix + 'gui_label_by_propierty_name'
+            gui_label_by_propierty_name = {}
+            for k, v in obj.__dict__.items():
+                if k == propierty_gui_label_by_propierty_name:
+                    propierty_gui_label_by_propierty_name = v
+                    break
+            propierty_name_by_gui_label = {}
+            for propierty_name_label in propierty_gui_label_by_propierty_name:
+                propierty_name_by_gui_label[propierty_gui_label_by_propierty_name[propierty_name_label]] = propierty_name_label
+
             for c in range(grid.columnCount() - 1):
                 label = grid.horizontalHeaderItem(c).text()
+                if label in propierty_name_by_gui_label:
+                    label = propierty_name_by_gui_label[label]
                 field =  ''.join([label[:1].lower(), label[1:]])
                 value = getattr(obj, field)
                 item = QtWidgets.QTableWidgetItem(str(value))
@@ -769,8 +782,22 @@ class FormLayoutDialogController(QtWidgets.QDialog):
         
         r = self.sender().property("row_id")        
 
+        class_prefix = F"_{obj.__class__.__name__}__"
+        propierty_gui_label_by_propierty_name = class_prefix + 'gui_label_by_propierty_name'
+        gui_label_by_propierty_name = {}
+        for k, v in obj.__dict__.items():
+            if k == propierty_gui_label_by_propierty_name:
+                propierty_gui_label_by_propierty_name = v
+                break
+        propierty_name_by_gui_label = {}
+        for propierty_name_label in propierty_gui_label_by_propierty_name:
+            propierty_name_by_gui_label[
+                propierty_gui_label_by_propierty_name[propierty_name_label]] = propierty_name_label
+
         for c in range(grid.columnCount() - 1):
             label = grid.horizontalHeaderItem(c).text()
+            if label in propierty_name_by_gui_label:
+                label = propierty_name_by_gui_label[label]
             field =  ''.join([label[:1].lower(), label[1:]])
             value = getattr(obj, field)
             item = QtWidgets.QTableWidgetItem(str(value))

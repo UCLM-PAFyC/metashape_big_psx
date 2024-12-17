@@ -72,8 +72,8 @@ class VPyGUIGenerator:
     def create_gui(cls, obj, overwrite = True):
         template_file_name = cls.create_new_template_file(obj)        
         form = FormLayoutDialogController(obj, template_file_name, overwrite)
-        propierties_to_connect_attribute_name = '_' + obj.__class__.__name__ + "__propierties_to_connect"
-        if hasattr(obj, propierties_to_connect_attribute_name):
+        gui_propierties_to_connect_attribute_name = '_' + obj.__class__.__name__ + "__gui_propierties_to_connect"
+        if hasattr(obj, gui_propierties_to_connect_attribute_name):
             obj.set_widget(form)
         return form
     
@@ -110,18 +110,32 @@ class VPyGUIGenerator:
         class_prefix = F"_{obj.__class__.__name__}__"
         row = 0
         # collect public fields 
+        propierty_gui_label_by_propierty_name = class_prefix + 'gui_label_by_propierty_name'
+        gui_label_by_propierty_name = {}
+        for k, v in obj.__dict__.items():
+            if k == propierty_gui_label_by_propierty_name:
+                propierty_gui_label_by_propierty_name = v
+                break
+        # propierty_name_by_gui_label = {}
+        # for propierty_name_label in propierty_gui_label_by_propierty_name:
+        #     propierty_name_by_gui_label[
+        #         propierty_gui_label_by_propierty_name[propierty_name_label]] = propierty_name_label
         for k,v in obj.__dict__.items():
             if k.startswith(class_prefix) or k == "v_id":
                 continue
-           
+
+            k_label = k.capitalize()
+            if k in propierty_gui_label_by_propierty_name:
+                k_label = propierty_gui_label_by_propierty_name[k]
+
             field_type = type(v).__name__
             widget_info = cls.type_dict.get(field_type, None)
             new_widget = ""
             if(widget_info != None):
-                new_widget = cls.create_standard_widgets(widget_template, row, widget_info, k)
+                new_widget = cls.create_standard_widgets(widget_template, row, widget_info, k, k_label)
             else:
                 widget_info = cls.type_dict.get("object", None)
-                new_widget = cls.create_standard_widgets(widget_template, row, widget_info, k)
+                new_widget = cls.create_standard_widgets(widget_template, row, widget_info, k, k_label)
                 
             new_widget = new_widget.replace("__content__", widget_info.get_content(getattr(obj, k)))            
             
@@ -133,6 +147,11 @@ class VPyGUIGenerator:
         for k, v in property_dict.items():
             if type(v) != property:
                 continue
+
+            k_label = k.capitalize()
+            if k in propierty_gui_label_by_propierty_name:
+                k_label = propierty_gui_label_by_propierty_name[k]
+
             if v.fset != None:
                 if len(v.fset.__annotations__) > 0:
                     an  = v.fset.__annotations__
@@ -157,7 +176,7 @@ class VPyGUIGenerator:
                             mydict["columns"] = cls.get_grid_columns(value[0])
                         widget_info = cls.widget_dict[mydict["widget"].lower()]
                         tmp_row = "__row__" if  "group" in mydict else row
-                        new_widget = cls.create_custom_widgets(mydict, widget_info, widget_template, tmp_row, k)
+                        new_widget = cls.create_custom_widgets(mydict, widget_info, widget_template, tmp_row, k, k_label)
             elif property_dict[v].fget != None:
                 pass
 
@@ -209,7 +228,7 @@ class VPyGUIGenerator:
         return widgets
 
     @classmethod
-    def create_custom_widgets(cls, property_dict, widget_info, widget_template, row, name):
+    def create_custom_widgets(cls, property_dict, widget_info, widget_template, row, name, label):
         
         if "widget" not in property_dict or property_dict["widget"].lower() not in cls.widget_dict:
             raise TypeError(f"Invalid widget for property '{name}'")
@@ -219,7 +238,7 @@ class VPyGUIGenerator:
         new_widget = new_widget.replace("class=\"QLabel\" name=\"label\"",
                                         f"class=\"QLabel\" name=\"label_{name}\"")
         #dhl
-        new_widget = new_widget.replace("__label__", name.capitalize())
+        new_widget = new_widget.replace("__label__", label)
         new_widget = new_widget.replace("__widget__", widget_info.widget_name)        
         
         new_widget = new_widget.replace("__key__", widget_info.key)
@@ -232,9 +251,9 @@ class VPyGUIGenerator:
         return new_widget
         
     @classmethod
-    def create_standard_widgets (cls, widget_template, row, widget_info, name):
+    def create_standard_widgets (cls, widget_template, row, widget_info, name, label):
         new_widget = widget_template.replace("__row__", str(row))
-        new_widget = new_widget.replace("__label__", name.capitalize())
+        new_widget = new_widget.replace("__label__", label)
         new_widget = new_widget.replace("__widget__", widget_info.widget_name)
         
         new_widget = new_widget.replace("__key__", widget_info.key)
@@ -249,21 +268,41 @@ class VPyGUIGenerator:
     def get_grid_columns(cls, obj):
         columns = []
         class_prefix = F"_{obj.__class__.__name__}__"
-        
+        class_prefix = F"_{obj.__class__.__name__}__"
+        propierty_gui_label_by_propierty_name = class_prefix + 'gui_label_by_propierty_name'
+        gui_label_by_propierty_name = {}
+        for k, v in obj.__dict__.items():
+            if k == propierty_gui_label_by_propierty_name:
+                propierty_gui_label_by_propierty_name = v
+                break
+        propierty_name_gui_no_in_table = class_prefix + 'gui_propierties_no_in_table'
+        propierties_names_gui_no_in_table = []
         for k,v in obj.__dict__.items():
-            if not k.startswith(class_prefix):
-                columns.append(k)
-                
+            if k == propierty_name_gui_no_in_table:
+                propierties_names_gui_no_in_table = v
+                break
+        for k,v in obj.__dict__.items():
+            # if not k.startswith(class_prefix):
+            if not k.startswith(class_prefix)\
+                    and not k in propierties_names_gui_no_in_table:
+                if k in propierty_gui_label_by_propierty_name:
+                    columns.append(propierty_gui_label_by_propierty_name[k])
+                else:
+                    columns.append(k)
         property_dict = (dict(obj.__class__.__dict__))
         for k, v in property_dict.items():
             if type(v) != property:
                 continue
+            if k in propierties_names_gui_no_in_table:
+                continue
             if v.fset != None:
                 if len(v.fset.__annotations__) > 0:
-                    columns.append(k)
-
+                    if k in propierty_gui_label_by_propierty_name:
+                        columns.append(propierty_gui_label_by_propierty_name[k])
+                    else:
+                        columns.append(k)
         return columns
-    
+
     @classmethod    
     def add_group_to_form(cls, row):
         result = ""
